@@ -37,36 +37,20 @@
                     <img src="assets/images/logo.svg" alt="Bootstrap Gallery">
                 </a>
 
-                <h4 class="mb-4">Signup</h4>
-
-                <div class="mb-3">
-                    <label class="form-label" for="name">Your name <span class="text-danger">*</span></label>
-                    <input type="text" id="name" class="form-control" placeholder="Enter your name">
-                </div>
+                <h6 class="fw-light mb-4">In order to access your dashboard, please enter the email ID you provided during
+                    the
+                    registration process.</h6>
 
                 <div class="mb-3">
                     <label class="form-label" for="email">Your email <span class="text-danger">*</span></label>
                     <input type="text" id="email" class="form-control" placeholder="Enter your email">
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="pwd">Your password <span class="text-danger">*</span></label>
-                    <div class="input-group">
-                        <input type="password" id="pwd" class="form-control" placeholder="Enter password">
-                        <button class="btn btn-outline-secondary" type="button">
-                            <i class="ri-eye-line text-primary"></i>
-                        </button>
-                    </div>
-                    <div class="form-text">
-                        Your password must be 8-20 characters long.
-                    </div>
+                <div class="mb-3 d-grid">
+                    <button type="submit" class="btn btn-primary">
+                        Submit
+                    </button>
                 </div>
-
-                <div class="mb-3 d-grid gap-2">
-                    <button type="submit" class="btn btn-primary">Signup</button>
-                    <a href="login.html" class="btn btn-secondary">Already have an account? Login</a>
-                </div>
-
             </div>
 
         </form>

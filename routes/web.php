@@ -11,8 +11,8 @@ Route::get('/', function () {
 Route::get('/signup', function () {
     return view('signup');
 });
-Route::get('/forget-password', function () {
-    return view('forget-password');
+Route::get('/forgot-password', function () {
+    return view('forgot-password');
 });
 
 //-------------------------------------------------- Patient -------------------------------
