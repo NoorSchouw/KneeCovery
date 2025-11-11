@@ -3,15 +3,53 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FysioController;
 use App\Http\Controllers\PatientController;
-
-
+// All links for the website
+//------------------------------------------------General-------------------------------------
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
+Route::get('/signup', function () {
+    return view('signup');
+});
+Route::get('/forget-password', function () {
+    return view('forget-password');
+});
+
+//-------------------------------------------------- Patient -------------------------------
+Route::get('/homepage', function () {
+    return view('homepage');
+});
+Route::get('/calendar', function () {
+    return view('patient/calendar');
+});
+Route::get('/exercises', function () {
+    return view('/patient/exercises');
+});
+Route::get('/patient-report', function () {
+    return view('/patient/report');
+});
+Route::get('/information', function () {
+    return view('/patient/information');
+});
+Route::get('/filming', function () {
+    return view('/patient/filming');
+});
+
+//----------------------------------------------------Physio----------------------------------
+Route::get('/patients', function () {
+    return view('/fysio/patients');
+});
+Route::get('/report', function () {
+    return view('/fysio/report');
+});
+Route::get('/exercises', function () {
+    return view('/fysio/upload_exercises');
+});
+//------------------------------- Tracking -------------------------------------------------
+
 Route::get('/motion', function () {
     return view('motion');
 });
-
 // Fysio pagina (video upload en analyse)
 Route::get('/fysio', [FysioController::class, 'showUploadPage']);
 Route::post('/fysio/upload', [FysioController::class, 'uploadVideo'])->name('fysio.upload');
