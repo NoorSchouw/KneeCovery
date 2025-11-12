@@ -146,7 +146,7 @@
     <div class="auth-branding">
         <img src="{{ asset('assets/images/logo.png') }}" alt="KneeCovery Logo">
         <h2>Welcome to KneeCovery</h2>
-        <p>Your personalized platform for smart ACL rehabilitation. Track your progress, connect with your care team, and recover stronger every day.</p>
+        <p>Your personalised platform for smart ACL rehabilitation. Track your progress, connect with your care team, and recover stronger every day.</p>
     </div>
 
     <!-- Signup form -->
@@ -169,7 +169,7 @@
             <div class="mb-3">
                 <label class="form-label" for="pwd">Your password <span class="text-danger">*</span></label>
                 <div class="input-group">
-                    <input type="password" id="pwd" name="password" class="form-control" placeholder="Enter password" minlength="8" maxlength="20" required>
+                    <input type="password" id="pwd" name="password" class="form-control" placeholder="Enter your password" minlength="8" maxlength="20" required>
                     <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                         <i class="ri-eye-line"></i>
                     </button>
