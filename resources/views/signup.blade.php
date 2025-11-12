@@ -150,7 +150,7 @@
     </div>
 
     <!-- Signup form -->
-    <form action="{{ url('/homepage') }}" method="POST">
+    <form action="{{ url('/homepage') }}" method="GET">
         @csrf
 
         <div class="auth-box gradient-box">
