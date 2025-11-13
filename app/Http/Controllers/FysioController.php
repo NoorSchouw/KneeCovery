@@ -17,7 +17,7 @@ class FysioController extends Controller
     public function uploadVideo(Request $request)
     {
         $request->validate([
-            'video' => 'required|file|mimes:mp4,mov,avi|max:20000', // max 20MB
+            'video' => 'required|file|mimes:mp4,mov,avi|max:512000', // max 500MB
         ]);
 
         $file = $request->file('video');
