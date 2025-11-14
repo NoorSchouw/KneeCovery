@@ -47,7 +47,7 @@
 
                 <!-- App brand starts -->
                 <div class="app-brand ms-3">
-                    <a href="/resources/views/homapage.blade.php">
+                    <a href="/resources/views/homepage.blade.php">
                         <img src="{{ asset ('assets/images/logo.png') }}" class="logo" alt="Dental Care Admin Template">
                     </a>
                 </div>
