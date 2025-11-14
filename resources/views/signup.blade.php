@@ -12,7 +12,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/remix/remixicon.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/main.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
     <style>
         /* Overall page gradient background */
