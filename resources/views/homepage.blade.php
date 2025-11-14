@@ -96,9 +96,9 @@
 
                 <!-- App brand starts -->
                 <div class="app-brand ms-3">
-                    <a href="{{ url('/') }}">
+                    <a href="{{ url('/homepage') }}">
                         <img src="{{  asset ('assets/images/logo.png') }}" class="logo"
-                             alt="Dental Care Admin Template">
+                             alt="Kneecovery">
                     </a>
                 </div>
                 <!-- App brand ends -->
@@ -154,7 +154,7 @@
                     <div class="app-brand">
                         <a href="#">
                             <img src="{{ asset('assets/images/logo.png') }}" class="logo"
-                                 alt="Dental Care Admin Template">
+                                 alt="KneeCovery">
                         </a>
                     </div>
                     <!-- App brand ends -->
@@ -181,10 +181,9 @@
                         <a id="userSettings" class="dropdown-toggle d-flex align-items-center" href="#" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="avatar-box">
-                                <img src="{{ asset('assets/images/doctor5.png') }}"
-                                     class="img-2xx rounded-5 border border-3 border-white"
-                                     alt="Dentist Dashboard">
-                                <span class="status busy"></span>
+                                <img src="{{ asset('assets/images/icons/account.png') }}"
+                                     class="img-3xx rounded-5"
+                                     alt="account">
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-300 shadow-lg">
@@ -195,15 +194,17 @@
                                 </div>
                             </div>
                             <div class="mx-3 my-2 d-grid">
-                                <a href="#" class="btn btn-primary">Logout</a>
+                                <a href="/resources/views/patient/information.blade.php" class="btn btn-primary">Account
+                                    information</a>
+                            </div>
+                            <div class="mx-3 my-2 d-grid">
+                                <a href="/resources/views/login.blade.php" class="btn btn-secondary">Logout</a>
                             </div>
                         </div>
                     </div>
                     <!-- Header user settings ends -->
-
                 </div>
                 <!-- App header actions ends -->
-
             </div>
             <!-- App header ends -->
 
@@ -217,23 +218,8 @@
                             <i class="ri-home-3-line"></i>
                         </a>
                     </li>
-                    <li class="breadcrumb-item text-primary" aria-current="page">
-                        Homepage
-                    </li>
                 </ol>
                 <!-- Breadcrumb ends -->
-
-                <!-- Sales stats starts -->
-                <div class="ms-auto d-lg-flex d-none flex-row">
-                    <div class="input-group">
-                <span class="input-group-text bg-primary-lighten">
-                  <i class="ri-calendar-2-line text-primary"></i>
-                </span>
-                        <input type="text" id="abc" class="form-control custom-daterange">
-                    </div>
-                </div>
-                <!-- Sales stats ends -->
-
             </div>
             <!-- App Hero header ends -->
 
@@ -246,16 +232,14 @@
 
                         <!-- Row starts -->
                         <div class="row gx-4">
-                            <div class="col-sm-12">
-                            </div>
+                            <div class="col-sm-12"></div>
                             <div class="col-sm-12">
                                 <div class="card mb-4">
                                     <div class="card-header pb-0 d-flex align-items-center justify-content-between">
-                                        <h5 class="card-title">Revenue</h5>
+                                        <h5 class="card-title">Knee extension and flexion</h5>
                                         <div class="btn-group btn-group-sm" role="group">
-                                            <button type="button" class="btn btn-primary">2025</button>
-                                            <button type="button" class="btn btn-outline-primary">2024</button>
-                                            <button type="button" class="btn btn-outline-primary">2023</button>
+                                            <button id="weekButton" type="button" class="btn btn-primary">Current week
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="card-body pt-0">
@@ -295,27 +279,26 @@
 
                                         <!-- Grid starts -->
                                         <div class="d-grid gap-2">
-                                            <a href="{{ url('/patient-profile') }}"
+                                            <a href="{{ url('/exercises') }}"
                                                class="d-flex align-items-center gap-3 appointment-card">
                                                 <div class="d-flex flex-column flex-fill">
-                                                    <div class="fw-semibold text-truncate">Heel slide</div>
+                                                    <div class="fw-semibold">Heel slide</div>
                                                 </div>
                                                 <span class="badge bg-danger">3x 10</span>
                                             </a>
-                                            <a href="{{ url('/patient-profile') }}"
-                                                   class="d-flex align-items-center gap-3 appointment-card">
-                                                <div class="d-flex flex-column flex-fill">
-                                                    <div class="fw-semibold text-truncate">Heel slide</div>
-                                                </div>
-                                                <span class="badge bg-danger">3x 10</span>
-                                            </a>
-                                            <a href="{{ url('/patient-profile') }}"
+                                            <a href="{{ url('/exercises') }}"
                                                class="d-flex align-items-center gap-3 appointment-card">
                                                 <div class="d-flex flex-column flex-fill">
-                                                    <div class="fw-semibold text-truncate">Heel slide</div>
+                                                    <div class="fw-semibold">Squat</div>
                                                 </div>
                                                 <span class="badge bg-danger">3x 10</span>
                                             </a>
+                                            <a href="{{ url('/exercises') }}"
+                                               class="d-flex flex-column gap-1 appointment-card">
+                                                <div class="fw-semibold">Alternate prone ham string curls</div>
+                                                <span class="badge bg-danger w-fit">3x 10</span>
+                                            </a>
+
                                         </div>
                                         <!-- Grid ends -->
 
