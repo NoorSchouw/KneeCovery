@@ -17,7 +17,7 @@
 		************ CSS Files *************
 	  ************* -->
     <link rel="stylesheet" href="assets/fonts/remix/remixicon.css">
-    <link rel="stylesheet" href="assets/css/main.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 
     <!-- *************
 		************ Vendor Css Files *************
