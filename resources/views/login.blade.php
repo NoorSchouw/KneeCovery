@@ -1,24 +1,20 @@
 <!DOCTYPE html>
-<!-- Maud's code -->
+<!-- Maud's code, deze code heeft nu de juiste layour en style -->
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Clove Dental Care Admin Template</title>
+    <title>KneeCovery - Login</title>
 
     <!-- Meta -->
-    <meta name="description" content="Marketplace for Bootstrap Admin Dashboards">
-    <meta property="og:title" content="Admin Templates - Dashboard Templates">
-    <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
-    <meta property="og:type" content="Website">
+    <meta name="description" content="Login for KneeCovery - Smart ACL Rehabilitation">
     <link rel="shortcut icon" href="{{ asset ('assets/images/favicon.svg') }}">
 
-    <!-- *************
-			************ CSS Files *************
-		************* -->
+    <!-- CSS bestanden -->
     <link rel="stylesheet" href="{{ asset ('assets/fonts/remix/remixicon.css') }}">
-    <link rel="stylesheet" href="{{ asset ('assets/css/main.min.css') }}">
+    <!-- Belangrijk: dezelfde CSS als in signup -->
+    <link rel="stylesheet" href="{{ asset ('assets/css/main.css') }}">
 
     <style>
         /* Algemene achtergrond en body */
@@ -31,11 +27,11 @@
             font-family: "Poppins", sans-serif;
         }
 
-        /* Invulblokje om in te loggen */
+        /* Center container */
         .auth-wrapper {
             display: flex;
-            align-items: center;        /* verticaal gecentreerd */
-            justify-content: center;   /* horizontaal gecentreerd */
+            align-items: center;
+            justify-content: center;
             gap: 60px;
             width: 100%;
             max-width: 1200px;
@@ -144,63 +140,69 @@
     </style>
 </head>
 
-<body class="login-bg">
+<body>
 
-<!-- Container starts -->
-<div class="container">
+<!-- Auth wrapper (geen container!) -->
+<div class="auth-wrapper">
 
-    <!-- Auth wrapper starts -->
-    <div class="auth-wrapper">
+    <!-- Logo en tekstje -->
+    <div class="auth-branding">
+        <img src="{{ asset('assets/images/logo.png') }}" alt="KneeCovery Logo">
+        <h2>Welcome to KneeCovery</h2>
+        <p>Your personalised platform for smart ACL rehabilitation. Track your progress, connect with your care team, and recover stronger every day.</p>
+    </div>
 
-        <!-- Logo en tekstje -->
-        <div class="auth-branding">
-            <img src="{{ asset('assets/images/logo.png') }}" alt="KneeCovery Logo">
-            <h2>Welcome to KneeCovery</h2>
-            <p>Your personalised platform for smart ACL rehabilitation. Track your progress, connect with your care team, and recover stronger every day.</p>
-        </div>
+    <!-- Log in -->
+    <form action="{{ url('/homepage') }}" method="GET">   <!-- Deze regel laat zien waar de gebruiker heen gaat wanneer deze op login knop drukt -->
 
-        <!-- Log in -->
-        <form action="{{ url ('/resources/views/app.blade.php') }}" method="GET">   <!-- Deze regel laat zien waar de gebruiker heen gaat wanner deze op login knop drukt -->
+        <div class="auth-box gradient-box">
+            <h4>Login</h4> <!-- De tekst bovenin wat het blokje is -->
 
-            <div class="auth-box gradient-box">
-                 <h4>Login</h4> <!-- De tekst bovenin wat het blokje is -->
-
-                <!-- Hier wordt het email veld geschreven -->
-                <div class="mb-3">  <!--mb-3 is de maat van het celd, dus uiterlijk -->
-                    <label class="form-label" for="email">Your email <span class="text-danger">*</span></label>
-                    <input type="text" id="email" class="form-control" placeholder="Enter your email">
-                </div>
-
-                <!-- Hier wordt het veld PassWord beschreven -->
-                <div class="mb-3">
-                    <label class="form-label" for="pwd">Your password <span class="text-danger">*</span></label>
-                    <div class="input-group">
-                        <input type="password" id="pwd" class="form-control" placeholder="Enter password">
-                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                            <i class="ri-eye-line text-primary"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-end mb-3">
-                    <a href="#" class="text-decoration-underline">Forgot password?</a>
-                </div>
-
-                <div class="mb-3 d-grid gap-2">
-                    <button type="submit" class="btn btn-primary">Login</button>
-                    <a href="signup.html" class="btn btn-secondary">Not registered? Signup</a>
-                </div>
-
+            <!-- Hier wordt het email veld geschreven -->
+            <div class="mb-3">  <!-- mb-3 is de maat van het veld, dus uiterlijk -->
+                <label class="form-label" for="email">Your email <span class="text-danger">*</span></label>
+                <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
             </div>
 
-        </form>
-        <!-- Form ends -->
+            <!-- Hier wordt het veld PassWord beschreven -->
+            <div class="mb-3">
+                <label class="form-label" for="pwd">Your password <span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <input type="password" id="pwd" class="form-control" placeholder="Enter password" required>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                        <i class="ri-eye-line"></i>
+                    </button>
+                </div>
+            </div>
 
-    </div>
-    <!-- Auth wrapper ends -->
+            <div class="d-flex justify-content-end mb-3">
+                <a href="#" class="text-decoration-underline">Forgot password?</a>
+            </div>
 
-</div>
-<!-- Container ends -->
+            <div class="mb-3 d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Login</button>
+                <a href="{{ url('/') }}" class="btn btn-secondary">Not registered? Signup</a>
+            </div>
+
+        </div>
+
+    </form>
+    <!-- Form ends -->
+
+</div> <!-- Auth wrapper ends -->
+
+
+<script>
+    // Toggle password visibility
+    const togglePassword = document.querySelector('#togglePassword');
+    const passwordInput = document.querySelector('#pwd');
+
+    togglePassword?.addEventListener('click', () => {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        togglePassword.querySelector('i').classList.toggle('ri-eye-off-line');
+    });
+</script>
 
 </body>
 
