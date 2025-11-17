@@ -36,6 +36,36 @@
                     <span class="menu-text">Homepage</span>
                 </a>
             </li>
+            <li class="{{ request()->is('calendar') ? 'active current-page' : '' }}">
+                <a href="{{ url('/calendar') }}">
+                    <i class="ri-calendar-line"></i>
+                    <span class="menu-text">Calendar</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('all-exercises') ? 'active current-page' : '' }}">
+                <a href="{{ url('/all-exercises') }}">
+                    <i class="ri-run-line"></i>
+                    <span class="menu-text">Exercises</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('patient-report') ? 'active current-page' : '' }}">
+                <a href="{{ url('/patient-report') }}">
+                    <i class="ri-bar-chart-line"></i>
+                    <span class="menu-text">Graphs</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('information') ? 'active current-page' : '' }}">
+                <a href="{{ url('/information') }}">
+                    <i class="ri-information-line"></i>
+                    <span class="menu-text">Information</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('filming') ? 'active current-page' : '' }}">
+                <a href="{{ url('/filming') }}">
+                    <i class="ri-video-line"></i>
+                    <span class="menu-text">Filming</span>
+                </a>
+            </li>
         </ul>
     </div>
     <!-- Sidebar menu ends -->

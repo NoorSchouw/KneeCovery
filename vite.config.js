@@ -24,7 +24,8 @@ export default defineConfig({
 
                 // JS
                 'resources/js/app.js',
-                'resources/js/vendor.js'
+                'resources/js/vendor.js',
+                'resources/js/graphs.js'
             ],
             refresh: true,
         }),

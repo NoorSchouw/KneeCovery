@@ -1,19 +1,20 @@
 // Import apex
 import './vendor/apex/apexcharts.min.js'
 
-// Graphs
-import './vendor/apex/custom/graphs/gauge.js'
-import './vendor/apex/custom/graphs/area.js'
-import './vendor/apex/custom/graphs/bar.js'
-import './vendor/apex/custom/graphs/column-area.js'
-import './vendor/apex/custom/graphs/candlestick.js'
-import './vendor/apex/custom/graphs/heatmap.js'
-import './vendor/apex/custom/graphs/donut.js'
-import 'resources/js/vendor/apex/custom/graphs/pie.js'
-import './vendor/apex/custom/graphs/area.js'
-import './vendor/apex/custom/graphs/radial-bar.js'
-import './vendor/apex/custom/graphs/funnel.js'
-import './vendor/apex/custom/graphs/pyramid.js'
+// Graphs - NOTE: Individual graph files are deprecated
+// All graphs are now initialized via graphs.js
+// Keeping these imports commented for reference:
+// import './vendor/apex/custom/graphs/gauge.js'
+// import './vendor/apex/custom/graphs/area.js'
+// import './vendor/apex/custom/graphs/bar.js'
+// import './vendor/apex/custom/graphs/column-area.js'
+// import './vendor/apex/custom/graphs/candlestick.js'
+// import './vendor/apex/custom/graphs/heatmap.js' // REMOVED
+// import './vendor/apex/custom/graphs/donut.js'
+// import './vendor/apex/custom/graphs/pie.js'
+// import './vendor/apex/custom/graphs/radial-bar.js'
+// import './vendor/apex/custom/graphs/funnel.js'
+// import './vendor/apex/custom/graphs/pyramid.js'
 
 //  ---------- Dentist
 import './vendor/apex/custom/dentist/claims.js'

@@ -4,45 +4,41 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Clove Dental Care Admin Template</title>
+    <title>KneeCovery - Graphs</title>
 
     <!-- Meta -->
-    <meta name="description" content="Marketplace for Bootstrap Admin Dashboards">
-    <meta property="og:title" content="Admin Templates - Dashboard Templates">
-    <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+    <meta name="description" content="Patient Graphs and Analytics">
+    <meta property="og:title" content="KneeCovery - Graphs">
+    <meta property="og:description" content="View patient progress graphs">
     <meta property="og:type" content="Website">
-    <link rel="shortcut icon" href="assets/images/favicon.svg">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}">
 
     @vite([
-   'resources/css/main.css',
-   'resources/css/daterange.css',
-   'resources/css/overlayScrollbars.css',
-   'resources/css/remixicon.css',
-   'resources/js/app.js',
-   'resources/js/vendor.js'
-])
+        'resources/css/main.css',
+        'resources/css/daterange.css',
+        'resources/css/overlayScrollbars.css',
+        'resources/css/remixicon.css',
+        'resources/js/app.js',
+        'resources/js/vendor.js',
+        'resources/js/graphs.js'
+    ])
 
-    <!-- *************
-		************ CSS Files *************
-	  ************* -->
+{{--    <!-- *************--}}
+{{--		************ CSS Files *************--}}
+{{--	  ************* -->--}}
 {{--    <link rel="stylesheet" href="assets/fonts/remix/remixicon.css">--}}
 {{--    <link rel="stylesheet" href="assets/css/main.css">--}}
 
-    <!-- *************
-		************ Vendor Css Files *************
-	  ************ -->
+{{--    <!-- *************--}}
+{{--		************ Vendor Css Files *************--}}
+{{--	  ************ -->--}}
 
-    <!-- Scrollbar CSS -->
+{{--    <!-- Scrollbar CSS -->--}}
 {{--    <link rel="stylesheet" href="assets/vendor/overlay-scroll/OverlayScrollbars.min.css">--}}
 
 {{--    <!-- Date Range CSS -->--}}
 {{--    <link rel="stylesheet" href="assets/vendor/daterange/daterange.css">--}}
 
-    <!-- Uploader CSS -->
-{{--    <link rel="stylesheet" href="assets/vendor/dropzone/dropzone.min.css">--}}
-
-    <!-- Quill Editor -->
-{{--    <link rel="stylesheet" href="assets/vendor/quill/quill.core.css">--}}
 </head>
 
 <body>
@@ -53,8 +49,14 @@
     <!-- Main container starts -->
     <div class="main-container">
 
-        <!-- Sidebar wrapper starts -->
-        <nav id="sidebar" class="sidebar-wrapper">
+        <!-- Sidebar Component -->
+        <x-sidebar userName="{{ $userName ?? 'John Doe' }}" userRole="{{ $userRole ?? 'Patient' }}"/>
+
+        <!-- App container starts -->
+        <div class="app-container">
+
+            <!-- Header Component -->
+            <x-header/>
 
             <!-- Brand container starts -->
             <div class="brand-container d-flex align-items-center justify-content-between">
@@ -148,7 +150,7 @@
                             <span class="menu-text">Doctors Profile</span>
                         </a>
                     </li>
-                    <li class="active current-page">
+                    <li>
                         <a href="add-doctors.html">
                             <i class="ri-stethoscope-line"></i>
                             <span class="menu-text">Add Doctor</span>
@@ -482,14 +484,14 @@
                             <span class="menu-text">Tables</span>
                         </a>
                     </li>
-                    <li class="treeview">
+                    <li class="treeview active current-page">
                         <a href="#!">
                             <i class="ri-bar-chart-line"></i>
                             <span class="menu-text">Graphs</span>
                         </a>
                         <ul class="treeview-menu">
                             <li>
-                                <a href="apex.html">Apex Graphs</a>
+                                <a href="apex.html" class="active-sub">Apex Graphs</a>
                             </li>
                             <li>
                                 <a href="morris.html">Morris Graphs</a>
@@ -1027,8 +1029,9 @@
                             <i class="ri-home-3-line"></i>
                         </a>
                     </li>
+                    <li class="breadcrumb-item">Graphs</li>
                     <li class="breadcrumb-item text-primary" aria-current="page">
-                        Add Doctor
+                        Apex Graphs
                     </li>
                 </ol>
                 <!-- Breadcrumb ends -->
@@ -1050,524 +1053,154 @@
             <!-- App body starts -->
             <div class="app-body">
 
-                <!-- Row starts -->
+                <!-- Row start -->
                 <div class="row gx-4">
-                    <div class="col-xl-12">
-                        <div class="card">
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title">Gauge</h5>
+                            </div>
                             <div class="card-body">
-
-                                <!-- Custom tabs starts -->
-                                <div class="custom-tabs-container">
-
-                                    <!-- Nav tabs starts -->
-                                    <ul class="nav nav-tabs" id="customTab2" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <a class="nav-link active" id="tab-oneA" data-bs-toggle="tab" href="#oneA" role="tab"
-                                               aria-controls="oneA" aria-selected="true"><i class="ri-briefcase-4-line"></i> Personal
-                                                Details</a>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <a class="nav-link" id="tab-twoA" data-bs-toggle="tab" href="#twoA" role="tab"
-                                               aria-controls="twoA" aria-selected="false"><i class="ri-account-pin-circle-line"></i>
-                                                Profile and Bio</a>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <a class="nav-link" id="tab-threeA" data-bs-toggle="tab" href="#threeA" role="tab"
-                                               aria-controls="threeA" aria-selected="false"><i class="ri-calendar-check-line"></i>
-                                                Availability</a>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <a class="nav-link" id="tab-fourA" data-bs-toggle="tab" href="#fourA" role="tab"
-                                               aria-controls="fourA" aria-selected="false"><i class="ri-lock-password-line"></i> Account
-                                                Details</a>
-                                        </li>
-                                    </ul>
-                                    <!-- Nav tabs ends -->
-
-                                    <!-- Tab content starts -->
-                                    <div class="tab-content h-350">
-                                        <div class="tab-pane fade show active" id="oneA" role="tabpanel">
-
-                                            <!-- Row starts -->
-                                            <div class="row gx-4">
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a1">First Name <span class="text-danger">*</span></label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-account-circle-line"></i>
-                                  </span>
-                                                            <input type="text" class="form-control" id="a1" placeholder="Enter First Name">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a2">Last Name <span class="text-danger">*</span></label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-account-circle-line"></i>
-                                  </span>
-                                                            <input type="text" class="form-control" id="a2" placeholder="Enter Last Name">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a3">Age <span class="text-danger">*</span></label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-flower-line"></i>
-                                  </span>
-                                                            <select class="form-select" id="a3">
-                                                                <option value="0">Select Age</option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                                <option value="8">8</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="selectGender1">Gender<span
-                                                                class="text-danger">*</span></label>
-                                                        <div class="m-0">
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="radio" name="selectGenderOptions"
-                                                                       id="selectGender1" value="male">
-                                                                <label class="form-check-label" for="selectGender1">Male</label>
-                                                            </div>
-                                                            <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="radio" name="selectGenderOptions"
-                                                                       id="selectGender2" value="female">
-                                                                <label class="form-check-label" for="selectGender2">Female</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a4">Create ID <span class="text-danger">*</span></label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-secure-payment-line"></i>
-                                  </span>
-                                                            <input type="text" class="form-control" id="a4" placeholder="Create Unique ID">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a5">Email ID <span class="text-danger">*</span></label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-mail-open-line"></i>
-                                  </span>
-                                                            <input type="email" class="form-control" id="a5" placeholder="Enter Email ID">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a6">Mobile Number <span
-                                                                class="text-danger">*</span></label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-phone-line"></i>
-                                  </span>
-                                                            <input type="text" class="form-control" id="a6" placeholder="Enter Mobile Number">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a7">Marital Status</label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-vip-crown-2-line"></i>
-                                  </span>
-                                                            <select class="form-select" id="a7">
-                                                                <option value="0">Select</option>
-                                                                <option value="1">Married</option>
-                                                                <option value="2">Un Married</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a8">Qualification</label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-copper-diamond-line"></i>
-                                  </span>
-                                                            <select class="form-select" id="a8">
-                                                                <option value="0">Select</option>
-                                                                <option value="1">MBBS, MD</option>
-                                                                <option value="2">MBBS, MS</option>
-                                                                <option value="3">MBBS</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a9">Designation</label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-nft-line"></i>
-                                  </span>
-                                                            <select class="form-select" id="a9">
-                                                                <option value="0">Select</option>
-                                                                <option value="1">Doctor</option>
-                                                                <option value="2">Head of the Dept</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a10">Blood Group<span
-                                                                class="text-danger">*</span></label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-drop-line"></i>
-                                  </span>
-                                                            <select class="form-select" id="a10">
-                                                                <option value="0">Select</option>
-                                                                <option value="1">A+</option>
-                                                                <option value="2">A-</option>
-                                                                <option value="3">B+</option>
-                                                                <option value="4">B-</option>
-                                                                <option value="5">O+</option>
-                                                                <option value="6">O-</option>
-                                                                <option value="7">AB+</option>
-                                                                <option value="8">AB-</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a11">Address</label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-projector-line"></i>
-                                  </span>
-                                                            <input type="text" class="form-control" id="a11" placeholder="Enter Address">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a12">Country</label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-flag-line"></i>
-                                  </span>
-                                                            <select class="form-select" id="a12">
-                                                                <option value="0">Select</option>
-                                                                <option value="1">USA</option>
-                                                                <option value="2">Canada</option>
-                                                                <option value="3">Brazil</option>
-                                                                <option value="4">India</option>
-                                                                <option value="5">China</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a13">State</label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-instance-line"></i>
-                                  </span>
-                                                            <select class="form-select" id="a13">
-                                                                <option value="0">Select</option>
-                                                                <option value="1">Alabama</option>
-                                                                <option value="2">Alaska</option>
-                                                                <option value="3">Arizona</option>
-                                                                <option value="4">California</option>
-                                                                <option value="5">Florida</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a14">City</label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-scan-line"></i>
-                                  </span>
-                                                            <input type="text" class="form-control" id="a14" placeholder="Enter City">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="a15">Postal Code</label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-qr-scan-line"></i>
-                                  </span>
-                                                            <input type="text" class="form-control" id="a15" placeholder="Enter Postal Code">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Row ends -->
-
-                                        </div>
-                                        <div class="tab-pane fade" id="twoA" role="tabpanel">
-
-                                            <!-- Row starts -->
-                                            <div class="row gx-4">
-                                                <div class="col-sm-2">
-                                                    <div id="dropzone" class="mb-3">
-                                                        <label class="form-label">Upload Profile</label>
-                                                        <form action="/upload" class="dropzone dz-clickable" id="demo-upload">
-                                                            <div class="dz-message">
-                                                                <button type="button" class="dz-button">
-                                                                    Click here to upload your photo.</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <label class="form-label">Write Bio</label>
-                                                    <div id="fullEditor">
-                                                        <h1>Hello,</h1>
-                                                        <br>
-                                                        <p>My name is <strong>Dr. David Kemrin</strong>. Write your bio here.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Row ends -->
-
-                                        </div>
-                                        <div class="tab-pane fade" id="threeA" role="tabpanel">
-
-                                            <!-- Row starts -->
-                                            <div class="row gx-4">
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="d1">Sunday</label>
-                                                        <div class="input-group">
-                                                            <select class="form-select" id="d1">
-                                                                <option value="0">From</option>
-                                                                <option value="1">7AM</option>
-                                                                <option value="2">8AM</option>
-                                                                <option value="3">9AM</option>
-                                                            </select>
-                                                            <select class="form-select" id="d1X">
-                                                                <option value="0">To</option>
-                                                                <option value="1">3PM</option>
-                                                                <option value="2">4PM</option>
-                                                                <option value="3">5PM</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="d2">Monday</label>
-                                                        <div class="input-group">
-                                                            <select class="form-select" id="d2">
-                                                                <option value="0">From</option>
-                                                                <option value="1">7AM</option>
-                                                                <option value="2">8AM</option>
-                                                                <option value="3">9AM</option>
-                                                            </select>
-                                                            <select class="form-select" id="d2X">
-                                                                <option value="0">To</option>
-                                                                <option value="1">3PM</option>
-                                                                <option value="2">4PM</option>
-                                                                <option value="3">5PM</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="d3">Tuesday</label>
-                                                        <div class="input-group">
-                                                            <select class="form-select" id="d3">
-                                                                <option value="0">From</option>
-                                                                <option value="1">7AM</option>
-                                                                <option value="2">8AM</option>
-                                                                <option value="3">9AM</option>
-                                                            </select>
-                                                            <select class="form-select" id="d3X">
-                                                                <option value="0">To</option>
-                                                                <option value="1">3PM</option>
-                                                                <option value="2">4PM</option>
-                                                                <option value="3">5PM</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="d4">Wednesday</label>
-                                                        <div class="input-group">
-                                                            <select class="form-select" id="d4">
-                                                                <option value="0">From</option>
-                                                                <option value="1">7AM</option>
-                                                                <option value="2">8AM</option>
-                                                                <option value="3">9AM</option>
-                                                            </select>
-                                                            <select class="form-select" id="d4X">
-                                                                <option value="0">To</option>
-                                                                <option value="1">3PM</option>
-                                                                <option value="2">4PM</option>
-                                                                <option value="3">5PM</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="d5">Thursday</label>
-                                                        <div class="input-group">
-                                                            <select class="form-select" id="d5">
-                                                                <option value="0">From</option>
-                                                                <option value="1">7AM</option>
-                                                                <option value="2">8AM</option>
-                                                                <option value="3">9AM</option>
-                                                            </select>
-                                                            <select class="form-select" id="d5X">
-                                                                <option value="0">To</option>
-                                                                <option value="1">3PM</option>
-                                                                <option value="2">4PM</option>
-                                                                <option value="3">5PM</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="d6">Friday</label>
-                                                        <div class="input-group">
-                                                            <select class="form-select" id="d6">
-                                                                <option value="0">From</option>
-                                                                <option value="1">7AM</option>
-                                                                <option value="2">8AM</option>
-                                                                <option value="3">9AM</option>
-                                                            </select>
-                                                            <select class="form-select" id="d6X">
-                                                                <option value="0">To</option>
-                                                                <option value="1">3PM</option>
-                                                                <option value="2">4PM</option>
-                                                                <option value="3">5PM</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="d7">Saturday</label>
-                                                        <div class="input-group">
-                                                            <select class="form-select" id="d7">
-                                                                <option value="0">From</option>
-                                                                <option value="1">7AM</option>
-                                                                <option value="2">8AM</option>
-                                                                <option value="3">9AM</option>
-                                                            </select>
-                                                            <select class="form-select" id="d7X">
-                                                                <option value="0">To</option>
-                                                                <option value="1">3PM</option>
-                                                                <option value="2">4PM</option>
-                                                                <option value="3">5PM</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Row ends -->
-
-                                        </div>
-                                        <div class="tab-pane fade" id="fourA" role="tabpanel">
-
-                                            <!-- Row starts -->
-                                            <div class="row gx-4 justify-content-center">
-                                                <div class="col-sm-4">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="u1">User Name</label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-account-pin-circle-line"></i>
-                                  </span>
-                                                            <input type="text" id="u1" placeholder="Enter username" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="u2">Password</label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-lock-password-line"></i>
-                                  </span>
-                                                            <input type="password" id="u2" class="form-control" placeholder="New Password">
-                                                            <button class="btn btn-outline-secondary" type="button">
-                                                                <i class="ri-eye-line"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div class="form-text">
-                                                            Your password must be 8-20 characters long, contain letters and numbers, and must not
-                                                            contain spaces, special characters.
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="u3">Confirm Password</label>
-                                                        <div class="input-group">
-                                  <span class="input-group-text">
-                                    <i class="ri-lock-password-line"></i>
-                                  </span>
-                                                            <input type="password" id="u3" placeholder="Confirm new password"
-                                                                   class="form-control">
-                                                            <button class="btn btn-outline-secondary" type="button">
-                                                                <i class="ri-eye-off-line"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div class="form-text">
-                                                            Your password must be 8-20 characters long, contain letters and numbers, and must not
-                                                            contain spaces, special characters.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Row ends -->
-
-                                        </div>
-                                    </div>
-                                    <!-- Tab content ends -->
-
+                                <div class="chart-height">
+                                    <div id="gauge" class="auto-align-graph"></div>
                                 </div>
-                                <!-- Custom tabs ends -->
-
-                                <!-- Card acrions starts -->
-                                <div class="d-flex gap-2 justify-content-end mt-4">
-                                    <a href="doctors-list.html" class="btn btn-outline-secondary">
-                                        Cancel
-                                    </a>
-                                    <a href="doctors-list.html" class="btn btn-primary">
-                                        Create Doctor Profile
-                                    </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title">Radial</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-height">
+                                    <div id="radial" class="auto-align-graph"></div>
                                 </div>
-                                <!-- Card acrions ends -->
-
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title">Funnel</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-height-xl">
+                                    <div id="funnel" class="auto-align-graph"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title">Pyramid</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-height-xl">
+                                    <div id="pyramid" class="auto-align-graph"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title">Donut</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-height">
+                                    <div id="donut" class="auto-align-graph"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title">Pie</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-height">
+                                    <div id="pie" class="auto-align-graph"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title">CandleStick</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-height-xl">
+                                    <div id="candleStick"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title">Area Graph</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-height-xl">
+                                    <div id="areaGraph"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title">Line Graph</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-height-xl">
+                                    <div id="lineGraph"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title">Line Graph</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-height-xl">
+                                    <div id="barGraph"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title">Column Area Graph</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-height-xl">
+                                    <div id="columnArea"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title">Heatmap</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-height-xl">
+                                    <div id="heatmap"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Row ends -->
+                <!-- Row end -->
 
             </div>
             <!-- App body ends -->
@@ -1590,9 +1223,9 @@
 <!-- *************
         ************ JavaScript Files *************
     ************* -->
-<!-- Required jQuery first, then Bootstrap Bundle JS -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
+{{--<!-- Required jQuery first, then Bootstrap Bundle JS -->--}}
+{{--<script src="assets/js/jquery.min.js"></script>--}}
+{{--<script src="assets/js/bootstrap.bundle.min.js"></script>--}}
 {{--<script src="assets/js/moment.min.js"></script>--}}
 
 <!-- *************
@@ -1607,15 +1240,23 @@
 {{--<script src="assets/vendor/daterange/daterange.js"></script>--}}
 {{--<script src="assets/vendor/daterange/custom-daterange.js"></script>--}}
 
-<!-- Dropzone JS -->
-{{--<script src="assets/vendor/dropzone/dropzone.min.js"></script>--}}
-
-<!-- Quill Editor JS -->
-{{--<script src="assets/vendor/quill/quill.min.js"></script>--}}
-{{--<script src="assets/vendor/quill/custom.js"></script>--}}
+{{--<!-- Apex js -->--}}
+{{--<script src="assets/vendor/apex/apexcharts.min.js"></script>--}}
+{{--<script src="assets/vendor/apex/custom/graphs/area.js"></script>--}}
+{{--<script src="assets/vendor/apex/custom/graphs/line.js"></script>--}}
+{{--<script src="assets/vendor/apex/custom/graphs/bar.js"></script>--}}
+{{--<script src="assets/vendor/apex/custom/graphs/column-area.js"></script>--}}
+{{--<script src="assets/vendor/apex/custom/graphs/candlestick.js"></script>--}}
+{{--<script src="assets/vendor/apex/custom/graphs/heatmap.js"></script>--}}
+{{--<script src="assets/vendor/apex/custom/graphs/donut.js"></script>--}}
+{{--<script src="assets/vendor/apex/custom/graphs/pie.js"></script>--}}
+{{--<script src="assets/vendor/apex/custom/graphs/gauge.js"></script>--}}
+{{--<script src="assets/vendor/apex/custom/graphs/radial-bar.js"></script>--}}
+{{--<script src="assets/vendor/apex/custom/graphs/funnel.js"></script>--}}
+{{--<script src="assets/vendor/apex/custom/graphs/pyramid.js"></script>--}}
 
 <!-- Custom JS files -->
-{{--<script src="assets/js/custom.js"></script>--}}
+<script src="assets/js/custom.js"></script>
 </body>
 
 </html>

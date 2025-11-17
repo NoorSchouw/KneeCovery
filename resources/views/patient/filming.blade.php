@@ -307,7 +307,7 @@
 <!-- Required jQuery first, then Bootstrap Bundle JS -->
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/js/moment.min.js') }}"></script>
+{{--<script src="{{ asset('assets/js/moment.min.js') }}"></script>--}}
 
 <!-- *************
         ************ Vendor Js Files *************
