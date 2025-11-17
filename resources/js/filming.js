@@ -1,85 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>KneeCovery – Motion Tracking</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <style>
-        body {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: #111;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-        h1 { margin-top: 20px; }
-        #video-container { position: relative; width: 640px; height: 480px; margin-bottom: 20px; }
-        video, canvas {
-            position: absolute;
-            top: 0; left: 0;
-            width: 640px; height: 480px;
-            border-radius: 8px;
-            transform: scaleX(-1);
-        }
-        #controls { margin: 12px 0; display: flex; gap: 10px; align-items: centre; }
-        #angle-display { font-size: 18px; font-weight: bold; colour: #fff; text-align: centre; margin-top: 10px; }
-        #statusbar { margin: 10px 0; padding: 6px 10px; border-radius: 6px; background: #222; colour: #ddd; font-family: monospace; }
-        .badge { display:inline-block; padding:2px 6px; border-radius:4px; margin-right:6px; font-weight:bold; }
-        .on { background:#14532d; colour:#a7f3d0; }
-        .off { background:#7f1d1d; colour:#fecaca; }
-        .warn { background:#635c0b; colour:#fef08a; }
+// filming.js
 
-        #recordBtn {
-            padding: 8px 12px;
-            border-radius: 6px;
-            border: none;
-            background: #0a7;
-            colour: #fff;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        #recordBtn.recording {
-            background: #b91c1c;
-        }
-    </style>
-
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.12.0/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script>
-</head>
-
-<body>
-<h1>KneeCovery – Motion Tracking</h1>
-
-<div id="controls">
-    <label for="kneeSelect">Select knee:</label>
-    <select id="kneeSelect">
-        <option value="left">Left knee</option>
-        <option value="right">Right knee</option>
-    </select>
-
-    <button id="recordBtn">Start recording</button>
-</div>
-
-<div id="statusbar">
-    <span id="camStatus" class="badge off">Camera: off</span>
-    <span id="trackStatus" class="badge off">Tracking: off</span>
-    <span id="refStatus" class="badge warn">Reference: unknown</span>
-    <span id="msg"></span>
-</div>
-
-<div id="video-container">
-    <video id="video" autoplay playsinline muted></video>
-    <canvas id="output"></canvas>
-</div>
-
-<canvas id="recordCanvas" style="display:none;"></canvas>
-
-<div id="angle-display">Angle: --° | Reference: --°</div>
-
-<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    // DOM-elementen ophalen
     const video = document.getElementById('video');
     const canvas = document.getElementById('output');
     const ctx = canvas.getContext('2d');
@@ -88,7 +10,6 @@
 
     const kneeSelect = document.getElementById('kneeSelect');
     const recordBtn = document.getElementById('recordBtn');
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     const camBadge = document.getElementById('camStatus');
     const trackBadge = document.getElementById('trackStatus');
@@ -96,6 +17,10 @@
     const msgEl = document.getElementById('msg');
     const angleDisplay = document.getElementById('angle-display');
 
+    const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+    const csrfToken = csrfMeta ? csrfMeta.getAttribute('content') : '';
+
+    // Variabelen
     let detector;
     let kneeSide = 'left';
     let referenceData = null;
@@ -106,24 +31,43 @@
     let recordedChunks = [];
     let isRecording = false;
 
+    // Event listeners
     kneeSelect.addEventListener('change', () => kneeSide = kneeSelect.value);
-    function setBadge(el, on, labelOn, labelOff){ el.classList.remove('on','off','warn'); el.classList.add(on?'on':'off'); el.textContent = (on?labelOn:labelOff); }
-    function setWarn(el, text){ el.classList.remove('on','off','warn'); el.classList.add('warn'); el.textContent = text; }
-    function logMsg(t){ msgEl.textContent = t; }
+    recordBtn.addEventListener('click', () => {
+        if (!isRecording) startRecording();
+        else stopRecording();
+    });
 
-    function ema(prev, value, alpha=0.25){ return prev == null ? value : prev*(1-alpha) + value*alpha; }
+    // Helper functies
+    function setBadge(el, on, labelOn, labelOff) {
+        el.classList.remove('on','off','warn');
+        el.classList.add(on ? 'on' : 'off');
+        el.textContent = on ? labelOn : labelOff;
+    }
 
-    function calculateAngle(a,b,c){
+    function setWarn(el, text) {
+        el.classList.remove('on','off','warn');
+        el.classList.add('warn');
+        el.textContent = text;
+    }
+
+    function logMsg(t) { msgEl.textContent = t; }
+
+    function ema(prev, value, alpha = 0.25) {
+        return prev == null ? value : prev*(1-alpha) + value*alpha;
+    }
+
+    function calculateAngle(a,b,c) {
         const ab = {x:a.x-b.x, y:a.y-b.y};
         const cb = {x:c.x-b.x, y:c.y-b.y};
         const dot = ab.x*cb.x + ab.y*cb.y;
-        const abLen = Math.hypot(ab.x,ab.y);
-        const cbLen = Math.hypot(cb.x,cb.y);
+        const abLen = Math.hypot(ab.x, ab.y);
+        const cbLen = Math.hypot(cb.x, cb.y);
         const cos = Math.min(1, Math.max(-1, dot/(abLen*cbLen)));
         return Math.acos(cos)*(180/Math.PI);
     }
 
-    function drawFanWithPoints(hip,knee,ankle,colour,angle){
+    function drawFanWithPoints(hip, knee, ankle, colour, angle) {
         ctx.beginPath();
         ctx.moveTo(hip.x, hip.y);
         ctx.lineTo(knee.x, knee.y);
@@ -143,7 +87,7 @@
         ctx.lineTo(ankle.x, ankle.y);
         ctx.stroke();
 
-        [hip,knee,ankle].forEach(pt => {
+        [hip, knee, ankle].forEach(pt => {
             ctx.beginPath();
             ctx.arc(pt.x, pt.y, 6, 0, 2*Math.PI);
             ctx.fillStyle = colour;
@@ -158,7 +102,7 @@
         ctx.fillText(`${angle.toFixed(1)}°`, knee.x + 10, knee.y - 10);
     }
 
-    function getFanColour(liveAngle){
+    function getFanColour(liveAngle) {
         if(!referenceData) return 'limegreen';
         const {peakAngle, direction} = referenceData;
         if(direction === 'extension' && liveAngle > peakAngle) return 'red';
@@ -166,57 +110,56 @@
         return 'limegreen';
     }
 
-    async function setupCamera(){
-        try{
+    // Camera setup
+    async function setupCamera() {
+        try {
             const stream = await navigator.mediaDevices.getUserMedia({video:{width:640,height:480},audio:false});
             video.srcObject = stream;
-            return new Promise(resolve => video.onloadedmetadata = ()=>{
-                canvas.width = 640;
-                canvas.height = 480;
-                recordCanvas.width = 640;
-                recordCanvas.height = 480;
+            return new Promise(resolve => video.onloadedmetadata = () => {
+                canvas.width = 640; canvas.height = 480;
+                recordCanvas.width = 640; recordCanvas.height = 480;
                 video.play();
-                setBadge(camBadge,true,'Camera: on','Camera: off');
+                setBadge(camBadge, true, 'Camera: on', 'Camera: off');
                 resolve();
             });
-        }catch(e){
+        } catch (e) {
             logMsg('❌ Camera access denied');
             throw e;
         }
     }
 
-    async function initDetector(){
-        detector = await poseDetection.createDetector(poseDetection.SupportedModels.BlazePose,{
+    // Pose detector
+    async function initDetector() {
+        detector = await poseDetection.createDetector(poseDetection.SupportedModels.BlazePose, {
             runtime:'mediapipe',
             modelType:'full',
             solutionPath:'https://cdn.jsdelivr.net/npm/@mediapipe/pose'
         });
-        setBadge(trackBadge,true,'Tracking: on','Tracking: off');
+        setBadge(trackBadge, true, 'Tracking: on', 'Tracking: off');
     }
 
-    async function loadReference(){
+    // Reference data
+    async function loadReference() {
         setWarn(refBadge,'Reference: loading');
         const refUrl = "{{ $referenceJson ?? '' }}";
         if(!refUrl){ setWarn(refBadge,'Reference: none'); return; }
-        try{
+        try {
             const res = await fetch(refUrl);
             referenceData = await res.json();
             setBadge(refBadge,true,'Reference: loaded','Reference: none');
-        }catch(e){
+        } catch(e) {
             console.error(e);
             setWarn(refBadge,'Reference: failed');
         }
     }
 
-    function startRecording(){
+    // Recording
+    function startRecording() {
         recordedChunks = [];
         const stream = recordCanvas.captureStream(30);
         const options = { mimeType: 'video/webm;codecs=vp9' };
-        try {
-            mediaRecorder = new MediaRecorder(stream, options);
-        } catch (e) {
-            mediaRecorder = new MediaRecorder(stream);
-        }
+        try { mediaRecorder = new MediaRecorder(stream, options); }
+        catch { mediaRecorder = new MediaRecorder(stream); }
 
         mediaRecorder.ondataavailable = (event) => {
             if (event.data && event.data.size > 0) recordedChunks.push(event.data);
@@ -245,25 +188,19 @@
         recordBtn.textContent = 'Stop recording';
     }
 
-    function stopRecording(){
-        if(mediaRecorder && mediaRecorder.state !== 'inactive') {
-            mediaRecorder.stop();
-        }
+    function stopRecording() {
+        if(mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
         isRecording = false;
         recordBtn.classList.remove('recording');
         recordBtn.textContent = 'Start recording';
     }
 
-    recordBtn.addEventListener('click', () => {
-        if(!isRecording) startRecording();
-        else stopRecording();
-    });
-
-    async function render(){
+    // Render loop
+    async function render() {
         const poses = await detector.estimatePoses(video);
         ctx.clearRect(0,0,canvas.width,canvas.height);
 
-        if(poses.length > 0){
+        if(poses.length > 0) {
             const kps = poses[0].keypoints;
             const hip = kps.find(k => k.name === `${kneeSide}_hip`);
             const knee = kps.find(k => k.name === `${kneeSide}_knee`);
@@ -291,17 +228,14 @@
         requestAnimationFrame(render);
     }
 
-    window.addEventListener('DOMContentLoaded', async () => {
-        try{
-            await setupCamera();
-            await initDetector();
-            await loadReference();
-            render();
-        }catch(err){
-            console.error(err);
-            logMsg('⚠️ Initialisation failed');
-        }
-    });
-</script>
-</body>
-</html>
+    // Initialization
+    try {
+        await setupCamera();
+        await initDetector();
+        await loadReference();
+        render();
+    } catch(err) {
+        console.error(err);
+        logMsg('⚠️ Initialisation failed');
+    }
+});
