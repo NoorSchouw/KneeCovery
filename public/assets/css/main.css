@@ -15271,3 +15271,166 @@ input[type=file]::file-selector-button {
 }
 
 /*# sourceMappingURL=main.css.map */
+
+/* ========================
+   KneeCovery – Motion Tracking
+   ======================== */
+
+/* --- Body en pagina achtergrond --- */
+body {
+    background: #ecf0ff
+    color: #ecf0ff;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Container voor alles --- */
+.filming-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0px auto;
+    max-width: 800px;
+}
+
+/* --- Header (Titel + Subtitel) --- */
+.filming-header {
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.filming-title {
+    color: #FD7596;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.filming-subtitle {
+    color: #353333;
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+/* --- Centered content: Controls, Statusbar, Video --- */
+.filming-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(253, 117, 150, 0.75) 0%, rgba(250, 170, 137, 0.75) 100%);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px #FD7596;
+}
+
+/* --- Controls --- */
+.filming-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filming-controls label {
+    color: #353333; /* kies hier je gewenste kleur */
+    font-weight: 500; /* optioneel: maakt de tekst iets dikker */
+    font-size: 16px;  /* optioneel: verander de grootte */
+}
+
+/* Dropdown styling */
+.filming-controls select {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    background: white;
+    color: #353333;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filming-controls select:hover {
+    background: white;
+}
+
+/* --- Statusbar --- */
+.filming-statusbar {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+}
+
+.on { background: #76d1a2; color: white; }
+.off { background: #f6b4b4; color: white; }
+.warn { background: #eadb95; color: white; }
+
+/* --- Record knop --- */
+#recordBtn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    background: #FD7596;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#recordBtn:hover {
+    opacity: 0.85;
+}
+
+#recordBtn.recording {
+    background: #FAAA89;
+}
+
+/* --- Video container --- */
+.filming-video-container {
+    position: relative;
+    width: 640px;
+    height: 480px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.filming-video-container video,
+.filming-video-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleX(-1);
+}
+
+/* --- Angle display --- */
+.filming-angle-display {
+    font-size: 18px;
+    font-weight: bold;
+    color: #353333;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* --- Responsive --- */
+@media (max-width: 700px) {
+    .filming-video-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .filming-center {
+        padding: 15px;
+    }
+}
