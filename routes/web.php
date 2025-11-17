@@ -12,7 +12,7 @@ Route::get('/signup', function () {
     return view('signup');
 });
 Route::get('/forgot-password', function () {
-    return view('forgot-password');
+    return view('forgot_password');
 });
 
 //-------------------------------------------------- Patient -------------------------------
@@ -22,7 +22,7 @@ Route::get('/homepage', function () {
 Route::get('/calendar', function () {
     return view('patient/calendar');
 });
-Route::get('/exercises', function () {
+Route::get('/all-exercises', function () {
     return view('/patient/exercises');
 });
 Route::get('/patient-report', function () {

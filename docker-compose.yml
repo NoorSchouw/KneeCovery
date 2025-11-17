@@ -6,6 +6,9 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     container_name: laravel_app
+    ports:
+      - "8000:8000"   # Laravel
+      - "5173:5173"   # Vite dev server
     volumes:
       - .:/var/www
     environment:
@@ -47,6 +50,8 @@ services:
     volumes:
       - .:/var/www
     command: tail -f /dev/null
+    ports:
+      - "5174:5174"  # expose Vite for HMR
 
 volumes:
   dbdata:

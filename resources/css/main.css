@@ -3623,17 +3623,6 @@ textarea.form-control-lg {
     border-bottom-left-radius: 0;
 }
 
-/* Password icon */
-.input-group .btn-outline-secondary {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-    color: #fff;
-}
-
-.input-group .btn-outline-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.25);
-}
-
 .valid-feedback {
     display: none;
     width: 100%;
@@ -3826,6 +3815,10 @@ textarea.form-control-lg {
     z-index: 4;
 }
 
+.header-text {
+    color: #fd7596
+}
+
 .btn {
     --bs-btn-padding-x: 0.75rem;
     --bs-btn-padding-y: 0.375rem;
@@ -3914,7 +3907,6 @@ textarea.form-control-lg {
     opacity: var(--bs-btn-disabled-opacity);
 }
 
-/*pink button*/
 .btn-primary {
     --bs-btn-color: #0f1115;
     --bs-btn-bg: #FD7596;
@@ -3932,17 +3924,16 @@ textarea.form-control-lg {
     --bs-btn-disabled-border-color: #FD7596;
 }
 
-/*transparent button with white border*/
 .btn-secondary {
-    --bs-btn-color: #fff;
-    --bs-btn-bg: transparent;
-    --bs-btn-border-color: white;
+    --bs-btn-color: #0f1115;
+    --bs-btn-bg: #d9d8e6;
+    --bs-btn-border-color: #d9d8e6;
     --bs-btn-hover-color: #0f1115;
     --bs-btn-hover-bg: rgb(222.7, 221.85, 233.75);
     --bs-btn-hover-border-color: rgb(220.8, 219.9, 232.5);
     --bs-btn-focus-shadow-rgb: 187, 186, 199;
-    --bs-btn-active-color: transparent;
-    --bs-btn-active-bg: transparent;
+    --bs-btn-active-color: #0f1115;
+    --bs-btn-active-bg: rgb(224.6, 223.8, 235);
     --bs-btn-active-border-color: rgb(220.8, 219.9, 232.5);
     --bs-btn-active-shadow: inset 0 3px 5px rgba(15, 17, 21, 0.125);
     --bs-btn-disabled-color: #0f1115;
@@ -3952,8 +3943,8 @@ textarea.form-control-lg {
 
 .btn-danger {
     --bs-btn-color: #0f1115;
-    --bs-btn-bg: #ff3b65;
-    --bs-btn-border-color: #ff3b65;
+    --bs-btn-bg: #faaa89;
+    --bs-btn-border-color: #faaa89;
     --bs-btn-hover-color: #0f1115;
     --bs-btn-hover-bg: rgb(255, 88.4, 124.1);
     --bs-btn-hover-border-color: rgb(255, 78.6, 116.4);
@@ -3963,8 +3954,8 @@ textarea.form-control-lg {
     --bs-btn-active-border-color: rgb(255, 78.6, 116.4);
     --bs-btn-active-shadow: inset 0 3px 5px rgba(15, 17, 21, 0.125);
     --bs-btn-disabled-color: #0f1115;
-    --bs-btn-disabled-bg: #ff3b65;
-    --bs-btn-disabled-border-color: #ff3b65;
+    --bs-btn-disabled-bg: #faaa89;
+    --bs-btn-disabled-border-color: #faaa89;
 }
 
 .btn-success {
@@ -4018,13 +4009,12 @@ textarea.form-control-lg {
     --bs-btn-disabled-border-color: #ffc037;
 }
 
-/* White button with pink text*/
 .btn-light {
-    --bs-btn-color: #f56b8c;
-    --bs-btn-bg: #fff;
-    --bs-btn-border-color: none;
-    --bs-btn-hover-color: #f56b8c;
-    --bs-btn-hover-bg: #f97793;
+    --bs-btn-color: #0f1115;
+    --bs-btn-bg: #f1effe;
+    --bs-btn-border-color: #f1effe;
+    --bs-btn-hover-color: #0f1115;
+    --bs-btn-hover-bg: rgb(204.85, 203.15, 215.9);
     --bs-btn-hover-border-color: rgb(192.8, 191.2, 203.2);
     --bs-btn-focus-shadow-rgb: 207, 206, 219;
     --bs-btn-active-color: #0f1115;
@@ -4034,7 +4024,6 @@ textarea.form-control-lg {
     --bs-btn-disabled-color: #0f1115;
     --bs-btn-disabled-bg: #f1effe;
     --bs-btn-disabled-border-color: #f1effe;
-    font-weight: 600;
 }
 
 .btn-dark {
@@ -16289,19 +16278,19 @@ input[type=file]::file-selector-button {
 }
 
 .bg-2 {
-    background: url(../images/banner2.svg);
+    background: url(../../public/assets/images/banner2.svg);
     background-size: cover;
     background-position: right;
 }
 
 .bg-3 {
-    background: url(../images/banner3.svg);
+    background: url(../../public/assets/images/banner3.svg);
     background-size: cover;
     background-position: right;
 }
 
 .datepicker-bg {
-    background: #FAAA89 !important;
+    background: linear-gradient(135deg, #fd7596 0%, #faaa89 100%);
     background-size: cover;
     background-position: center bottom;
     -webkit-border-radius: 6px;
@@ -17399,7 +17388,7 @@ input[type=file]::file-selector-button {
 }
 
 .login-bg {
-    background: #ffffff url(../images/login-bg.svg) no-repeat;
+    background: #ffffff url(../../public/assets/images/login-bg.svg) no-repeat;
     background-size: cover;
     background-position: bottom left;
     background-attachment: fixed;
@@ -17409,21 +17398,7 @@ input[type=file]::file-selector-button {
     display: flex;
     align-items: center;
     justify-content: end;
-    gap: 60px;
-    width: 100%;
-    max-width: 1200px;
-    padding: 40px;
     min-height: 100vh;
-}
-
-/*Achtergrond van login, signup en forgot password*/
-body.body-auth{
-    background: linear-gradient(135deg, #fce0e6 0%, #fde2c3 100%);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Poppins", sans-serif;
 }
 
 @media (max-width: 991.98px) {
@@ -17432,44 +17407,20 @@ body.body-auth{
     }
 }
 
-/* Log in box */
-.auth-box.gradient-box {
-    flex: 1;
-    background: linear-gradient(135deg, #fd7596 0%, #faaa89 100%);
-    border: none;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    padding: 2.5rem;
-    border-radius: 20px;
-    color: #fff;
-    max-width: 420px;
+.auth-box {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid #FD7596;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 2rem 0;
+    min-width: 340px;
+    max-width: 340px;
 }
 
-.auth-box.gradient-box .form-control {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-    color: #fff;
-}
-
-.auth-box.gradient-box .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.auth-box.gradient-box h4 {
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 1.8rem;
-}
-
-/* Smooth fade-in animation */
-.auth-box,
-.auth-branding {
-    animation: fadeIn 0.8s ease both;
-}
-
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(10px);}
-    to {opacity: 1; transform: translateY(0);}
-}
 .auth-logo {
     display: inline-flex;
 }
@@ -17479,30 +17430,6 @@ body.body-auth{
     max-height: 48px;
 }
 
-/* Linkerzijde (logo & branding) */
-.auth-branding {
-    flex: 1;
-    text-align: right;
-    color: #333;
-}
-
-.auth-branding img {
-    max-width: 280px;
-    margin-bottom: 20px;
-}
-
-.auth-branding h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #444;
-}
-
-.auth-branding p {
-    font-size: 1.1rem;
-    color: #666;
-    line-height: 1.6;
-}
-
 @media (max-width: 991.98px) {
     .auth-box {
         background: #ffffff;
@@ -17510,7 +17437,7 @@ body.body-auth{
 }
 
 .error-bg {
-    background: #0f1115 url(../images/error-bg.svg) no-repeat;
+    background: #0f1115 url(../../public/assets/images/error-bg.svg) no-repeat;
     background-size: cover;
     background-attachment: fixed;
 }
@@ -17538,7 +17465,7 @@ body.body-auth{
 }
 
 .maintenance-bg {
-    background: #ffffff url(../images/maintenance-bg.svg) no-repeat;
+    background: #ffffff url(../../public/assets/images/maintenance-bg.svg) no-repeat;
     background-position: right bottom;
     background-size: cover;
     background-attachment: fixed;
@@ -17566,177 +17493,3 @@ body.body-auth{
 }
 
 /*# sourceMappingURL=main.css.map */
-
-/* ========================
-   KneeCovery – Motion Tracking
-   ======================== */
-
-/* --- Body en pagina achtergrond --- */
-body {
-    background: #ecf0ff;
-    color: #ecf0ff;
-    margin: 0;
-    padding: 0;
-}
-
-/* --- Container voor alles --- */
-.filming-container {
-    display: flex;
-    flex-direction: column;
-    margin: 0px auto;
-    max-width: 800px;
-}
-
-/* --- Header (Titel + Subtitel) --- */
-.filming-header {
-    text-align: left;
-    margin-bottom: 5px;
-}
-
-.filming-title {
-    color: #FD7596;
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.filming-subtitle {
-    color: #353333;
-    font-size: 18px;
-    margin-bottom: 0;
-}
-
-/* --- Centered content: Controls, Statusbar, Video --- */
-.filming-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(135deg, rgba(253, 117, 150, 0.75) 0%, rgba(250, 170, 137, 0.75) 100%);
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px #FD7596;
-}
-
-/* --- Controls --- */
-.filming-controls {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.filming-controls label {
-    color: #353333; /* kies hier je gewenste kleur */
-    font-weight: 500; /* optioneel: maakt de tekst iets dikker */
-    font-size: 16px; /* optioneel: verander de grootte */
-}
-
-/* Dropdown styling */
-.filming-controls select {
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: none;
-    background: white;
-    color: #353333;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.filming-controls select:hover {
-    background: white;
-}
-
-/* --- Statusbar --- */
-.filming-statusbar {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.badge {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 14px;
-    text-align: center;
-}
-
-.on {
-    background: #76d1a2;
-    color: white;
-}
-
-.off {
-    background: #f6b4b4;
-    color: white;
-}
-
-.warn {
-    background: #eadb95;
-    color: white;
-}
-
-/* --- Record knop --- */
-#recordBtn {
-    padding: 8px 16px;
-    border-radius: 6px;
-    border: none;
-    background: #FD7596;
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-#recordBtn:hover {
-    opacity: 0.85;
-}
-
-#recordBtn.recording {
-    background: #FAAA89;
-}
-
-/* --- Video container --- */
-.filming-video-container {
-    position: relative;
-    width: 640px;
-    height: 480px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
-.filming-video-container video,
-.filming-video-container canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: scaleX(-1);
-}
-
-/* --- Angle display --- */
-.filming-angle-display {
-    font-size: 18px;
-    font-weight: bold;
-    color: #353333;
-    margin-top: 10px;
-    text-align: center;
-}
-
-/* --- Responsive --- */
-@media (max-width: 700px) {
-    .filming-video-container {
-        width: 100%;
-        height: auto;
-    }
-
-    .filming-center {
-        padding: 15px;
-    }
-}
