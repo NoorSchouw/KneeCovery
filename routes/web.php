@@ -12,7 +12,7 @@ Route::get('/signup', function () {
     return view('signup');
 });
 Route::get('/forgot-password', function () {
-    return view('forgot-password');
+    return view('forgot_password');
 });
 
 //-------------------------------------------------- Patient -------------------------------
