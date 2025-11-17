@@ -6,41 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Clove Dental Care Admin Template</title>
 
-    <!-- Meta -->
-    <meta name="description" content="Marketplace for Bootstrap Admin Dashboards">
-    <meta property="og:title" content="Admin Templates - Dashboard Templates">
-    <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
-    <meta property="og:type" content="Website">
-    <link rel="shortcut icon" href="assets/images/favicon.svg">
-
-    <!-- *************
-		************ CSS Files *************
-	  ************* -->
-    <link rel="stylesheet" href="assets/fonts/remix/remixicon.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-
-    <!-- *************
-		************ Vendor Css Files *************
-	  ************ -->
-
-    <!-- Scrollbar CSS -->
-    <link rel="stylesheet" href="assets/vendor/overlay-scroll/OverlayScrollbars.min.css">
-
-    <!-- Date Range CSS -->
-    <link rel="stylesheet" href="assets/vendor/daterange/daterange.css">
-
-    <!-- Data Tables -->
-    <link rel="stylesheet" href="assets/vendor/datatables/dataTables.bs5.css">
-    <link rel="stylesheet" href="assets/vendor/datatables/dataTables.bs5-custom.css">
-    <link rel="stylesheet" href="assets/vendor/datatables/buttons/dataTables.bs5-custom.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/fonts/remix/remixicon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/overlay-scroll/OverlayScrollbars.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/dataTables.bs5.css') }}">
 </head>
 
 <body>
 
-<!-- Page wrapper starts -->
 <div class="page-wrapper">
-
-    <!-- Main container starts -->
     <div class="main-container">
 
         <!-- Sidebar wrapper starts -->
@@ -51,27 +26,21 @@
 
                 <!-- App brand starts -->
                 <div class="app-brand ms-3">
-                    <a href="index.html">
-                        <img src="assets/images/logo.svg" class="logo" alt="Dental Care Admin Template">
+                    <a href="{{ url('/homepage') }}">
+                        <img src="assets/images/logo.png" class="logo" alt="Dental Care Admin Template">
                     </a>
                 </div>
                 <!-- App brand ends -->
-
-                <!-- Pin sidebar starts -->
-                <button type="button" class="pin-sidebar me-3">
-                    <i class="ri-menu-line"></i>
-                </button>
-                <!-- Pin sidebar ends -->
 
             </div>
             <!-- Brand container ends -->
 
             <!-- Sidebar profile starts -->
             <div class="sidebar-profile">
-                <img src="assets/images/doctor5.png" class="rounded-5 border border-primary border-3"
+                <img src="{{ asset('assets/images/doctor5.png') }}" class="rounded-5 border border-primary border-3"
                      alt="Dentist Admin Templates">
-                <h6 class="mb-1 profile-name text-nowrap text-truncate text-primary">Jennifer Arter</h6>
-                <small class="profile-name text-nowrap text-truncate">Department Head</small>
+                <h6 class="mb-1 profile-name text-nowrap text-truncate text-primary">Sarah Smith</h6>
+                <small class="profile-name text-nowrap text-truncate">Physiotherapist</small>
             </div>
             <!-- Sidebar profile ends -->
 
@@ -79,531 +48,9 @@
             <div class="sidebarMenuScroll">
                 <ul class="sidebar-menu">
                     <li>
-                        <a href="index.html">
+                        <a href="{{ url('/homepage') }}">
                             <i class="ri-home-6-line"></i>
-                            <span class="menu-text">Dentist Admin</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="dashboard2.html">
-                            <i class="ri-home-smile-2-line"></i>
-                            <span class="menu-text">Dentist Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="dashboard3.html">
-                            <i class="ri-home-5-line"></i>
-                            <span class="menu-text">Dental Clinic</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="doc-appointments.html">
-                            <i class="ri-calendar-2-line"></i>
-                            <span class="menu-text">Appointments</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="my-patients.html">
-                            <i class="ri-empathize-line"></i>
-                            <span class="menu-text">My Patients</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="patient-profile.html">
-                            <i class="ri-empathize-line"></i>
-                            <span class="menu-text">Patient Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="doctor-dashboard.html">
-                            <i class="ri-stethoscope-line"></i>
-                            <span class="menu-text">Doctors Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="active current-page">
-                        <a href="doctors-grid.html">
-                            <i class="ri-stethoscope-line"></i>
-                            <span class="menu-text">Doctors Grid</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="doctors-cards.html">
-                            <i class="ri-stethoscope-line"></i>
-                            <span class="menu-text">Doctors Cards</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="doctors-profile.html">
-                            <i class="ri-stethoscope-line"></i>
-                            <span class="menu-text">Doctors Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="add-doctors.html">
-                            <i class="ri-stethoscope-line"></i>
-                            <span class="menu-text">Add Doctor</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="edit-doctors.html">
-                            <i class="ri-stethoscope-line"></i>
-                            <span class="menu-text">Edit Doctor</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="patient-dashboard.html">
-                            <i class="ri-heart-pulse-line"></i>
-                            <span class="menu-text">Patients Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="patients-list.html">
-                            <i class="ri-heart-pulse-line"></i>
-                            <span class="menu-text">Patients List</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="add-patient.html">
-                            <i class="ri-heart-pulse-line"></i>
-                            <span class="menu-text">Add Patient</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="edit-patient.html">
-                            <i class="ri-heart-pulse-line"></i>
-                            <span class="menu-text">Edit Patient Details</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-nurse-line"></i>
-                            <span class="menu-text">Staff</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="staff.html">Staff List</a>
-                            </li>
-                            <li>
-                                <a href="add-staff.html">Add Staff</a>
-                            </li>
-                            <li>
-                                <a href="edit-staff.html">Edit Staff Details</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-dossier-line"></i>
-                            <span class="menu-text">Appointments</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="appointments.html">Appointments</a>
-                            </li>
-                            <li>
-                                <a href="appointments-list.html">Appointments List</a>
-                            </li>
-                            <li>
-                                <a href="book-appointment.html">Book Appointment</a>
-                            </li>
-                            <li>
-                                <a href="appointment-success.html">Appointment Success</a>
-                            </li>
-                            <li>
-                                <a href="edit-appointment.html">Edit Appointment</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-building-2-line"></i>
-                            <span class="menu-text">Departments</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="departments-list.html">Departments List</a>
-                            </li>
-                            <li>
-                                <a href="add-department.html">Add Department</a>
-                            </li>
-                            <li>
-                                <a href="edit-department.html">Edit Department</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-secure-payment-line"></i>
-                            <span class="menu-text">Accounts</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="income.html">Income</a>
-                            </li>
-                            <li>
-                                <a href="payments.html">Payments</a>
-                            </li>
-                            <li>
-                                <a href="invoices.html">Invoices</a>
-                            </li>
-                            <li>
-                                <a href="invoice-details.html">Invoice Details</a>
-                            </li>
-                            <li>
-                                <a href="create-invoice.html">Create Invoice</a>
-                            </li>
-                            <li>
-                                <a href="expenses.html">Expenses</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-group-2-line"></i>
-                            <span class="menu-text">Human Resources</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="hr-approvals.html">HR Approvals</a>
-                            </li>
-                            <li>
-                                <a href="staff-attendance.html">Attendance</a>
-                            </li>
-                            <li>
-                                <a href="staff-leaves.html">Staff Leaves</a>
-                            </li>
-                            <li>
-                                <a href="staff-holidays.html">Holidays</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-money-dollar-circle-line"></i>
-                            <span class="menu-text">Salaries</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="salaries.html">Salary List</a>
-                            </li>
-                            <li>
-                                <a href="payslip.html">Payslip</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-hotel-bed-line"></i>
-                            <span class="menu-text">Rooms</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="room-statistics.html">Statistics</a>
-                            </li>
-                            <li>
-                                <a href="rooms-allotted.html">Rooms Allotted</a>
-                            </li>
-                            <li>
-                                <a href="rooms-by-dept.html">Rooms By Department</a>
-                            </li>
-                            <li>
-                                <a href="available-rooms.html">Available Rooms</a>
-                            </li>
-                            <li>
-                                <a href="book-room.html">Book Room</a>
-                            </li>
-                            <li>
-                                <a href="add-room.html">Add Room</a>
-                            </li>
-                            <li>
-                                <a href="edit-room.html">Edit Room</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-car-washing-line"></i>
-                            <span class="menu-text">Ambulance</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="ambulance-list.html">Ambulance List</a>
-                            </li>
-                            <li>
-                                <a href="add-ambulance.html">Add Ambulance</a>
-                            </li>
-                            <li>
-                                <a href="edit-ambulance.html">Edit Ambulance</a>
-                            </li>
-                            <li>
-                                <a href="ambulance-call-list.html">Ambulance Call List</a>
-                            </li>
-                            <li>
-                                <a href="add-driver.html">Add Driver</a>
-                            </li>
-                            <li>
-                                <a href="edit-driver.html">Edit Driver</a>
-                            </li>
-                            <li>
-                                <a href="driver-list.html">Driver List</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="events.html">
-                            <i class="ri-calendar-line"></i>
-                            <span class="menu-text">Event Management</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="gallery.html">
-                            <i class="ri-tent-line"></i>
-                            <span class="menu-text">Gallery</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="news.html">
-                            <i class="ri-news-line"></i>
-                            <span class="menu-text">News & Updates</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-color-filter-line"></i>
-                            <span class="menu-text">UI Elements</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="alerts.html">Alerts</a>
-                            </li>
-                            <li>
-                                <a href="avatars.html">Avatars</a>
-                            </li>
-                            <li>
-                                <a href="badges.html">Badges</a>
-                            </li>
-                            <li>
-                                <a href="buttons.html">Buttons</a>
-                            </li>
-                            <li>
-                                <a href="button-groups.html">Button Groups</a>
-                            </li>
-                            <li>
-                                <a href="cards.html">Cards</a>
-                            </li>
-                            <li>
-                                <a href="advanced-cards.html">Advanced Cards</a>
-                            </li>
-                            <li>
-                                <a href="dropdowns.html">Dropdowns</a>
-                            </li>
-                            <li>
-                                <a href="list-items.html">List Items</a>
-                            </li>
-                            <li>
-                                <a href="progress.html">Progress Bars</a>
-                            </li>
-                            <li>
-                                <a href="placeholders.html">Placeholders</a>
-                            </li>
-                            <li>
-                                <a href="spinners.html">Spinners</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-notification-badge-line"></i>
-                            <span class="menu-text">Jquery Components</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="accordions.html">Accordions</a>
-                            </li>
-                            <li>
-                                <a href="carousel.html">Carousel</a>
-                            </li>
-                            <li>
-                                <a href="modals.html">Modals</a>
-                            </li>
-                            <li>
-                                <a href="popovers.html">Popovers</a>
-                            </li>
-                            <li>
-                                <a href="tabs.html">Tabs</a>
-                            </li>
-                            <li>
-                                <a href="tooltips.html">Tooltips</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-terminal-window-line"></i>
-                            <span class="menu-text">Forms</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="form-inputs.html">Form Inputs</a>
-                            </li>
-                            <li>
-                                <a href="form-checkbox-radio.html">Checkbox &amp; Radio</a>
-                            </li>
-                            <li>
-                                <a href="form-file-input.html">File Input</a>
-                            </li>
-                            <li>
-                                <a href="form-validations.html">Validations</a>
-                            </li>
-                            <li>
-                                <a href="date-time-pickers.html">Date Time Pickers</a>
-                            </li>
-                            <li>
-                                <a href="form-masks.html">Input Masks</a>
-                            </li>
-                            <li>
-                                <a href="form-tags.html">Input Tags</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="tables.html">
-                            <i class="ri-table-line"></i>
-                            <span class="menu-text">Tables</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-bar-chart-line"></i>
-                            <span class="menu-text">Graphs</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="apex.html">Apex Graphs</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Morris Graphs</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="maps.html">
-                            <i class="ri-road-map-line"></i>
-                            <span class="menu-text">Vector Maps</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="icons.html">
-                            <i class="ri-send-plane-2-line"></i>
-                            <span class="menu-text">Icons</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="settings.html">
-                            <i class="ri-settings-5-line"></i>
-                            <span class="menu-text">Account Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="typography.html">
-                            <i class="ri-font-size"></i>
-                            <span class="menu-text">Typography</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-login-circle-line"></i>
-                            <span class="menu-text">Login/Signup</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="login.html">Login</a>
-                            </li>
-                            <li>
-                                <a href="signup.html">Signup</a>
-                            </li>
-                            <li>
-                                <a href="forgot-password.html">Forgot Password</a>
-                            </li>
-                            <li>
-                                <a href="reset-password.html">Reset Password</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="page-not-found.html">
-                            <i class="ri-alert-line"></i>
-                            <span class="menu-text">Page Not Found</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="maintenance.html">
-                            <i class="ri-auction-line"></i>
-                            <span class="menu-text">Maintenance</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#!">
-                            <i class="ri-dropdown-list"></i>
-                            <span class="menu-text">Menu Level</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="#!">Level One Link</a>
-                            </li>
-                            <li>
-                                <a href="#!">
-                                    Level One Menu
-                                    <i class="ri-arrow-right-s-line"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li>
-                                        <a href="#!">Level Two Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#!">Level Two Menu
-                                            <i class="ri-arrow-right-s-line"></i>
-                                        </a>
-                                        <ul class="treeview-menu">
-                                            <li>
-                                                <a href="#!">Level Three Link</a>
-                                            </li>
-                                            <li>
-                                                <a href="#!">Level Three Link</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#!">Level One Link</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="default.html">
-                            <i class="ri-send-plane-line"></i>
-                            <span class="menu-text">Default Page</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <i class="ri-exchange-line"></i>
-                            <span class="menu-text">Chip</span>
-                            <span class="badge bg-primary ms-auto">6</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!">
-                            <i class="ri-ticket-line"></i>
-                            <span class="menu-text">Badge</span>
-                            <span class="badge border border-primary text-primary ms-auto">Chip</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#!" class="disabled">
-                            <i class="ri-magic-line"></i>
-                            <span class="menu-text">Disabled Link</span>
+                            <span class="menu-text">Homepage</span>
                         </a>
                     </li>
                 </ul>
@@ -621,886 +68,270 @@
         </nav>
         <!-- Sidebar wrapper ends -->
 
-        <!-- App container starts -->
+        <!-- App container -->
         <div class="app-container">
 
-            <!-- App header starts -->
+            <!-- Header -->
             <div class="app-header d-flex align-items-center">
-
-                <!-- Brand container sm starts -->
-                <div class="brand-container-sm d-xl-none d-flex align-items-center">
-
-                    <!-- App brand starts -->
-                    <div class="app-brand">
-                        <a href="index.html">
-                            <img src="assets/images/logo.svg" class="logo" alt="Dental Care Admin Template">
-                        </a>
-                    </div>
-                    <!-- App brand ends -->
-
-                    <!-- Toggle sidebar starts -->
-                    <button type="button" class="toggle-sidebar">
-                        <i class="ri-menu-line"></i>
-                    </button>
-                    <!-- Toggle sidebar ends -->
-
-                </div>
-                <!-- Brand container sm ends -->
-
-                <!-- Search container starts -->
-                <div class="search-container d-xl-block d-none">
-                    <input type="text" class="form-control" id="searchId" placeholder="Search">
-                    <i class="ri-search-line"></i>
-                </div>
-                <!-- Search container ends -->
-
-                <!-- App header actions starts -->
-                <div class="header-actions">
-
-                    <!-- Header actions starts -->
-                    <div class="d-lg-flex d-none gap-2">
-
-                        <!-- Select country dropdown starts -->
-                        <div class="dropdown">
-                            <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                <img src="assets/images/flags/1x1/fr.svg" class="header-country-flag" alt="Bootstrap Dashboards">
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-mini">
-                                <div class="country-container">
-                                    <a href="index.html" class="py-2">
-                                        <img src="assets/images/flags/1x1/us.svg" alt="Admin Panel">
-                                    </a>
-                                    <a href="index.html" class="py-2">
-                                        <img src="assets/images/flags/1x1/in.svg" alt="Admin Panels">
-                                    </a>
-                                    <a href="index.html" class="py-2">
-                                        <img src="assets/images/flags/1x1/br.svg" alt="Admin Dashboards">
-                                    </a>
-                                    <a href="index.html" class="py-2">
-                                        <img src="assets/images/flags/1x1/tr.svg" alt="Admin Templatess">
-                                    </a>
-                                    <a href="index.html" class="py-2">
-                                        <img src="assets/images/flags/1x1/gb.svg" alt="Google Admin">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Select country dropdown ends -->
-
-                        <!-- Bookmarks starts -->
-                        <div class="dropdown">
-                            <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                <i class="ri-star-line"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-300">
-                                <h5 class="fw-semibold px-3 py-2 text-primary">Bookmarks</h5>
-
-                                <div class="d-flex justify-content-center gap-3">
-                                    <a href="doctors-cards.html" class="text-center">
-                                        <div class="icon-box lg bg-primary-subtle rounded-5 mb-1">
-                                            <i class="ri-stethoscope-line text-primary fs-4"></i>
-                                        </div>
-                                        Doctors
-                                    </a>
-                                    <a href="staff.html" class="text-center">
-                                        <div class="icon-box lg bg-primary-subtle rounded-5 mb-1">
-                                            <i class="ri-nurse-line text-primary fs-4"></i>
-                                        </div>
-                                        Staff
-                                    </a>
-                                    <a href="patients-list.html" class="text-center">
-                                        <div class="icon-box lg bg-primary-subtle rounded-5 mb-1">
-                                            <i class="ri-group-2-line text-primary fs-4"></i>
-                                        </div>
-                                        Patients
-                                    </a>
-                                </div>
-
-                                <!-- View all button starts -->
-                                <div class="d-grid m-3">
-                                    <a href="javascript:void(0)" class="btn btn-outline-primary">Add New Bookmark</a>
-                                </div>
-                                <!-- View all button ends -->
-
-                            </div>
-                        </div>
-                        <!-- Bookmarks ends -->
-
-                        <!-- Notifications dropdown starts -->
-                        <div class="dropdown">
-                            <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                <i class="ri-list-check-3"></i>
-                                <span class="count-label warning"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-300">
-                                <h5 class="fw-semibold px-3 py-2 text-primary">Activity</h5>
-
-                                <!-- Scroll starts -->
-                                <div class="scroll300">
-
-                                    <!-- Activity List Starts -->
-                                    <div class="p-3">
-                                        <ul class="p-0 activity-list2">
-                                            <li class="activity-item pb-3 mb-3">
-                                                <a href="#!">
-                                                    <h5 class="fw-regular">
-                                                        <i class="ri-circle-fill text-danger me-1"></i>
-                                                        Invoices.
-                                                    </h5>
-                                                    <div class="ps-3 ms-2 border-start">
-                                                        <div class="d-flex align-items-center mb-2">
-                                                            <div class="flex-shrink-0">
-                                                                <img src="assets/images/products/1.jpg" class="img-3x rounded-1"
-                                                                     alt="Dentist Admin Templates">
-                                                            </div>
-                                                            <div class="flex-grow-1 ms-3">
-                                                                23 invoices have been paid to the Clove Labs.
-                                                            </div>
-                                                        </div>
-                                                        <p class="m-0 small">10:20AM Today</p>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="activity-item pb-3 mb-3">
-                                                <a href="#!">
-                                                    <h5 class="fw-regular">
-                                                        <i class="ri-circle-fill text-info me-1"></i>
-                                                        Purchased.
-                                                    </h5>
-                                                    <div class="ps-3 ms-2 border-start">
-                                                        <div class="d-flex align-items-center mb-2">
-                                                            <div class="flex-shrink-0">
-                                                                <img src="assets/images/products/2.jpg" class="img-3x rounded-1"
-                                                                     alt="Dentist Admin Templates">
-                                                            </div>
-                                                            <div class="flex-grow-1 ms-3">
-                                                                28 new surgical equipments have been purchased.
-                                                            </div>
-                                                        </div>
-                                                        <p class="m-0 small">04:30PM Today</p>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="activity-item pb-3 mb-3">
-                                                <a href="#!">
-                                                    <h5 class="fw-regular">
-                                                        <i class="ri-circle-fill text-success me-1"></i>
-                                                        Appointed.
-                                                    </h5>
-                                                    <div class="ps-3 ms-2 border-start">
-                                                        <div class="d-flex align-items-center mb-2">
-                                                            <div class="flex-shrink-0">
-                                                                <img src="assets/images/products/8.jpg" class="img-3x rounded-1"
-                                                                     alt="Dentist Admin Templates">
-                                                            </div>
-                                                            <div class="flex-grow-1 ms-3">
-                                                                36 new doctors and 28 staff members appointed.
-                                                            </div>
-                                                        </div>
-                                                        <p class="m-0 small">06:50PM Today</p>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="activity-item">
-                                                <a href="#!">
-                                                    <h5 class="fw-regular">
-                                                        <i class="ri-circle-fill text-warning me-1"></i>
-                                                        Requested
-                                                    </h5>
-                                                    <div class="ps-3 ms-2 border-start">
-                                                        <div class="d-flex align-items-center mb-2">
-                                                            <div class="flex-shrink-0">
-                                                                <img src="assets/images/products/9.jpg" class="img-3x rounded-1"
-                                                                     alt="Dentist Admin Templates">
-                                                            </div>
-                                                            <div class="flex-grow-1 ms-3">
-                                                                Requested for 6 new vehicles for medical emergency. .
-                                                            </div>
-                                                        </div>
-                                                        <p class="m-0 small">08:30PM Today</p>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- Activity List Ends -->
-
-                                </div>
-                                <!-- Scroll ends -->
-
-                                <!-- View all button starts -->
-                                <div class="d-grid m-3">
-                                    <a href="javascript:void(0)" class="btn btn-primary">View all</a>
-                                </div>
-                                <!-- View all button ends -->
-
-                            </div>
-                        </div>
-                        <!-- Notifications dropdown ends -->
-
-                        <!-- Notifications dropdown starts -->
-                        <div class="dropdown">
-                            <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                <i class="ri-alarm-warning-line"></i>
-                                <span class="count-label success"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-300">
-                                <h5 class="fw-semibold px-3 py-2 text-primary">Alerts</h5>
-
-                                <!-- Scroll starts -->
-                                <div class="scroll300">
-
-                                    <!-- Alert list starts -->
-                                    <div class="p-3">
-                                        <div class="d-flex py-2">
-                                            <div class="icon-box md bg-primary rounded-circle me-3">
-                                                <span>BS</span>
-                                            </div>
-                                            <div class="m-0">
-                                                <h6 class="mb-1 fw-semibold">Becky Shah</h6>
-                                                <p class="mb-1">
-                                                    Appointed as a new President 2025
-                                                </p>
-                                                <p class="small m-0 opacity-50">Today, 07:30pm</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex py-2">
-                                            <div class="icon-box md bg-primary rounded-circle me-3">
-                                                <span>UF</span>
-                                            </div>
-                                            <div class="m-0">
-                                                <h6 class="mb-1 fw-semibold">Ursula Frazier</h6>
-                                                <p class="mb-1">
-                                                    Congratulate, James for new job.
-                                                </p>
-                                                <p class="small m-0 opacity-50">Today, 08:00pm</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex py-2">
-                                            <div class="icon-box md bg-primary rounded-circle me-3">
-                                                <span>MK</span>
-                                            </div>
-                                            <div class="m-0">
-                                                <h6 class="mb-1 fw-semibold">Myra Kane</h6>
-                                                <p class="mb-1">
-                                                    Lewis added new doctors training schedule.
-                                                </p>
-                                                <p class="small m-0 opacity-50">Today, 09:30pm</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Alert list ends -->
-
-                                </div>
-                                <!-- Scroll ends -->
-
-                                <!-- View all button starts -->
-                                <div class="d-grid m-3">
-                                    <a href="javascript:void(0)" class="btn btn-primary">View all</a>
-                                </div>
-                                <!-- View all button ends -->
-
-                            </div>
-                        </div>
-                        <!-- Notifications dropdown ends -->
-
-                        <!-- Messages dropdown starts -->
-                        <div class="dropdown">
-                            <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                <i class="ri-message-3-line"></i>
-                                <span class="count-label"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-300">
-                                <h5 class="fw-semibold px-3 py-2 text-primary">Messages</h5>
-
-                                <!-- Scroll starts -->
-                                <div class="scroll300">
-
-                                    <!-- Messages list starts -->
-                                    <div class="p-3">
-                                        <div class="d-flex py-2">
-                                            <img src="assets/images/doctor3.png" class="img-3x me-3 rounded-5"
-                                                 alt="Dentist Admin Templates">
-                                            <div class="m-0">
-                                                <h6 class="mb-1 fw-semibold">Albert Winters</h6>
-                                                <p class="mb-1">
-                                                    Appointed as a new President 2025
-                                                </p>
-                                                <p class="small m-0 opacity-50">Today, 07:30pm</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex py-2">
-                                            <img src="assets/images/doctor1.png" class="img-3x me-3 rounded-5"
-                                                 alt="Dentist Admin Templates">
-                                            <div class="m-0">
-                                                <h6 class="mb-1 fw-semibold">Van Robinson</h6>
-                                                <p class="mb-1">
-                                                    Congratulate, James for new job.
-                                                </p>
-                                                <p class="small m-0 opacity-50">Today, 08:00pm</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex py-2">
-                                            <img src="assets/images/doctor4.png" class="img-3x me-3 rounded-5"
-                                                 alt="Dentist Admin Templates">
-                                            <div class="m-0">
-                                                <h6 class="mb-1 fw-semibold">Mara Coffey</h6>
-                                                <p class="mb-1">
-                                                    Lewis added new doctors training schedule.
-                                                </p>
-                                                <p class="small m-0 opacity-50">Today, 09:30pm</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Messages list ends -->
-
-                                </div>
-                                <!-- Scroll ends -->
-
-                                <!-- View all button starts -->
-                                <div class="d-grid m-3">
-                                    <a href="javascript:void(0)" class="btn btn-primary">View all</a>
-                                </div>
-                                <!-- View all button ends -->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Header actions ends -->
-
-                    <!-- Header user settings starts -->
-                    <div class="dropdown ms-3">
-                        <a id="userSettings" class="dropdown-toggle d-flex align-items-center" href="#!" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="avatar-box">
-                                <img src="assets/images/doctor5.png" class="img-2xx rounded-5 border border-3 border-white"
-                                     alt="Dentist Dashboard">
-                                <span class="status busy"></span>
-                            </div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-300 shadow-lg">
-                            <div class="d-flex align-items-center justify-content-between p-3">
-                                <div>
-                                    <span class="small">Doctor</span>
-                                    <h6 class="m-0">Martin Boyer, MD</h6>
-                                </div>
-                                <div class="d-flex flex-column text-end">
-                                    <h5 class="fw-bold lh-1 m-0">$5900</h5>
-                                    <div class="text-primary small">Weekly Earnings</div>
-                                </div>
-                            </div>
-                            <div class="mx-3 my-2 d-grid">
-                                <a href="login.html" class="btn btn-primary">Logout</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Header user settings ends -->
-
-                </div>
-                <!-- App header actions ends -->
-
+                <!-- Header content -->
             </div>
-            <!-- App header ends -->
 
-            <!-- App hero header starts -->
+            <!-- Hero Header -->
             <div class="app-hero-header d-flex align-items-center">
-
-                <!-- Breadcrumb starts -->
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="index.html">
-                            <i class="ri-home-3-line"></i>
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item text-primary" aria-current="page">
-                        Doctors Grid
-                    </li>
+                    <li class="breadcrumb-item"><a href="{{ url('/homepage') }}"><i class="ri-home-3-line"></i></a></li>
+                    <li class="breadcrumb-item text-primary">Patients</li>
                 </ol>
-                <!-- Breadcrumb ends -->
-
-                <!-- Sales stats starts -->
-                <div class="ms-auto d-lg-flex d-none flex-row">
-                    <div class="input-group">
-                <span class="input-group-text bg-primary-lighten">
-                  <i class="ri-calendar-2-line text-primary"></i>
-                </span>
-                        <input type="text" id="abc" class="form-control custom-daterange">
-                    </div>
-                </div>
-                <!-- Sales stats ends -->
-
             </div>
-            <!-- App Hero header ends -->
 
-            <!-- App body starts -->
+            <!-- Body -->
             <div class="app-body">
-
-                <!-- Row starts -->
                 <div class="row gx-4">
                     <div class="col-sm-12">
                         <div class="card">
-                            <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="card-title">Doctors List</h5>
-                                <a href="add-doctors.html" class="btn btn-primary ms-auto">Add Doctor</a>
-                            </div>
                             <div class="card-body pt-0">
 
-                                <!-- Table starts -->
                                 <div class="table-responsive">
-                                    <table id="scrollVertical" class="table truncate m-0 align-middle">
+                                    <table class="table truncate m-0 align-middle" id="patientsTable">
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Doctor Name</th>
-                                            <th>Designation</th>
-                                            <th class="text-center">Sun</th>
-                                            <th class="text-center">Mon</th>
-                                            <th class="text-center">Tue</th>
-                                            <th class="text-center">Wed</th>
-                                            <th class="text-center">Thu</th>
-                                            <th class="text-center">Fri</th>
-                                            <th class="text-center">Sat</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Patient Number</th>
+                                            <th>Gender</th>
+                                            <th>Date of Birth</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td>#0008</td>
+                                            <td>#0001</td>
+                                            <td><img src="{{ asset('assets/images/doctor.png') }}" class="img-2x rounded-5 me-1">Jane</td>
+                                            <td>Doe</td>
+                                            <td>349157</td>
+                                            <td>Female</td>
+                                            <td>1982-06-15</td>
                                             <td>
-                                                <img src="assets/images/doctor.png" class="img-2x rounded-5 me-1"
-                                                     alt="Medical Admin Template">
-                                                Allan Stuart
-                                            </td>
-                                            <td>Oncologist</td>
-                                            <td class="text-center text-danger">NA</td>
-                                            <td class="text-center">9AM-2PM</td>
-                                            <td class="text-center">9AM-2PM</td>
-                                            <td class="text-center">9AM-2PM</td>
-                                            <td class="text-center">9AM-2PM</td>
-                                            <td class="text-center">9AM-2PM</td>
-                                            <td class="text-center">9AM-2PM</td>
-                                            <td>
-                                                <div class="d-inline-flex gap-1">
-                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                                            data-bs-target="#delRow">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                    </button>
-                                                    <a href="edit-doctors.html" class="btn btn-outline-success btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Doctor Details">
-                                                        <i class="ri-edit-box-line"></i>
-                                                    </a>
-                                                    <a href="doctors-profile.html" class="btn btn-outline-info btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Profile">
-                                                        <i class="ri-eye-line"></i>
-                                                    </a>
-                                                </div>
+                                                <button class="btn btn-outline-success btn-sm editBtn" data-firstname="Jane" data-lastname="Doe" data-number="349157" data-gender="Female" data-dob="1982-06-15" data-bs-toggle="modal" data-bs-target="#editPatientModal"><i class="ri-edit-box-line"></i></button>
+                                                <button class="btn btn-outline-info btn-sm viewBtn" data-number="349157"><i class="ri-eye-line"></i></button>
+                                                <button class="btn btn-outline-danger btn-sm deleteBtn"><i class="ri-delete-bin-line"></i></button>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>#0021</td>
+                                            <td>#0002</td>
+                                            <td><img src="{{ asset('assets/images/doctor1.png') }}" class="img-2x rounded-5 me-1">John</td>
+                                            <td>Doe</td>
+                                            <td>648515</td>
+                                            <td>Male</td>
+                                            <td>1964-07-19</td>
                                             <td>
-                                                <img src="assets/images/doctor1.png" class="img-2x rounded-5 me-1"
-                                                     alt="Medical Admin Template">
-                                                Smith White
-                                            </td>
-                                            <td>Neurology</td>
-                                            <td class="text-center text-danger">NA</td>
-                                            <td class="text-center">3PM-5PM</td>
-                                            <td class="text-center">3PM-5PM</td>
-                                            <td class="text-center">3PM-5PM</td>
-                                            <td class="text-center">3PM-5PM</td>
-                                            <td class="text-center">3PM-5PM</td>
-                                            <td class="text-center">3PM-5PM</td>
-                                            <td>
-                                                <div class="d-inline-flex gap-1">
-                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                                            data-bs-target="#delRow">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                    </button>
-                                                    <a href="edit-doctors.html" class="btn btn-outline-success btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Doctor Details">
-                                                        <i class="ri-edit-box-line"></i>
-                                                    </a>
-                                                    <a href="doctors-profile.html" class="btn btn-outline-info btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Profile">
-                                                        <i class="ri-eye-line"></i>
-                                                    </a>
-                                                </div>
+                                                <button class="btn btn-outline-success btn-sm editBtn" data-firstname="John" data-lastname="Doe" data-number="648515" data-gender="Male" data-dob="1964-07-19" data-bs-toggle="modal" data-bs-target="#editPatientModal"><i class="ri-edit-box-line"></i></button>
+                                                <button class="btn btn-outline-info btn-sm viewBtn" data-number="648515"><i class="ri-eye-line"></i></button>
+                                                <button class="btn btn-outline-danger btn-sm deleteBtn"><i class="ri-delete-bin-line"></i></button>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>#0026</td>
+                                            <td>#0003</td>
+                                            <td><img src="{{ asset('assets/images/doctor.png') }}" class="img-2x rounded-5 me-1">Jet</td>
+                                            <td>Sanders</td>
+                                            <td>852146</td>
+                                            <td>Female</td>
+                                            <td>1985-03-27</td>
                                             <td>
-                                                <img src="assets/images/doctor2.png" class="img-2x rounded-5 me-1"
-                                                     alt="Medical Admin Template">
-                                                Gilbert Sandoval
-                                            </td>
-                                            <td>Cardiologist</td>
-                                            <td class="text-center text-danger">NA</td>
-                                            <td class="text-center">5PM-9PM</td>
-                                            <td class="text-center">5PM-9PM</td>
-                                            <td class="text-center">5PM-9PM</td>
-                                            <td class="text-center">5PM-9PM</td>
-                                            <td class="text-center">5PM-9PM</td>
-                                            <td class="text-center">5PM-9PM</td>
-                                            <td>
-                                                <div class="d-inline-flex gap-1">
-                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                                            data-bs-target="#delRow">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                    </button>
-                                                    <a href="edit-doctors.html" class="btn btn-outline-success btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Doctor Details">
-                                                        <i class="ri-edit-box-line"></i>
-                                                    </a>
-                                                    <a href="doctors-profile.html" class="btn btn-outline-info btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Profile">
-                                                        <i class="ri-eye-line"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#0039</td>
-                                            <td>
-                                                <img src="assets/images/doctor3.png" class="img-2x rounded-5 me-1"
-                                                     alt="Medical Admin Template">
-                                                Bernardo James
-                                            </td>
-                                            <td>Clinical Doctor</td>
-                                            <td class="text-center text-danger">NA</td>
-                                            <td class="text-center">7AM-9AM</td>
-                                            <td class="text-center">7AM-9AM</td>
-                                            <td class="text-center">7AM-9AM</td>
-                                            <td class="text-center">7AM-9AM</td>
-                                            <td class="text-center">7AM-9AM</td>
-                                            <td class="text-center">7AM-9AM</td>
-                                            <td>
-                                                <div class="d-inline-flex gap-1">
-                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                                            data-bs-target="#delRow">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                    </button>
-                                                    <a href="edit-doctors.html" class="btn btn-outline-success btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Doctor Details">
-                                                        <i class="ri-edit-box-line"></i>
-                                                    </a>
-                                                    <a href="doctors-profile.html" class="btn btn-outline-info btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Profile">
-                                                        <i class="ri-eye-line"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#0044</td>
-                                            <td>
-                                                <img src="assets/images/doctor4.png" class="img-2x rounded-5 me-1"
-                                                     alt="Medical Admin Template">
-                                                Ronald Sullivan
-                                            </td>
-                                            <td>Radiologist</td>
-                                            <td class="text-center text-danger">NA</td>
-                                            <td class="text-center">3PM-9PM</td>
-                                            <td class="text-center">3PM-9PM</td>
-                                            <td class="text-center">3PM-9PM</td>
-                                            <td class="text-center">3PM-9PM</td>
-                                            <td class="text-center">3PM-9PM</td>
-                                            <td class="text-center">3PM-9PM</td>
-                                            <td>
-                                                <div class="d-inline-flex gap-1">
-                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                                            data-bs-target="#delRow">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                    </button>
-                                                    <a href="edit-doctors.html" class="btn btn-outline-success btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Doctor Details">
-                                                        <i class="ri-edit-box-line"></i>
-                                                    </a>
-                                                    <a href="doctors-profile.html" class="btn btn-outline-info btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Profile">
-                                                        <i class="ri-eye-line"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#0083</td>
-                                            <td>
-                                                <img src="assets/images/doctor5.png" class="img-2x rounded-5 me-1"
-                                                     alt="Medical Admin Template">
-                                                Amelia Bruklin
-                                            </td>
-                                            <td>Neurologist</td>
-                                            <td class="text-center text-danger">NA</td>
-                                            <td class="text-center">6PM-8PM</td>
-                                            <td class="text-center">6PM-8PM</td>
-                                            <td class="text-center">6PM-8PM</td>
-                                            <td class="text-center">6PM-8PM</td>
-                                            <td class="text-center">6PM-8PM</td>
-                                            <td class="text-center">6PM-8PM</td>
-                                            <td>
-                                                <div class="d-inline-flex gap-1">
-                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                                            data-bs-target="#delRow">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                    </button>
-                                                    <a href="edit-doctors.html" class="btn btn-outline-success btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Doctor Details">
-                                                        <i class="ri-edit-box-line"></i>
-                                                    </a>
-                                                    <a href="doctors-profile.html" class="btn btn-outline-info btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Profile">
-                                                        <i class="ri-eye-line"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#0067</td>
-                                            <td>
-                                                <img src="assets/images/doctor2.png" class="img-2x rounded-5 me-1"
-                                                     alt="Medical Admin Template">
-                                                Bshton Cozei
-                                            </td>
-                                            <td>Pediatrics</td>
-                                            <td class="text-center text-danger">NA</td>
-                                            <td class="text-center">4PM-7PM</td>
-                                            <td class="text-center">4PM-7PM</td>
-                                            <td class="text-center">4PM-7PM</td>
-                                            <td class="text-center">4PM-7PM</td>
-                                            <td class="text-center">4PM-7PM</td>
-                                            <td class="text-center">4PM-7PM</td>
-                                            <td>
-                                                <div class="d-inline-flex gap-1">
-                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                                            data-bs-target="#delRow">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                    </button>
-                                                    <a href="edit-doctors.html" class="btn btn-outline-success btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Doctor Details">
-                                                        <i class="ri-edit-box-line"></i>
-                                                    </a>
-                                                    <a href="doctors-profile.html" class="btn btn-outline-info btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Profile">
-                                                        <i class="ri-eye-line"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#0048</td>
-                                            <td>
-                                                <img src="assets/images/doctor3.png" class="img-2x rounded-5 me-1"
-                                                     alt="Medical Admin Template">
-                                                George Bailey
-                                            </td>
-                                            <td>Pediatrics</td>
-                                            <td class="text-center text-danger">NA</td>
-                                            <td class="text-center">5PM-8PM</td>
-                                            <td class="text-center">5PM-8PM</td>
-                                            <td class="text-center">5PM-8PM</td>
-                                            <td class="text-center">5PM-8PM</td>
-                                            <td class="text-center">5PM-8PM</td>
-                                            <td class="text-center">5PM-8PM</td>
-                                            <td>
-                                                <div class="d-inline-flex gap-1">
-                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                                            data-bs-target="#delRow">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                    </button>
-                                                    <a href="edit-doctors.html" class="btn btn-outline-success btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Doctor Details">
-                                                        <i class="ri-edit-box-line"></i>
-                                                    </a>
-                                                    <a href="doctors-profile.html" class="btn btn-outline-info btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Profile">
-                                                        <i class="ri-eye-line"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#0058</td>
-                                            <td>
-                                                <img src="assets/images/doctor4.png" class="img-2x rounded-5 me-1"
-                                                     alt="Medical Admin Template">
-                                                Andrea Lalema
-                                            </td>
-                                            <td>Dentist</td>
-                                            <td class="text-center text-danger">NA</td>
-                                            <td class="text-center">8AM-4PM</td>
-                                            <td class="text-center">8AM-4PM</td>
-                                            <td class="text-center">8AM-4PM</td>
-                                            <td class="text-center">8AM-4PM</td>
-                                            <td class="text-center">8AM-4PM</td>
-                                            <td class="text-center">8AM-4PM</td>
-                                            <td>
-                                                <div class="d-inline-flex gap-1">
-                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                                            data-bs-target="#delRow">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                    </button>
-                                                    <a href="edit-doctors.html" class="btn btn-outline-success btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Doctor Details">
-                                                        <i class="ri-edit-box-line"></i>
-                                                    </a>
-                                                    <a href="doctors-profile.html" class="btn btn-outline-info btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Profile">
-                                                        <i class="ri-eye-line"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#0047</td>
-                                            <td>
-                                                <img src="assets/images/doctor3.png" class="img-2x rounded-5 me-1"
-                                                     alt="Medical Admin Template">
-                                                Taylor Melon
-                                            </td>
-                                            <td>Therapist</td>
-                                            <td class="text-center text-danger">NA</td>
-                                            <td class="text-center">9AM-3PM</td>
-                                            <td class="text-center">9AM-3PM</td>
-                                            <td class="text-center">9AM-3PM</td>
-                                            <td class="text-center">9AM-3PM</td>
-                                            <td class="text-center">9AM-3PM</td>
-                                            <td class="text-center">9AM-3PM</td>
-                                            <td>
-                                                <div class="d-inline-flex gap-1">
-                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                                            data-bs-target="#delRow">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                    </button>
-                                                    <a href="edit-doctors.html" class="btn btn-outline-success btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Doctor Details">
-                                                        <i class="ri-edit-box-line"></i>
-                                                    </a>
-                                                    <a href="doctors-profile.html" class="btn btn-outline-info btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Profile">
-                                                        <i class="ri-eye-line"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#0082</td>
-                                            <td>
-                                                <img src="assets/images/doctor.png" class="img-2x rounded-5 me-1"
-                                                     alt="Medical Admin Template">
-                                                Meera Gill
-                                            </td>
-                                            <td>Gynecologist</td>
-                                            <td class="text-center text-danger">NA</td>
-                                            <td class="text-center">5PM-8PM</td>
-                                            <td class="text-center">5PM-8PM</td>
-                                            <td class="text-center">5PM-8PM</td>
-                                            <td class="text-center">5PM-8PM</td>
-                                            <td class="text-center">5PM-8PM</td>
-                                            <td class="text-center">5PM-8PM</td>
-                                            <td>
-                                                <div class="d-inline-flex gap-1">
-                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                                            data-bs-target="#delRow">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                    </button>
-                                                    <a href="edit-doctors.html" class="btn btn-outline-success btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Doctor Details">
-                                                        <i class="ri-edit-box-line"></i>
-                                                    </a>
-                                                    <a href="doctors-profile.html" class="btn btn-outline-info btn-sm"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Profile">
-                                                        <i class="ri-eye-line"></i>
-                                                    </a>
-                                                </div>
+                                                <button class="btn btn-outline-success btn-sm editBtn" data-firstname="Jane" data-lastname="Doe" data-number="349157" data-gender="Female" data-dob="1982-06-15" data-bs-toggle="modal" data-bs-target="#editPatientModal"><i class="ri-edit-box-line"></i></button>
+                                                <button class="btn btn-outline-info btn-sm viewBtn" data-number="349157"><i class="ri-eye-line"></i></button>
+                                                <button class="btn btn-outline-danger btn-sm deleteBtn"><i class="ri-delete-bin-line"></i></button>
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- Table ends -->
 
-                                <!-- Modal Delete Row -->
-                                <div class="modal fade" id="delRow" tabindex="-1" aria-labelledby="delRowLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="delRowLabel">
-                                                    Confirm
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to delete the doctor from list?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <div class="d-flex justify-content-end gap-2">
-                                                    <button class="btn btn-outline-secondary" data-bs-dismiss="modal"
-                                                            aria-label="Close">No</button>
-                                                    <button class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Yes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <!-- Add Patient Button -->
+                                <div class="d-flex justify-content-end mb-3">
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPatientModal">Add Patient</button>
                                 </div>
 
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Row ends -->
-
             </div>
-            <!-- App body ends -->
-
-            <!-- App footer starts -->
-            <div class="app-footer">
-                <span>© Dental Care Admin 2025</span>
-            </div>
-            <!-- App footer ends -->
-
         </div>
-        <!-- App container ends -->
-
     </div>
-    <!-- Main container ends -->
-
 </div>
-<!-- Page wrapper ends -->
 
-<!-- *************
-        ************ JavaScript Files *************
-    ************* -->
-<!-- Required jQuery first, then Bootstrap Bundle JS -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/moment.min.js"></script>
+<!-- Edit Patient Modal -->
+<div class="modal fade" id="editPatientModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Edit Patient Details</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editPatientForm">
+                    <div class="mb-3"><label>First Name</label><input type="text" id="editFirstName" class="form-control"></div>
+                    <div class="mb-3"><label>Last Name</label><input type="text" id="editLastName" class="form-control"></div>
+                    <div class="mb-3"><label>Patient Number</label><input type="text" id="editPatientNum" class="form-control"></div>
+                    <div class="mb-3"><label>Gender</label>
+                        <select id="editGender" class="form-select">
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3"><label>Date of Birth</label><input type="date" id="editDob" class="form-control"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary" id="savePatientBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- *************
-        ************ Vendor Js Files *************
-    ************* -->
+<!-- Add Patient Modal -->
+<div class="modal fade" id="addPatientModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Add Patient</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addPatientForm">
+                    <div class="mb-3"><label>First Name</label><input type="text" id="addFirstName" class="form-control" required></div>
+                    <div class="mb-3"><label>Last Name</label><input type="text" id="addLastName" class="form-control" required></div>
+                    <div class="mb-3"><label>Patient Number (from dossier)</label><input type="text" id="addPatientNumber" class="form-control"></div>
+                    <div class="mb-3"><label>Gender</label>
+                        <select id="addGender" class="form-select">
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3"><label>Date of Birth</label><input type="date" id="addDob" class="form-control" required></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-success" id="saveNewPatient">Add Patient</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- Overlay Scroll JS -->
-<script src="assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
-<script src="assets/vendor/overlay-scroll/custom-scrollbar.js"></script>
+<!-- Delete Patient Modal -->
+<div class="modal fade" id="deletePatientModal" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Confirm</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">Are you sure you want to delete this patient?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn" data-bs-dismiss="modal">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- Date Range JS -->
-<script src="assets/vendor/daterange/daterange.js"></script>
-<script src="assets/vendor/daterange/custom-daterange.js"></script>
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
-<!-- Data Tables -->
-<script src="assets/vendor/datatables/dataTables.min.js"></script>
-<script src="assets/vendor/datatables/dataTables.bootstrap.min.js"></script>
-<script src="assets/vendor/datatables/custom/custom-datatables.js"></script>
+<script>
+    $(document).ready(function(){
+        let rowToEdit = null;
+        let rowToDelete = null;
 
-<!-- Custom JS files -->
-<script src="assets/js/custom.js"></script>
+        // Edit button
+        $(document).on("click", ".editBtn", function(){
+            rowToEdit = $(this).closest("tr");
+            $("#editFirstName").val($(this).data("firstname"));
+            $("#editLastName").val($(this).data("lastname"));
+            $("#editPatientNum").val($(this).data("number"));
+            $("#editGender").val($(this).data("gender"));
+            $("#editDob").val($(this).data("dob"));
+        });
+
+        // Save edited patient
+        $("#savePatientBtn").click(function(){
+            if(rowToEdit){
+                rowToEdit.find("td:eq(1)").html('<img src="{{ asset('assets/images/doctor.png') }}" class="img-2x rounded-5 me-1">'+$("#editFirstName").val());
+                rowToEdit.find("td:eq(2)").text($("#editLastName").val());
+                rowToEdit.find("td:eq(3)").text($("#editPatientNum").val());
+                rowToEdit.find("td:eq(4)").text($("#editGender").val());
+                rowToEdit.find("td:eq(5)").text($("#editDob").val());
+
+                rowToEdit.find(".editBtn")
+                    .data("firstname", $("#editFirstName").val())
+                    .data("lastname", $("#editLastName").val())
+                    .data("number", $("#editPatientNum").val())
+                    .data("gender", $("#editGender").val())
+                    .data("dob", $("#editDob").val());
+            }
+            $("#editPatientModal").modal("hide");
+        });
+
+        // Delete button
+        $(document).on("click", ".deleteBtn", function(){
+            rowToDelete = $(this).closest("tr");
+            $("#deletePatientModal").modal("show");
+        });
+
+        // Confirm delete
+        $("#confirmDeleteBtn").click(function(){
+            if(rowToDelete) rowToDelete.remove();
+        });
+
+        // View Profile button
+        $(document).on("click", ".viewBtn", function(){
+            const patientNumber = $(this).data("number");
+            window.location.href = `/report/${patientNumber}`;
+        });
+
+        // Add patient
+        $("#saveNewPatient").click(function(){
+            const first = $("#addFirstName").val().trim();
+            const last = $("#addLastName").val().trim();
+            const number = $("#addPatientNumber").val().trim();
+            const gender = $("#addGender").val();
+            const dob = $("#addDob").val();
+
+            if(!first || !last || !dob){
+                alert("Please fill in First Name, Last Name, and Date of Birth.");
+                return;
+            }
+
+            const tbody = $("#patientsTable tbody");
+            const rowCount = tbody.find("tr").length;
+            const newId = '#' + String(rowCount+1).padStart(4,'0');
+
+            const newRow = `<tr>
+            <td>${newId}</td>
+            <td><img src="assets/images/doctor.png" class="img-2x rounded-5 me-1">${first}</td>
+            <td>${last}</td>
+            <td>${number}</td>
+            <td>${gender}</td>
+            <td>${dob}</td>
+            <td>
+                <button class="btn btn-outline-success btn-sm editBtn" data-firstname="${first}" data-lastname="${last}" data-number="${number}" data-gender="${gender}" data-dob="${dob}" data-bs-toggle="modal" data-bs-target="#editPatientModal"><i class="ri-edit-box-line"></i></button>
+                <button class="btn btn-outline-info btn-sm viewBtn" data-number="${number}"><i class="ri-eye-line"></i></button>
+                <button class="btn btn-outline-danger btn-sm deleteBtn"><i class="ri-delete-bin-line"></i></button>
+            </td>
+        </tr>`;
+
+            tbody.append(newRow);
+            $("#addPatientModal").modal("hide");
+            $("#addPatientForm")[0].reset();
+        });
+    });
+</script>
+
 </body>
-
 </html>
