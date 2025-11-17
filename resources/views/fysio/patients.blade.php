@@ -77,19 +77,39 @@
             </div>
 
             <!-- Hero Header -->
-            <div class="app-hero-header d-flex align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ url('/homepage') }}"><i class="ri-home-3-line"></i></a></li>
+            <div class="app-hero-header d-flex justify-content-between align-items-center">
+
+                <!-- Breadcrumb -->
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item">
+                        <a href="{{ url('/homepage') }}"><i class="ri-home-3-line"></i></a>
+                    </li>
                     <li class="breadcrumb-item text-primary">Patients</li>
                 </ol>
+
+                <!-- Search container starts -->
+                <div class="search-container d-xl-block d-none">
+                    <input type="text" class="form-control" id="searchId" placeholder="Search"
+                           style="border: 2px solid lightgray; border-radius: 5px;">
+                    <i class="ri-search-line"></i>
+                </div>
+                <!-- Search container ends -->
+
+                <!-- Add Patient Button -->
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPatientModal">
+                    Add Patient
+                </button>
+
             </div>
 
             <!-- Body -->
             <div class="app-body">
                 <div class="row gx-4">
                     <div class="col-sm-12">
-                        <div class="card">
-                            <div class="card-body pt-0">
+                        <!-- Card met afgeronde hoeken -->
+                        <div class="card" style="border-radius: 12px; overflow: hidden;">
+
+                            <div class="card-body pt-0 p-0">
 
                                 <div class="table-responsive">
                                     <table class="table truncate m-0 align-middle" id="patientsTable">
@@ -107,7 +127,7 @@
                                         <tbody>
                                         <tr>
                                             <td>#0001</td>
-                                            <td><img src="{{ asset('assets/images/doctor.png') }}" class="img-2x rounded-5 me-1">Jane</td>
+                                            <td>Jane</td>
                                             <td>Doe</td>
                                             <td>349157</td>
                                             <td>Female</td>
@@ -120,7 +140,7 @@
                                         </tr>
                                         <tr>
                                             <td>#0002</td>
-                                            <td><img src="{{ asset('assets/images/doctor1.png') }}" class="img-2x rounded-5 me-1">John</td>
+                                            <td>John</td>
                                             <td>Doe</td>
                                             <td>648515</td>
                                             <td>Male</td>
@@ -133,8 +153,8 @@
                                         </tr>
                                         <tr>
                                             <td>#0003</td>
-                                            <td><img src="{{ asset('assets/images/doctor.png') }}" class="img-2x rounded-5 me-1">Jet</td>
-                                            <td>Sanders</td>
+                                            <td>Baby</td>
+                                            <td>Doe</td>
                                             <td>852146</td>
                                             <td>Female</td>
                                             <td>1985-03-27</td>
@@ -147,12 +167,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-
-                                <!-- Add Patient Button -->
-                                <div class="d-flex justify-content-end mb-3">
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPatientModal">Add Patient</button>
-                                </div>
-
                             </div>
                         </div>
                     </div>
