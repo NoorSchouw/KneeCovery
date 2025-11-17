@@ -401,7 +401,11 @@
                                                         <label class="form-label" for="a7">Injured Knee <span class="text-danger">*</span></label>
                                                         <div class="input-group">
                                   <span class="input-group-text">
-                                    <i class="ri-vip-crown-2-line"></i>
+                                      <img src="{{ asset('assets/images/icons/knee2.png') }}"
+                                           alt="Injured Knee"
+                                           width="14.4"
+                                           height="14.4">
+
                                   </span>
                                                             <select class="form-select" id="a7">
                                                                 <option value="0">Select</option>
