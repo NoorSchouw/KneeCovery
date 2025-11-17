@@ -13,26 +13,35 @@
     <meta property="og:type" content="Website">
     <link rel="shortcut icon" href="assets/images/favicon.svg">
 
+
+    @vite([
+   'resources/css/main.css',
+   'resources/css/daterange.css',
+   'resources/css/overlayScrollbars.css',
+   'resources/css/remixicon.css',
+   'resources/js/app.js',
+   'resources/js/vendor.js'
+])
     <!-- *************
 		************ CSS Files *************
 	  ************* -->
-    <link rel="stylesheet" href="assets/fonts/remix/remixicon.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+{{--    <link rel="stylesheet" href="assets/fonts/remix/remixicon.css">--}}
+{{--    <link rel="stylesheet" href="assets/css/main.css">--}}
 
     <!-- *************
 		************ Vendor Css Files *************
 	  ************ -->
 
     <!-- Scrollbar CSS -->
-    <link rel="stylesheet" href="assets/vendor/overlay-scroll/OverlayScrollbars.min.css">
+{{--    <link rel="stylesheet" href="assets/vendor/overlay-scroll/OverlayScrollbars.min.css">--}}
 
     <!-- Date Range CSS -->
-    <link rel="stylesheet" href="assets/vendor/daterange/daterange.css">
+{{--    <link rel="stylesheet" href="assets/vendor/daterange/daterange.css">--}}
 
     <!-- Data Tables -->
-    <link rel="stylesheet" href="assets/vendor/datatables/dataTables.bs5.css">
-    <link rel="stylesheet" href="assets/vendor/datatables/dataTables.bs5-custom.css">
-    <link rel="stylesheet" href="assets/vendor/datatables/buttons/dataTables.bs5-custom.css">
+{{--    <link rel="stylesheet" href="assets/vendor/datatables/dataTables.bs5.css">--}}
+{{--    <link rel="stylesheet" href="assets/vendor/datatables/dataTables.bs5-custom.css">--}}
+{{--    <link rel="stylesheet" href="assets/vendor/datatables/buttons/dataTables.bs5-custom.css">--}}
 </head>
 
 <body>
@@ -1478,29 +1487,29 @@
         ************ JavaScript Files *************
     ************* -->
 <!-- Required jQuery first, then Bootstrap Bundle JS -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/moment.min.js"></script>
+{{--<script src="assets/js/jquery.min.js"></script>--}}
+{{--<script src="assets/js/bootstrap.bundle.min.js"></script>--}}
+{{--<script src="assets/js/moment.min.js"></script>--}}
 
 <!-- *************
         ************ Vendor Js Files *************
     ************* -->
 
 <!-- Overlay Scroll JS -->
-<script src="assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
-<script src="assets/vendor/overlay-scroll/custom-scrollbar.js"></script>
+{{--<script src="assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>--}}
+{{--<script src="assets/vendor/overlay-scroll/custom-scrollbar.js"></script>--}}
 
 <!-- Date Range JS -->
-<script src="assets/vendor/daterange/daterange.js"></script>
-<script src="assets/vendor/daterange/custom-daterange.js"></script>
+{{--<script src="assets/vendor/daterange/daterange.js"></script>--}}
+{{--<script src="assets/vendor/daterange/custom-daterange.js"></script>--}}
 
 <!-- Data Tables -->
-<script src="assets/vendor/datatables/dataTables.min.js"></script>
-<script src="assets/vendor/datatables/dataTables.bootstrap.min.js"></script>
-<script src="assets/vendor/datatables/custom/custom-datatables.js"></script>
+{{--<script src="assets/vendor/datatables/dataTables.min.js"></script>--}}
+{{--<script src="assets/vendor/datatables/dataTables.bootstrap.min.js"></script>--}}
+{{--<script src="assets/vendor/datatables/custom/custom-datatables.js"></script>--}}
 
 <!-- Custom JS files -->
-<script src="assets/js/custom.js"></script>
+{{--<script src="assets/js/custom.js"></script>--}}
 </body>
 
 </html>

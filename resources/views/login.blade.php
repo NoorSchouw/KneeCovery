@@ -13,11 +13,19 @@
     <meta property="og:type" content="Website">
     <link rel="shortcut icon" href="{{ asset ('assets/images/favicon.svg') }}">
 
+    @vite([
+   'resources/css/main.css',
+   'resources/css/daterange.css',
+   'resources/css/overlayScrollbars.css',
+   'resources/css/remixicon.css',
+   'resources/js/app.js',
+   'resources/js/vendor.js'
+])
     <!-- *************
 			************ CSS Files *************
 		************* -->
-    <link rel="stylesheet" href="{{ asset ('assets/fonts/remix/remixicon.css')}}">
-    <link rel="stylesheet" href="{{ asset ('assets/css/main.css')}}">
+{{--    <link rel="stylesheet" href="{{ asset ('assets/fonts/remix/remixicon.css')}}">--}}
+{{--    <link rel="stylesheet" href="{{ asset ('assets/css/main.css')}}">--}}
 
 </head>
 
