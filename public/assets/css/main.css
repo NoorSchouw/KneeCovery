@@ -15278,7 +15278,7 @@ input[type=file]::file-selector-button {
 
 /* --- Body en pagina achtergrond --- */
 body {
-    background: #ecf0ff
+    background: #FFFFFFFF;
     color: #ecf0ff;
     margin: 0;
     padding: 0;
@@ -15289,7 +15289,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0px auto;
-    max-width: 800px;
+    max-width: 1000px; /* breder voor webcam + controls */
 }
 
 /* --- Header (Titel + Subtitel) --- */
@@ -15308,32 +15308,48 @@ body {
 .filming-subtitle {
     color: #353333;
     font-size: 18px;
-    margin-bottom: 0;
+    margin-bottom: 8px;
 }
 
-/* --- Centered content: Controls, Statusbar, Video --- */
+/* --- Filming center: Video links, controls rechts --- */
 .filming-center {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
     background: linear-gradient(135deg, rgba(253, 117, 150, 0.75) 0%, rgba(250, 170, 137, 0.75) 100%);
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 20px #FD7596;
+    gap: 30px; /* ruimte tussen video en controls */
+    flex-wrap: wrap;
+}
+
+/* --- Video kolom --- */
+.video-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Controls kolom --- */
+.controls-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 15px; /* ruimte tussen controls */
 }
 
 /* --- Controls --- */
 .filming-controls {
     display: flex;
-    gap: 12px;
     align-items: center;
-    margin-bottom: 20px;
+    gap: 12px;
 }
 
 .filming-controls label {
-    color: #353333; /* kies hier je gewenste kleur */
-    font-weight: 500; /* optioneel: maakt de tekst iets dikker */
-    font-size: 16px;  /* optioneel: verander de grootte */
+    color: #353333;
+    font-weight: 500;
+    font-size: 16px;
 }
 
 /* Dropdown styling */
@@ -15354,10 +15370,10 @@ body {
 /* --- Statusbar --- */
 .filming-statusbar {
     display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 10px;
 }
 
 .badge {
@@ -15398,12 +15414,12 @@ body {
     position: relative;
     width: 640px;
     height: 480px;
-    margin-bottom: 20px;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
+/* Video & canvas overlay */
 .filming-video-container video,
 .filming-video-container canvas {
     position: absolute;
@@ -15419,18 +15435,24 @@ body {
     font-size: 18px;
     font-weight: bold;
     color: #353333;
-    margin-top: 10px;
+    margin-top: 15px;
     text-align: center;
 }
 
 /* --- Responsive --- */
-@media (max-width: 700px) {
+@media (max-width: 900px) {
+    .filming-center {
+        flex-direction: column;
+        align-items: center;
+    }
+    .controls-side {
+        flex-direction: row;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 20px;
+    }
     .filming-video-container {
         width: 100%;
         height: auto;
-    }
-
-    .filming-center {
-        padding: 15px;
     }
 }
