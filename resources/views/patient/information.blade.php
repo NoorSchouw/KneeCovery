@@ -11,29 +11,38 @@
     <meta property="og:title" content="Admin Templates - Dashboard Templates">
     <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
     <meta property="og:type" content="Website">
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}">
+    <link rel="shortcut icon" href="assets/images/favicon.svg">
+
+    @vite([
+   'resources/css/main.css',
+   'resources/css/daterange.css',
+   'resources/css/overlayScrollbars.css',
+   'resources/css/remixicon.css',
+   'resources/js/app.js',
+   'resources/js/vendor.js'
+])
 
     <!-- *************
 		************ CSS Files *************
 	  ************* -->
-    <link rel="stylesheet" href="{{ asset('assets/fonts/remix/remixicon.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+{{--    <link rel="stylesheet" href="assets/fonts/remix/remixicon.css">--}}
+{{--    <link rel="stylesheet" href="assets/css/main.css">--}}
 
     <!-- *************
 		************ Vendor Css Files *************
 	  ************ -->
 
     <!-- Scrollbar CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/overlay-scroll/OverlayScrollbars.min.css') }}">
+{{--    <link rel="stylesheet" href="assets/vendor/overlay-scroll/OverlayScrollbars.min.css">--}}
 
-    <!-- Date Range CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/daterange/daterange.css') }}">
+{{--    <!-- Date Range CSS -->--}}
+{{--    <link rel="stylesheet" href="assets/vendor/daterange/daterange.css">--}}
 
     <!-- Uploader CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/dropzone/dropzone.min.css') }}">
+{{--    <link rel="stylesheet" href="assets/vendor/dropzone/dropzone.min.css">--}}
 
     <!-- Quill Editor -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/quill/quill.core.css') }}">
+{{--    <link rel="stylesheet" href="assets/vendor/quill/quill.core.css">--}}
 </head>
 
 <body>
@@ -52,11 +61,17 @@
 
                 <!-- App brand starts -->
                 <div class="app-brand ms-3">
-                    <a href="{{ url('/homepage') }}">
-                        <img src="assets/images/logo.png" class="logo" alt="Dental Care Admin Template">
+                    <a href="index.html">
+                        <img src="assets/images/logo.svg" class="logo" alt="Dental Care Admin Template">
                     </a>
                 </div>
                 <!-- App brand ends -->
+
+                <!-- Pin sidebar starts -->
+                <button type="button" class="pin-sidebar me-3">
+                    <i class="ri-menu-line"></i>
+                </button>
+                <!-- Pin sidebar ends -->
 
             </div>
             <!-- Brand container ends -->
@@ -65,8 +80,8 @@
             <div class="sidebar-profile">
                 <img src="assets/images/doctor5.png" class="rounded-5 border border-primary border-3"
                      alt="Dentist Admin Templates">
-                <h6 class="mb-1 profile-name text-nowrap text-truncate text-primary">Jane Doe</h6>
-                <small class="profile-name text-nowrap text-truncate">Patient</small>
+                <h6 class="mb-1 profile-name text-nowrap text-truncate text-primary">Jennifer Arter</h6>
+                <small class="profile-name text-nowrap text-truncate">Department Head</small>
             </div>
             <!-- Sidebar profile ends -->
 
@@ -74,9 +89,531 @@
             <div class="sidebarMenuScroll">
                 <ul class="sidebar-menu">
                     <li>
-                        <a href="{{ url('/homepage') }}">
+                        <a href="index.html">
                             <i class="ri-home-6-line"></i>
-                            <span class="menu-text">Homepage</span>
+                            <span class="menu-text">Dentist Admin</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="dashboard2.html">
+                            <i class="ri-home-smile-2-line"></i>
+                            <span class="menu-text">Dentist Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="dashboard3.html">
+                            <i class="ri-home-5-line"></i>
+                            <span class="menu-text">Dental Clinic</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="doc-appointments.html">
+                            <i class="ri-calendar-2-line"></i>
+                            <span class="menu-text">Appointments</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="my-patients.html">
+                            <i class="ri-empathize-line"></i>
+                            <span class="menu-text">My Patients</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="patient-profile.html">
+                            <i class="ri-empathize-line"></i>
+                            <span class="menu-text">Patient Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="doctor-dashboard.html">
+                            <i class="ri-stethoscope-line"></i>
+                            <span class="menu-text">Doctors Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="doctors-grid.html">
+                            <i class="ri-stethoscope-line"></i>
+                            <span class="menu-text">Doctors Grid</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="doctors-cards.html">
+                            <i class="ri-stethoscope-line"></i>
+                            <span class="menu-text">Doctors Cards</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="doctors-profile.html">
+                            <i class="ri-stethoscope-line"></i>
+                            <span class="menu-text">Doctors Profile</span>
+                        </a>
+                    </li>
+                    <li class="active current-page">
+                        <a href="add-doctors.html">
+                            <i class="ri-stethoscope-line"></i>
+                            <span class="menu-text">Add Doctor</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="edit-doctors.html">
+                            <i class="ri-stethoscope-line"></i>
+                            <span class="menu-text">Edit Doctor</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="patient-dashboard.html">
+                            <i class="ri-heart-pulse-line"></i>
+                            <span class="menu-text">Patients Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="patients-list.html">
+                            <i class="ri-heart-pulse-line"></i>
+                            <span class="menu-text">Patients List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="add-patient.html">
+                            <i class="ri-heart-pulse-line"></i>
+                            <span class="menu-text">Add Patient</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="edit-patient.html">
+                            <i class="ri-heart-pulse-line"></i>
+                            <span class="menu-text">Edit Patient Details</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-nurse-line"></i>
+                            <span class="menu-text">Staff</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="staff.html">Staff List</a>
+                            </li>
+                            <li>
+                                <a href="add-staff.html">Add Staff</a>
+                            </li>
+                            <li>
+                                <a href="edit-staff.html">Edit Staff Details</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-dossier-line"></i>
+                            <span class="menu-text">Appointments</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="appointments.html">Appointments</a>
+                            </li>
+                            <li>
+                                <a href="appointments-list.html">Appointments List</a>
+                            </li>
+                            <li>
+                                <a href="book-appointment.html">Book Appointment</a>
+                            </li>
+                            <li>
+                                <a href="appointment-success.html">Appointment Success</a>
+                            </li>
+                            <li>
+                                <a href="edit-appointment.html">Edit Appointment</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-building-2-line"></i>
+                            <span class="menu-text">Departments</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="departments-list.html">Departments List</a>
+                            </li>
+                            <li>
+                                <a href="add-department.html">Add Department</a>
+                            </li>
+                            <li>
+                                <a href="edit-department.html">Edit Department</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-secure-payment-line"></i>
+                            <span class="menu-text">Accounts</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="income.html">Income</a>
+                            </li>
+                            <li>
+                                <a href="payments.html">Payments</a>
+                            </li>
+                            <li>
+                                <a href="invoices.html">Invoices</a>
+                            </li>
+                            <li>
+                                <a href="invoice-details.html">Invoice Details</a>
+                            </li>
+                            <li>
+                                <a href="create-invoice.html">Create Invoice</a>
+                            </li>
+                            <li>
+                                <a href="expenses.html">Expenses</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-group-2-line"></i>
+                            <span class="menu-text">Human Resources</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="hr-approvals.html">HR Approvals</a>
+                            </li>
+                            <li>
+                                <a href="staff-attendance.html">Attendance</a>
+                            </li>
+                            <li>
+                                <a href="staff-leaves.html">Staff Leaves</a>
+                            </li>
+                            <li>
+                                <a href="staff-holidays.html">Holidays</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-money-dollar-circle-line"></i>
+                            <span class="menu-text">Salaries</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="salaries.html">Salary List</a>
+                            </li>
+                            <li>
+                                <a href="payslip.html">Payslip</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-hotel-bed-line"></i>
+                            <span class="menu-text">Rooms</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="room-statistics.html">Statistics</a>
+                            </li>
+                            <li>
+                                <a href="rooms-allotted.html">Rooms Allotted</a>
+                            </li>
+                            <li>
+                                <a href="rooms-by-dept.html">Rooms By Department</a>
+                            </li>
+                            <li>
+                                <a href="available-rooms.html">Available Rooms</a>
+                            </li>
+                            <li>
+                                <a href="book-room.html">Book Room</a>
+                            </li>
+                            <li>
+                                <a href="add-room.html">Add Room</a>
+                            </li>
+                            <li>
+                                <a href="edit-room.html">Edit Room</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-car-washing-line"></i>
+                            <span class="menu-text">Ambulance</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="ambulance-list.html">Ambulance List</a>
+                            </li>
+                            <li>
+                                <a href="add-ambulance.html">Add Ambulance</a>
+                            </li>
+                            <li>
+                                <a href="edit-ambulance.html">Edit Ambulance</a>
+                            </li>
+                            <li>
+                                <a href="ambulance-call-list.html">Ambulance Call List</a>
+                            </li>
+                            <li>
+                                <a href="add-driver.html">Add Driver</a>
+                            </li>
+                            <li>
+                                <a href="edit-driver.html">Edit Driver</a>
+                            </li>
+                            <li>
+                                <a href="driver-list.html">Driver List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="events.html">
+                            <i class="ri-calendar-line"></i>
+                            <span class="menu-text">Event Management</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="gallery.html">
+                            <i class="ri-tent-line"></i>
+                            <span class="menu-text">Gallery</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="news.html">
+                            <i class="ri-news-line"></i>
+                            <span class="menu-text">News & Updates</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-color-filter-line"></i>
+                            <span class="menu-text">UI Elements</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="alerts.html">Alerts</a>
+                            </li>
+                            <li>
+                                <a href="avatars.html">Avatars</a>
+                            </li>
+                            <li>
+                                <a href="badges.html">Badges</a>
+                            </li>
+                            <li>
+                                <a href="buttons.html">Buttons</a>
+                            </li>
+                            <li>
+                                <a href="button-groups.html">Button Groups</a>
+                            </li>
+                            <li>
+                                <a href="cards.html">Cards</a>
+                            </li>
+                            <li>
+                                <a href="advanced-cards.html">Advanced Cards</a>
+                            </li>
+                            <li>
+                                <a href="dropdowns.html">Dropdowns</a>
+                            </li>
+                            <li>
+                                <a href="list-items.html">List Items</a>
+                            </li>
+                            <li>
+                                <a href="progress.html">Progress Bars</a>
+                            </li>
+                            <li>
+                                <a href="placeholders.html">Placeholders</a>
+                            </li>
+                            <li>
+                                <a href="spinners.html">Spinners</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-notification-badge-line"></i>
+                            <span class="menu-text">Jquery Components</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="accordions.html">Accordions</a>
+                            </li>
+                            <li>
+                                <a href="carousel.html">Carousel</a>
+                            </li>
+                            <li>
+                                <a href="modals.html">Modals</a>
+                            </li>
+                            <li>
+                                <a href="popovers.html">Popovers</a>
+                            </li>
+                            <li>
+                                <a href="tabs.html">Tabs</a>
+                            </li>
+                            <li>
+                                <a href="tooltips.html">Tooltips</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-terminal-window-line"></i>
+                            <span class="menu-text">Forms</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="form-inputs.html">Form Inputs</a>
+                            </li>
+                            <li>
+                                <a href="form-checkbox-radio.html">Checkbox &amp; Radio</a>
+                            </li>
+                            <li>
+                                <a href="form-file-input.html">File Input</a>
+                            </li>
+                            <li>
+                                <a href="form-validations.html">Validations</a>
+                            </li>
+                            <li>
+                                <a href="date-time-pickers.html">Date Time Pickers</a>
+                            </li>
+                            <li>
+                                <a href="form-masks.html">Input Masks</a>
+                            </li>
+                            <li>
+                                <a href="form-tags.html">Input Tags</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="tables.html">
+                            <i class="ri-table-line"></i>
+                            <span class="menu-text">Tables</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-bar-chart-line"></i>
+                            <span class="menu-text">Graphs</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="apex.html">Apex Graphs</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Morris Graphs</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="maps.html">
+                            <i class="ri-road-map-line"></i>
+                            <span class="menu-text">Vector Maps</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="icons.html">
+                            <i class="ri-send-plane-2-line"></i>
+                            <span class="menu-text">Icons</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="settings.html">
+                            <i class="ri-settings-5-line"></i>
+                            <span class="menu-text">Account Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="typography.html">
+                            <i class="ri-font-size"></i>
+                            <span class="menu-text">Typography</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-login-circle-line"></i>
+                            <span class="menu-text">Login/Signup</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="login.html">Login</a>
+                            </li>
+                            <li>
+                                <a href="signup.html">Signup</a>
+                            </li>
+                            <li>
+                                <a href="forgot-password.html">Forgot Password</a>
+                            </li>
+                            <li>
+                                <a href="reset-password.html">Reset Password</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="page-not-found.html">
+                            <i class="ri-alert-line"></i>
+                            <span class="menu-text">Page Not Found</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="maintenance.html">
+                            <i class="ri-auction-line"></i>
+                            <span class="menu-text">Maintenance</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#!">
+                            <i class="ri-dropdown-list"></i>
+                            <span class="menu-text">Menu Level</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="#!">Level One Link</a>
+                            </li>
+                            <li>
+                                <a href="#!">
+                                    Level One Menu
+                                    <i class="ri-arrow-right-s-line"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li>
+                                        <a href="#!">Level Two Link</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">Level Two Menu
+                                            <i class="ri-arrow-right-s-line"></i>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            <li>
+                                                <a href="#!">Level Three Link</a>
+                                            </li>
+                                            <li>
+                                                <a href="#!">Level Three Link</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#!">Level One Link</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="default.html">
+                            <i class="ri-send-plane-line"></i>
+                            <span class="menu-text">Default Page</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            <i class="ri-exchange-line"></i>
+                            <span class="menu-text">Chip</span>
+                            <span class="badge bg-primary ms-auto">6</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!">
+                            <i class="ri-ticket-line"></i>
+                            <span class="menu-text">Badge</span>
+                            <span class="badge border border-primary text-primary ms-auto">Chip</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!" class="disabled">
+                            <i class="ri-magic-line"></i>
+                            <span class="menu-text">Disabled Link</span>
                         </a>
                     </li>
                 </ul>
@@ -105,11 +642,18 @@
 
                     <!-- App brand starts -->
                     <div class="app-brand">
-                        <a href="{{ ('/homepage') }}">
-                            <img src="assets/images/logo.png" class="logo" alt="Dental Care Admin Template">
+                        <a href="index.html">
+                            <img src="assets/images/logo.svg" class="logo" alt="Dental Care Admin Template">
                         </a>
                     </div>
                     <!-- App brand ends -->
+
+                    <!-- Toggle sidebar starts -->
+                    <button type="button" class="toggle-sidebar">
+                        <i class="ri-menu-line"></i>
+                    </button>
+                    <!-- Toggle sidebar ends -->
+
                 </div>
                 <!-- Brand container sm ends -->
 
@@ -126,6 +670,316 @@
                     <!-- Header actions starts -->
                     <div class="d-lg-flex d-none gap-2">
 
+                        <!-- Select country dropdown starts -->
+                        <div class="dropdown">
+                            <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <img src="assets/images/flags/1x1/fr.svg" class="header-country-flag" alt="Bootstrap Dashboards">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-mini">
+                                <div class="country-container">
+                                    <a href="index.html" class="py-2">
+                                        <img src="assets/images/flags/1x1/us.svg" alt="Admin Panel">
+                                    </a>
+                                    <a href="index.html" class="py-2">
+                                        <img src="assets/images/flags/1x1/in.svg" alt="Admin Panels">
+                                    </a>
+                                    <a href="index.html" class="py-2">
+                                        <img src="assets/images/flags/1x1/br.svg" alt="Admin Dashboards">
+                                    </a>
+                                    <a href="index.html" class="py-2">
+                                        <img src="assets/images/flags/1x1/tr.svg" alt="Admin Templatess">
+                                    </a>
+                                    <a href="index.html" class="py-2">
+                                        <img src="assets/images/flags/1x1/gb.svg" alt="Google Admin">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Select country dropdown ends -->
+
+                        <!-- Bookmarks starts -->
+                        <div class="dropdown">
+                            <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="ri-star-line"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-300">
+                                <h5 class="fw-semibold px-3 py-2 text-primary">Bookmarks</h5>
+
+                                <div class="d-flex justify-content-center gap-3">
+                                    <a href="doctors-cards.html" class="text-center">
+                                        <div class="icon-box lg bg-primary-subtle rounded-5 mb-1">
+                                            <i class="ri-stethoscope-line text-primary fs-4"></i>
+                                        </div>
+                                        Doctors
+                                    </a>
+                                    <a href="staff.html" class="text-center">
+                                        <div class="icon-box lg bg-primary-subtle rounded-5 mb-1">
+                                            <i class="ri-nurse-line text-primary fs-4"></i>
+                                        </div>
+                                        Staff
+                                    </a>
+                                    <a href="patients-list.html" class="text-center">
+                                        <div class="icon-box lg bg-primary-subtle rounded-5 mb-1">
+                                            <i class="ri-group-2-line text-primary fs-4"></i>
+                                        </div>
+                                        Patients
+                                    </a>
+                                </div>
+
+                                <!-- View all button starts -->
+                                <div class="d-grid m-3">
+                                    <a href="javascript:void(0)" class="btn btn-outline-primary">Add New Bookmark</a>
+                                </div>
+                                <!-- View all button ends -->
+
+                            </div>
+                        </div>
+                        <!-- Bookmarks ends -->
+
+                        <!-- Notifications dropdown starts -->
+                        <div class="dropdown">
+                            <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="ri-list-check-3"></i>
+                                <span class="count-label warning"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-300">
+                                <h5 class="fw-semibold px-3 py-2 text-primary">Activity</h5>
+
+                                <!-- Scroll starts -->
+                                <div class="scroll300">
+
+                                    <!-- Activity List Starts -->
+                                    <div class="p-3">
+                                        <ul class="p-0 activity-list2">
+                                            <li class="activity-item pb-3 mb-3">
+                                                <a href="#!">
+                                                    <h5 class="fw-regular">
+                                                        <i class="ri-circle-fill text-danger me-1"></i>
+                                                        Invoices.
+                                                    </h5>
+                                                    <div class="ps-3 ms-2 border-start">
+                                                        <div class="d-flex align-items-center mb-2">
+                                                            <div class="flex-shrink-0">
+                                                                <img src="assets/images/products/1.jpg" class="img-3x rounded-1"
+                                                                     alt="Dentist Admin Templates">
+                                                            </div>
+                                                            <div class="flex-grow-1 ms-3">
+                                                                23 invoices have been paid to the Clove Labs.
+                                                            </div>
+                                                        </div>
+                                                        <p class="m-0 small">10:20AM Today</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="activity-item pb-3 mb-3">
+                                                <a href="#!">
+                                                    <h5 class="fw-regular">
+                                                        <i class="ri-circle-fill text-info me-1"></i>
+                                                        Purchased.
+                                                    </h5>
+                                                    <div class="ps-3 ms-2 border-start">
+                                                        <div class="d-flex align-items-center mb-2">
+                                                            <div class="flex-shrink-0">
+                                                                <img src="assets/images/products/2.jpg" class="img-3x rounded-1"
+                                                                     alt="Dentist Admin Templates">
+                                                            </div>
+                                                            <div class="flex-grow-1 ms-3">
+                                                                28 new surgical equipments have been purchased.
+                                                            </div>
+                                                        </div>
+                                                        <p class="m-0 small">04:30PM Today</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="activity-item pb-3 mb-3">
+                                                <a href="#!">
+                                                    <h5 class="fw-regular">
+                                                        <i class="ri-circle-fill text-success me-1"></i>
+                                                        Appointed.
+                                                    </h5>
+                                                    <div class="ps-3 ms-2 border-start">
+                                                        <div class="d-flex align-items-center mb-2">
+                                                            <div class="flex-shrink-0">
+                                                                <img src="assets/images/products/8.jpg" class="img-3x rounded-1"
+                                                                     alt="Dentist Admin Templates">
+                                                            </div>
+                                                            <div class="flex-grow-1 ms-3">
+                                                                36 new doctors and 28 staff members appointed.
+                                                            </div>
+                                                        </div>
+                                                        <p class="m-0 small">06:50PM Today</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="activity-item">
+                                                <a href="#!">
+                                                    <h5 class="fw-regular">
+                                                        <i class="ri-circle-fill text-warning me-1"></i>
+                                                        Requested
+                                                    </h5>
+                                                    <div class="ps-3 ms-2 border-start">
+                                                        <div class="d-flex align-items-center mb-2">
+                                                            <div class="flex-shrink-0">
+                                                                <img src="assets/images/products/9.jpg" class="img-3x rounded-1"
+                                                                     alt="Dentist Admin Templates">
+                                                            </div>
+                                                            <div class="flex-grow-1 ms-3">
+                                                                Requested for 6 new vehicles for medical emergency. .
+                                                            </div>
+                                                        </div>
+                                                        <p class="m-0 small">08:30PM Today</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- Activity List Ends -->
+
+                                </div>
+                                <!-- Scroll ends -->
+
+                                <!-- View all button starts -->
+                                <div class="d-grid m-3">
+                                    <a href="javascript:void(0)" class="btn btn-primary">View all</a>
+                                </div>
+                                <!-- View all button ends -->
+
+                            </div>
+                        </div>
+                        <!-- Notifications dropdown ends -->
+
+                        <!-- Notifications dropdown starts -->
+                        <div class="dropdown">
+                            <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="ri-alarm-warning-line"></i>
+                                <span class="count-label success"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-300">
+                                <h5 class="fw-semibold px-3 py-2 text-primary">Alerts</h5>
+
+                                <!-- Scroll starts -->
+                                <div class="scroll300">
+
+                                    <!-- Alert list starts -->
+                                    <div class="p-3">
+                                        <div class="d-flex py-2">
+                                            <div class="icon-box md bg-primary rounded-circle me-3">
+                                                <span>BS</span>
+                                            </div>
+                                            <div class="m-0">
+                                                <h6 class="mb-1 fw-semibold">Becky Shah</h6>
+                                                <p class="mb-1">
+                                                    Appointed as a new President 2025
+                                                </p>
+                                                <p class="small m-0 opacity-50">Today, 07:30pm</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex py-2">
+                                            <div class="icon-box md bg-primary rounded-circle me-3">
+                                                <span>UF</span>
+                                            </div>
+                                            <div class="m-0">
+                                                <h6 class="mb-1 fw-semibold">Ursula Frazier</h6>
+                                                <p class="mb-1">
+                                                    Congratulate, James for new job.
+                                                </p>
+                                                <p class="small m-0 opacity-50">Today, 08:00pm</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex py-2">
+                                            <div class="icon-box md bg-primary rounded-circle me-3">
+                                                <span>MK</span>
+                                            </div>
+                                            <div class="m-0">
+                                                <h6 class="mb-1 fw-semibold">Myra Kane</h6>
+                                                <p class="mb-1">
+                                                    Lewis added new doctors training schedule.
+                                                </p>
+                                                <p class="small m-0 opacity-50">Today, 09:30pm</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Alert list ends -->
+
+                                </div>
+                                <!-- Scroll ends -->
+
+                                <!-- View all button starts -->
+                                <div class="d-grid m-3">
+                                    <a href="javascript:void(0)" class="btn btn-primary">View all</a>
+                                </div>
+                                <!-- View all button ends -->
+
+                            </div>
+                        </div>
+                        <!-- Notifications dropdown ends -->
+
+                        <!-- Messages dropdown starts -->
+                        <div class="dropdown">
+                            <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="ri-message-3-line"></i>
+                                <span class="count-label"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-300">
+                                <h5 class="fw-semibold px-3 py-2 text-primary">Messages</h5>
+
+                                <!-- Scroll starts -->
+                                <div class="scroll300">
+
+                                    <!-- Messages list starts -->
+                                    <div class="p-3">
+                                        <div class="d-flex py-2">
+                                            <img src="assets/images/doctor3.png" class="img-3x me-3 rounded-5"
+                                                 alt="Dentist Admin Templates">
+                                            <div class="m-0">
+                                                <h6 class="mb-1 fw-semibold">Albert Winters</h6>
+                                                <p class="mb-1">
+                                                    Appointed as a new President 2025
+                                                </p>
+                                                <p class="small m-0 opacity-50">Today, 07:30pm</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex py-2">
+                                            <img src="assets/images/doctor1.png" class="img-3x me-3 rounded-5"
+                                                 alt="Dentist Admin Templates">
+                                            <div class="m-0">
+                                                <h6 class="mb-1 fw-semibold">Van Robinson</h6>
+                                                <p class="mb-1">
+                                                    Congratulate, James for new job.
+                                                </p>
+                                                <p class="small m-0 opacity-50">Today, 08:00pm</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex py-2">
+                                            <img src="assets/images/doctor4.png" class="img-3x me-3 rounded-5"
+                                                 alt="Dentist Admin Templates">
+                                            <div class="m-0">
+                                                <h6 class="mb-1 fw-semibold">Mara Coffey</h6>
+                                                <p class="mb-1">
+                                                    Lewis added new doctors training schedule.
+                                                </p>
+                                                <p class="small m-0 opacity-50">Today, 09:30pm</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Messages list ends -->
+
+                                </div>
+                                <!-- Scroll ends -->
+
+                                <!-- View all button starts -->
+                                <div class="d-grid m-3">
+                                    <a href="javascript:void(0)" class="btn btn-primary">View all</a>
+                                </div>
+                                <!-- View all button ends -->
+
+                            </div>
+                        </div>
                     </div>
                     <!-- Header actions ends -->
 
@@ -134,7 +988,7 @@
                         <a id="userSettings" class="dropdown-toggle d-flex align-items-center" href="#!" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="avatar-box">
-                                <img src="assets/images/doctor.png" class="img-2xx rounded-5 border border-3 border-white"
+                                <img src="assets/images/doctor5.png" class="img-2xx rounded-5 border border-3 border-white"
                                      alt="Dentist Dashboard">
                                 <span class="status busy"></span>
                             </div>
@@ -142,11 +996,16 @@
                         <div class="dropdown-menu dropdown-menu-end dropdown-300 shadow-lg">
                             <div class="d-flex align-items-center justify-content-between p-3">
                                 <div>
-                                    <h6 class="m-0">John Doe</h6>
+                                    <span class="small">Doctor</span>
+                                    <h6 class="m-0">Martin Boyer, MD</h6>
+                                </div>
+                                <div class="d-flex flex-column text-end">
+                                    <h5 class="fw-bold lh-1 m-0">$5900</h5>
+                                    <div class="text-primary small">Weekly Earnings</div>
                                 </div>
                             </div>
                             <div class="mx-3 my-2 d-grid">
-                                <a href="{{ url('/') }}" class="btn btn-primary">Logout</a>
+                                <a href="login.html" class="btn btn-primary">Logout</a>
                             </div>
                         </div>
                     </div>
@@ -169,7 +1028,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item text-primary" aria-current="page">
-                        Personal Information
+                        Add Doctor
                     </li>
                 </ol>
                 <!-- Breadcrumb ends -->
@@ -206,6 +1065,16 @@
                                             <a class="nav-link active" id="tab-oneA" data-bs-toggle="tab" href="#oneA" role="tab"
                                                aria-controls="oneA" aria-selected="true"><i class="ri-briefcase-4-line"></i> Personal
                                                 Details</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="tab-twoA" data-bs-toggle="tab" href="#twoA" role="tab"
+                                               aria-controls="twoA" aria-selected="false"><i class="ri-account-pin-circle-line"></i>
+                                                Profile and Bio</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="tab-threeA" data-bs-toggle="tab" href="#threeA" role="tab"
+                                               aria-controls="threeA" aria-selected="false"><i class="ri-calendar-check-line"></i>
+                                                Availability</a>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <a class="nav-link" id="tab-fourA" data-bs-toggle="tab" href="#fourA" role="tab"
@@ -260,97 +1129,6 @@
                                                                 <option value="6">6</option>
                                                                 <option value="7">7</option>
                                                                 <option value="8">8</option>
-                                                                <option value="9">9</option>
-                                                                <option value="10">10</option>
-                                                                <option value="11">11</option>
-                                                                <option value="12">12</option>
-                                                                <option value="13">13</option>
-                                                                <option value="14">14</option>
-                                                                <option value="15">15</option>
-                                                                <option value="16">16</option>
-                                                                <option value="17">17</option>
-                                                                <option value="18">18</option>
-                                                                <option value="19">19</option>
-                                                                <option value="20">20</option>
-                                                                <option value="21">21</option>
-                                                                <option value="22">22</option>
-                                                                <option value="23">23</option>
-                                                                <option value="24">24</option>
-                                                                <option value="25">25</option>
-                                                                <option value="26">26</option>
-                                                                <option value="27">27</option>
-                                                                <option value="28">28</option>
-                                                                <option value="29">29</option>
-                                                                <option value="30">30</option>
-                                                                <option value="31">31</option>
-                                                                <option value="32">32</option>
-                                                                <option value="33">33</option>
-                                                                <option value="34">34</option>
-                                                                <option value="35">35</option>
-                                                                <option value="36">36</option>
-                                                                <option value="37">37</option>
-                                                                <option value="38">38</option>
-                                                                <option value="39">39</option>
-                                                                <option value="40">40</option>
-                                                                <option value="41">41</option>
-                                                                <option value="42">42</option>
-                                                                <option value="43">43</option>
-                                                                <option value="44">44</option>
-                                                                <option value="45">45</option>
-                                                                <option value="46">46</option>
-                                                                <option value="47">47</option>
-                                                                <option value="48">48</option>
-                                                                <option value="49">49</option>
-                                                                <option value="50">50</option>
-                                                                <option value="51">51</option>
-                                                                <option value="52">52</option>
-                                                                <option value="53">53</option>
-                                                                <option value="54">54</option>
-                                                                <option value="55">55</option>
-                                                                <option value="56">56</option>
-                                                                <option value="57">57</option>
-                                                                <option value="58">58</option>
-                                                                <option value="59">59</option>
-                                                                <option value="60">60</option>
-                                                                <option value="61">61</option>
-                                                                <option value="62">62</option>
-                                                                <option value="63">63</option>
-                                                                <option value="64">64</option>
-                                                                <option value="65">65</option>
-                                                                <option value="66">66</option>
-                                                                <option value="67">67</option>
-                                                                <option value="68">68</option>
-                                                                <option value="69">69</option>
-                                                                <option value="70">70</option>
-                                                                <option value="71">71</option>
-                                                                <option value="72">72</option>
-                                                                <option value="73">73</option>
-                                                                <option value="74">74</option>
-                                                                <option value="75">75</option>
-                                                                <option value="76">76</option>
-                                                                <option value="77">77</option>
-                                                                <option value="78">78</option>
-                                                                <option value="79">79</option>
-                                                                <option value="80">80</option>
-                                                                <option value="81">81</option>
-                                                                <option value="82">82</option>
-                                                                <option value="83">83</option>
-                                                                <option value="84">84</option>
-                                                                <option value="85">85</option>
-                                                                <option value="86">86</option>
-                                                                <option value="87">87</option>
-                                                                <option value="88">88</option>
-                                                                <option value="89">89</option>
-                                                                <option value="90">90</option>
-                                                                <option value="91">91</option>
-                                                                <option value="92">92</option>
-                                                                <option value="93">93</option>
-                                                                <option value="94">94</option>
-                                                                <option value="95">95</option>
-                                                                <option value="96">96</option>
-                                                                <option value="97">97</option>
-                                                                <option value="98">98</option>
-                                                                <option value="99">99</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -370,6 +1148,17 @@
                                                                        id="selectGender2" value="female">
                                                                 <label class="form-check-label" for="selectGender2">Female</label>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="a4">Create ID <span class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                  <span class="input-group-text">
+                                    <i class="ri-secure-payment-line"></i>
+                                  </span>
+                                                            <input type="text" class="form-control" id="a4" placeholder="Create Unique ID">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -398,22 +1187,79 @@
                                                 </div>
                                                 <div class="col-xxl-3 col-lg-4 col-sm-6">
                                                     <div class="mb-3">
-                                                        <label class="form-label" for="a7">Injured Knee <span class="text-danger">*</span></label>
+                                                        <label class="form-label" for="a7">Marital Status</label>
                                                         <div class="input-group">
                                   <span class="input-group-text">
-                                    <i class="ri-vip-crown-2-line"></i>
+                                      <img src="{{ asset('assets/images/icons/knee2.png') }}"
+                                           alt="Injured Knee"
+                                           width="14.4"
+                                           height="14.4">
+
                                   </span>
                                                             <select class="form-select" id="a7">
                                                                 <option value="0">Select</option>
-                                                                <option value="1">Left Knee</option>
-                                                                <option value="2">Right Knee</option>
+                                                                <option value="1">Married</option>
+                                                                <option value="2">Un Married</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-xxl-3 col-lg-4 col-sm-6">
                                                     <div class="mb-3">
-                                                        <label class="form-label" for="a11">Address <span class="text-danger">*</span></label>
+                                                        <label class="form-label" for="a8">Qualification</label>
+                                                        <div class="input-group">
+                                  <span class="input-group-text">
+                                    <i class="ri-copper-diamond-line"></i>
+                                  </span>
+                                                            <select class="form-select" id="a8">
+                                                                <option value="0">Select</option>
+                                                                <option value="1">MBBS, MD</option>
+                                                                <option value="2">MBBS, MS</option>
+                                                                <option value="3">MBBS</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="a9">Designation</label>
+                                                        <div class="input-group">
+                                  <span class="input-group-text">
+                                    <i class="ri-nft-line"></i>
+                                  </span>
+                                                            <select class="form-select" id="a9">
+                                                                <option value="0">Select</option>
+                                                                <option value="1">Doctor</option>
+                                                                <option value="2">Head of the Dept</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="a10">Blood Group<span
+                                                                class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                  <span class="input-group-text">
+                                    <i class="ri-drop-line"></i>
+                                  </span>
+                                                            <select class="form-select" id="a10">
+                                                                <option value="0">Select</option>
+                                                                <option value="1">A+</option>
+                                                                <option value="2">A-</option>
+                                                                <option value="3">B+</option>
+                                                                <option value="4">B-</option>
+                                                                <option value="5">O+</option>
+                                                                <option value="6">O-</option>
+                                                                <option value="7">AB+</option>
+                                                                <option value="8">AB-</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="a11">Address</label>
                                                         <div class="input-group">
                                   <span class="input-group-text">
                                     <i class="ri-projector-line"></i>
@@ -424,18 +1270,43 @@
                                                 </div>
                                                 <div class="col-xxl-3 col-lg-4 col-sm-6">
                                                     <div class="mb-3">
-                                                        <label class="form-label" for="a12">Country <span class="text-danger">*</span></label>
+                                                        <label class="form-label" for="a12">Country</label>
                                                         <div class="input-group">
                                   <span class="input-group-text">
                                     <i class="ri-flag-line"></i>
                                   </span>
-                                                            <input type="text" class="form-control" id="a14" placeholder="Enter Country">
+                                                            <select class="form-select" id="a12">
+                                                                <option value="0">Select</option>
+                                                                <option value="1">USA</option>
+                                                                <option value="2">Canada</option>
+                                                                <option value="3">Brazil</option>
+                                                                <option value="4">India</option>
+                                                                <option value="5">China</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-xxl-3 col-lg-4 col-sm-6">
                                                     <div class="mb-3">
-                                                        <label class="form-label" for="a14">City <span class="text-danger">*</span></label>
+                                                        <label class="form-label" for="a13">State</label>
+                                                        <div class="input-group">
+                                  <span class="input-group-text">
+                                    <i class="ri-instance-line"></i>
+                                  </span>
+                                                            <select class="form-select" id="a13">
+                                                                <option value="0">Select</option>
+                                                                <option value="1">Alabama</option>
+                                                                <option value="2">Alaska</option>
+                                                                <option value="3">Arizona</option>
+                                                                <option value="4">California</option>
+                                                                <option value="5">Florida</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="a14">City</label>
                                                         <div class="input-group">
                                   <span class="input-group-text">
                                     <i class="ri-scan-line"></i>
@@ -446,7 +1317,7 @@
                                                 </div>
                                                 <div class="col-xxl-3 col-lg-4 col-sm-6">
                                                     <div class="mb-3">
-                                                        <label class="form-label" for="a15">Postal Code <span class="text-danger">*</span></label>
+                                                        <label class="form-label" for="a15">Postal Code</label>
                                                         <div class="input-group">
                                   <span class="input-group-text">
                                     <i class="ri-qr-scan-line"></i>
@@ -685,16 +1556,16 @@
                                 </div>
                                 <!-- Custom tabs ends -->
 
-                                <!-- Card actions starts -->
+                                <!-- Card acrions starts -->
                                 <div class="d-flex gap-2 justify-content-end mt-4">
-                                    <a href="#" class="btn btn-outline-secondary">
+                                    <a href="doctors-list.html" class="btn btn-outline-secondary">
                                         Cancel
                                     </a>
-                                    <a href="#" class="btn btn-primary">
-                                        Save
+                                    <a href="doctors-list.html" class="btn btn-primary">
+                                        Create Doctor Profile
                                     </a>
                                 </div>
-                                <!-- Card actions ends -->
+                                <!-- Card acrions ends -->
 
                             </div>
                         </div>
@@ -704,6 +1575,12 @@
 
             </div>
             <!-- App body ends -->
+
+            <!-- App footer starts -->
+            <div class="app-footer">
+                <span>© Dental Care Admin 2025</span>
+            </div>
+            <!-- App footer ends -->
 
         </div>
         <!-- App container ends -->
@@ -718,31 +1595,31 @@
         ************ JavaScript Files *************
     ************* -->
 <!-- Required jQuery first, then Bootstrap Bundle JS -->
-<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/js/moment.min.js') }}"></script>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/moment.min.js"></script>
 
 <!-- *************
         ************ Vendor Js Files *************
     ************* -->
 
 <!-- Overlay Scroll JS -->
-<script src="{{ asset('assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/overlay-scroll/custom-scrollbar.js') }}"></script>
+{{--<script src="assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>--}}
+{{--<script src="assets/vendor/overlay-scroll/custom-scrollbar.js"></script>--}}
 
 <!-- Date Range JS -->
-<script src="{{ asset('assets/vendor/daterange/daterange.js') }}"></script>
-<script src="{{ asset('assets/vendor/daterange/custom-daterange.js') }}"></script>
+{{--<script src="assets/vendor/daterange/daterange.js"></script>--}}
+{{--<script src="assets/vendor/daterange/custom-daterange.js"></script>--}}
 
 <!-- Dropzone JS -->
-<script src="{{ asset('assets/vendor/dropzone/dropzone.min.js') }}"></script>
+{{--<script src="assets/vendor/dropzone/dropzone.min.js"></script>--}}
 
 <!-- Quill Editor JS -->
-<script src="{{ asset('assets/vendor/quill/quill.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/quill/custom.js') }}"></script>
+{{--<script src="assets/vendor/quill/quill.min.js"></script>--}}
+{{--<script src="assets/vendor/quill/custom.js"></script>--}}
 
 <!-- Custom JS files -->
-<script src="{{ asset('assets/js/custom.js') }}"></script>
+{{--<script src="assets/js/custom.js"></script>--}}
 </body>
 
 </html>
