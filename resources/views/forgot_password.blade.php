@@ -7,61 +7,107 @@
     <title>KneeCovery - Forgot Password</title>
 
     <!-- Meta -->
-    <meta name="description" content="Marketplace for Bootstrap Admin Dashboards">
-    <meta property="og:title" content="Admin Templates - Dashboard Templates">
-    <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
-    <meta property="og:type" content="Website">
+    <meta name="description" content="Forgot Password for KneeCovery - Smart ACL Rehabilitation">
     <link rel="shortcut icon" href="{{ asset ('assets/images/favicon.svg') }}">
 
-    <!-- *************
-			************ CSS Files *************
-		************* -->
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ asset ('assets/fonts/remix/remixicon.css') }}">
     <link rel="stylesheet" href="{{ asset ('assets/css/main.css') }}">
-
 </head>
 
-<body class="login-bg">
+<body class="body-auth">
 
-<!-- Container starts -->
-<div class="container">
+<div class="auth-wrapper">
 
-    <!-- Auth wrapper starts -->
-    <div class="auth-wrapper">
+    <!-- Alleen het logo, geen grote tekst -->
+    <div class="auth-branding">
+        <img src="{{ asset('assets/images/logo.png') }}" alt="KneeCovery Logo">
+    </div>
 
-        <!-- Form starts -->
-        <form action="index.html">
+    <!-- Forgot Password Form -->
+    <form action="{{ url('/reset-success') }}" method="POST">
+        @csrf
 
-            <div class="auth-box">
-                <a href="index.html" class="auth-logo mb-4">
-                    <img src="assets/images/logo.svg" alt="Bootstrap Gallery">
-                </a>
+        <div class="auth-box gradient-box">
 
-                <h6 class="fw-light mb-4">In order to access your dashboard, please enter the email ID you provided during
-                    the
-                    registration process.</h6>
+            <h4>Reset Password</h4>
 
-                <div class="mb-3">
-                    <label class="form-label" for="email">Your email <span class="text-danger">*</span></label>
-                    <input type="text" id="email" class="form-control" placeholder="Enter your email">
-                </div>
+            <p class="fw-light mb-4">
+                Enter your email and choose a new password.
+            </p>
 
-                <div class="mb-3 d-grid">
-                    <button type="submit" class="btn btn-primary">
-                        Submit
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label" for="email">Your email <span class="text-danger">*</span></label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+            <!-- New Password -->
+            <div class="mb-3">
+                <label class="form-label" for="new-password">New password <span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <input
+                        type="password"
+                        id="new-password"
+                        name="password"
+                        class="form-control"
+                        placeholder="Enter new password"
+                        minlength="8"
+                        required
+                    >
+                    <button type="button" class="btn btn-outline-secondary toggle-password">
+                        <i class="ri-eye-line"></i>
                     </button>
                 </div>
             </div>
 
-        </form>
-        <!-- Form ends -->
+            <!-- Confirm Password -->
+            <div class="mb-3">
+                <label class="form-label" for="confirm-password">Confirm password <span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <input
+                        type="password"
+                        id="confirm-password"
+                        name="password_confirmation"
+                        class="form-control"
+                        placeholder="Re-enter your new password"
+                        minlength="8"
+                        required
+                    >
+                    <button type="button" class="btn btn-outline-secondary toggle-password">
+                        <i class="ri-eye-line"></i>
+                    </button>
+                </div>
+            </div>
 
-    </div>
-    <!-- Auth wrapper ends -->
+            <!-- Submit -->
+            <div class="mb-3 d-grid">
+                <button type="submit" class="btn btn-light">
+                    Reset Password
+                </button>
+            </div>
+
+            <!-- Submit and Return to login, cancel password change -->
+            <div class="mb-3 d-grid gap-2">
+                <button type="submit" class="btn btn-light">Reset Password</button>
+                <a href="{{ url('/') }}" class="btn btn-secondary">Not registered? Signup</a>
+            </div>
+
+        </div>
+
+    </form>
 
 </div>
-<!-- Container ends -->
+
+<!-- Toggle JS -->
+<script src="{{ asset('assets/js/authentification.js') }}"></script>
 
 </body>
-
 </html>
