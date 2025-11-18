@@ -13,21 +13,19 @@
     <meta property="og:type" content="Website">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}">
 
-    @vite([
-     'resources/css/main.css',
-     'resources/css/daterange.css',
-     'resources/css/overlayScrollbars.css',
-     'resources/css/remixicon.css',
-     'resources/js/app.js',
-     'resources/js/vendor.js'
- ])
+    <!-- *************
+		************ CSS Files *************
+	  ************* -->
+    <link rel="stylesheet" href="{{  asset ('assets/fonts/remix/remixicon.css') }}">
+    <link rel="stylesheet" href="{{  asset ('assets/css/main.css') }}">
 
-{{--    <!-- Vendor CSS Files -->--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/overlay-scroll/OverlayScrollbars.min.css') }}">--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.css') }}">--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/dataTables.bs5.css') }}">--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/dataTables.bs5-custom.css') }}">--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/buttons/dataTables.bs5-custom.css') }}">--}}
+    <!-- Vendor CSS Files -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/overlay-scroll/OverlayScrollbars.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/daterange/daterange.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/dataTables.bs5.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/dataTables.bs5-custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/buttons/dataTables.bs5-custom.css') }}">
 </head>
 <body>
 
@@ -38,7 +36,7 @@
     <div class="main-container">
 
         <!-- Sidebar Component -->
-        <x-sidebar/>
+        <x-sidebar-patient/>
 
         <!-- App container -->
         <div class="app-container">
@@ -161,29 +159,34 @@
 </div>
 <!-- Page wrapper ends -->
 
-{{--<!-- Vendor Js Files -->--}}
-{{--<script src="{{ asset('assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js') }}"></script>--}}
-{{--<script src="{{ asset('assets/vendor/overlay-scroll/custom-scrollbar.js') }}"></script>--}}
+<!-- JavaScript Files -->
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/moment.min.js') }}"></script>
 
-{{--<script src="{{ asset('assets/vendor/daterange/daterange.js') }}"></script>--}}
-{{--<script src="{{ asset('assets/vendor/daterange/custom-daterange.js') }}"></script>--}}
+<!-- Vendor Js Files -->
+<script src="{{ asset('assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/overlay-scroll/custom-scrollbar.js') }}"></script>
 
-{{--<script src="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>--}}
-{{--<script src="{{ asset('assets/vendor/jquery-ui/custom.js') }}"></script>--}}
+<script src="{{ asset('assets/vendor/daterange/daterange.js') }}"></script>
+<script src="{{ asset('assets/vendor/daterange/custom-daterange.js') }}"></script>
 
-{{--<script src="{{ asset('assets/vendor/apex/apexcharts.min.js') }}"></script>--}}
-{{--<script src="{{ asset('assets/vendor/apex/custom/home/patients.js') }}"></script>--}}
-{{--<script src="{{ asset('assets/vendor/apex/custom/home/department-income.js') }}"></script>--}}
-{{--<script src="{{ asset('assets/vendor/apex/custom/home/income.js') }}"></script>--}}
-{{--<script src="{{ asset('assets/vendor/apex/custom/home/appointments-overview.js') }}"></script>--}}
-{{--<script src="{{ asset('assets/vendor/apex/custom/home/sparklines.js') }}"></script>--}}
+<script src="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/jquery-ui/custom.js') }}"></script>
 
-{{--<script src="{{ asset('assets/vendor/datatables/dataTables.min.js') }}"></script>--}}
-{{--<script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap.min.js') }}"></script>--}}
-{{--<script src="{{ asset('assets/vendor/datatables/custom/custom-datatables.js') }}"></script>--}}
+<script src="{{ asset('assets/vendor/apex/apexcharts.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/apex/custom/home/patients.js') }}"></script>
+<script src="{{ asset('assets/vendor/apex/custom/home/department-income.js') }}"></script>
+<script src="{{ asset('assets/vendor/apex/custom/home/income.js') }}"></script>
+<script src="{{ asset('assets/vendor/apex/custom/home/appointments-overview.js') }}"></script>
+<script src="{{ asset('assets/vendor/apex/custom/home/sparklines.js') }}"></script>
 
-{{--<!-- Custom JS files -->--}}
-{{--<script src="{{ asset('assets/js/custom.js') }}"></script>--}}
+<script src="{{ asset('assets/vendor/datatables/dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables/custom/custom-datatables.js') }}"></script>
+
+<!-- Custom JS files -->
+<script src="{{ asset('assets/js/custom.js') }}"></script>
 
 </body>
 </html>

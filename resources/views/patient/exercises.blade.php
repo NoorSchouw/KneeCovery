@@ -11,16 +11,23 @@
     <meta property="og:title" content="KneeCovery">
     <meta property="og:description" content="All exercises">
     <meta property="og:type" content="Website">
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}">
+    <link rel="shortcut icon" href="{{  asset ('assets/images/favicon.svg') }}">
 
-    @vite([
-    'resources/css/app.css',
-    'resources/css/main.css',
-    'resources/css/daterange.css',
-    'resources/css/overlayScrollbars.css',
-    'resources/css/remixicon.css',
-    'resources/js/app.js',
-])
+    <!-- *************
+		************ CSS Files *************
+	  ************* -->
+    <link rel="stylesheet" href="{{ asset ('assets/fonts/remix/remixicon.css') }}">
+    <link rel="stylesheet" href="{{ asset ('assets/css/main.css') }}">
+
+    <!-- *************
+		************ Vendor Css Files *************
+	  ************ -->
+
+    <!-- Scrollbar CSS -->
+    <link rel="stylesheet" href="{{ asset ('assets/vendor/overlay-scroll/OverlayScrollbars.min.css') }}">
+
+    <!-- Date Range CSS -->
+    <link rel="stylesheet" href="{{ asset ('assets/vendor/daterange/daterange.css') }}">
 
 </head>
 
@@ -31,7 +38,7 @@
     <div class="main-container">
 
         <!-- Sidebar Component -->
-        <x-sidebar/>
+        <x-sidebar-patient/>
 
         <!-- App container -->
         <div class="app-container">
@@ -39,22 +46,26 @@
             <!-- Header Component -->
             <x-header/>
 
-            <!-- App hero header starts -->
-            <div class="app-hero-header d-flex align-items-center">
+            <!-- Hero Header -->
+            <div class="app-hero-header d-flex justify-content-between align-items-center">
 
                 <!-- Breadcrumb -->
-                <ol class="breadcrumb">
+                <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item">
-                        <a href="/resources/views/homepage.blade.php">
-                            <i class="ri-home-3-line"></i>
-                        </a>
+                        <a href="{{ url('/homepage') }}"><i class="ri-home-3-line"></i></a>
                     </li>
-                    <li class="breadcrumb-item text-primary" aria-current="page">
-                        All exercises
-                    </li>
+                    <li class="breadcrumb-item text-primary">Patients</li>
                 </ol>
+
+                <!-- Search container starts -->
+                <div class="search-container d-xl-block d-none">
+                    <input type="text" class="form-control" id="searchId" placeholder="Search"
+                           style="border: 2px solid lightgray; border-radius: 5px;">
+                    <i class="ri-search-line"></i>
+                </div>
+                <!-- Search container ends -->
+
             </div>
-            <!-- App Hero header ends -->
 
             <!-- App body starts -->
             <div class="app-body">
@@ -99,5 +110,30 @@
         <!-- App container ends -->
     </div>
 </div>
+<!-- Page wrapper ends -->
+
+<!-- *************
+        ************ JavaScript Files *************
+    ************* -->
+<!-- Required jQuery first, then Bootstrap Bundle JS -->
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/moment.min.js') }}"></script>
+
+<!-- *************
+        ************ Vendor Js Files *************
+    ************* -->
+
+<!-- Overlay Scroll JS -->
+<script src="{{ asset('assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/overlay-scroll/custom-scrollbar.js') }}"></script>
+
+<!-- Date Range JS -->
+<script src="{{ asset('assets/vendor/daterange/daterange.js') }}"></script>
+<script src="{{ asset('assets/vendor/daterange/custom-daterange.js') }}"></script>
+
+<!-- Custom JS files -->
+<script src="{{ asset('assets/js/custom.js') }}"></script>
 </body>
+
 </html>
