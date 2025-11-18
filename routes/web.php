@@ -22,7 +22,7 @@ Route::get('/homepage', function () {
 Route::get('/calendar', function () {
     return view('patient/calendar');
 });
-Route::get('/exercises', function () {
+Route::get('/all-exercises', function () {
     return view('/patient/exercises');
 });
 Route::get('/patient-report', function () {
