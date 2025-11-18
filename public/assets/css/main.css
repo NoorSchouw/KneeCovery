@@ -3919,6 +3919,7 @@ textarea.form-control-lg {
     --bs-btn-color: #0f1115;
     --bs-btn-bg: #FD7596;
     --bs-btn-border-color: #FD7596;
+    --bs-btn-border-color: #FD7596;
     --bs-btn-hover-color: #0f1115;
     --bs-btn-hover-bg: rgb(253.3, 137.7, 165.75);
     --bs-btn-hover-border-color: rgb(253.2, 130.8, 160.5);
@@ -16301,7 +16302,7 @@ input[type=file]::file-selector-button {
 }
 
 .datepicker-bg {
-    background: #FAAA89 !important;
+    background: linear-gradient(135deg, #fd7596 0%, #faaa89 100%);
     background-size: cover;
     background-position: center bottom;
     -webkit-border-radius: 6px;
@@ -17573,7 +17574,7 @@ body.body-auth{
 
 /* --- Body en pagina achtergrond --- */
 body {
-    background: #ecf0ff;
+    background: white;
     color: #ecf0ff;
     margin: 0;
     padding: 0;
@@ -17739,4 +17740,9 @@ body {
     .filming-center {
         padding: 15px;
     }
+}
+
+/*header text color */
+.header-text {
+    color: #FD7596;
 }

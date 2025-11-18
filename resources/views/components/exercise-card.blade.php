@@ -17,15 +17,16 @@
                     <div>
                         <h5 class="header-text">{{ $title }}</h5>
 
-                        <p><strong>How to perform:</strong><br>
+                        <p>
+                            <strong>How to perform:</strong><br>
                             @foreach ($steps as $step)
-                                • {{ $step }}<br>
+                                {{ $loop->iteration }}. {{ $step }}<br>
                             @endforeach
                         </p>
                     </div>
 
                     <div class="text-end">
-                        <a href="#" class="btn btn-danger">Start Exercise</a>
+                        <a href="/resources/views/patient/filming.blade.php" class="btn btn-primary">Start Exercise</a>
                     </div>
 
                 </div>
