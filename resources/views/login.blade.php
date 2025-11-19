@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Maud's code, deze code heeft nu de juiste layout en style -->
+<!-- Maud's code, deze code heeft nu de juiste layour en style -->
 <html lang="en">
 
 <head>
@@ -69,9 +69,7 @@
 </div> <!-- Auth wrapper ends -->
 
 <!-- Custom JS files -->
-{{--<script src="{{ asset('assets/js/authentification.js') }}"></script>--}}
-<script src="{{ asset('resources/js/vendor/authentification.js') }}"></script>
-
+<script src="{{ asset('assets/js/authentification.js') }}"></script>
 
 </body>
 

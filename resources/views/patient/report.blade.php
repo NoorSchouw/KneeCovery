@@ -13,31 +13,21 @@
     <meta property="og:type" content="Website">
     <link rel="shortcut icon" href="assets/images/favicon.svg">
 
-    @vite([
-   'resources/css/main.css',
-   'resources/css/daterange.css',
-   'resources/css/overlayScrollbars.css',
-   'resources/css/remixicon.css',
-   'resources/js/app.js',
-   'resources/js/vendor.js',
+    <!-- *************
+		************ CSS Files *************
+	  ************* -->
+    <link rel="stylesheet" href="assets/fonts/remix/remixicon.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 
+    <!-- *************
+		************ Vendor Css Files *************
+	  ************ -->
 
-])
-{{--    <!-- *************--}}
-{{--		************ CSS Files *************--}}
-{{--	  ************* -->--}}
-{{--    <link rel="stylesheet" href="assets/fonts/remix/remixicon.css">--}}
-{{--    <link rel="stylesheet" href="assets/css/main.css">--}}
+    <!-- Scrollbar CSS -->
+    <link rel="stylesheet" href="assets/vendor/overlay-scroll/OverlayScrollbars.min.css">
 
-{{--    <!-- *************--}}
-{{--		************ Vendor Css Files *************--}}
-{{--	  ************ -->--}}
-
-{{--    <!-- Scrollbar CSS -->--}}
-{{--    <link rel="stylesheet" href="assets/vendor/overlay-scroll/OverlayScrollbars.min.css">--}}
-
-{{--    <!-- Date Range CSS -->--}}
-{{--    <link rel="stylesheet" href="assets/vendor/daterange/daterange.css">--}}
+    <!-- Date Range CSS -->
+    <link rel="stylesheet" href="assets/vendor/daterange/daterange.css">
 
 </head>
 
@@ -1217,37 +1207,37 @@
 <!-- *************
         ************ JavaScript Files *************
     ************* -->
-{{--<!-- Required jQuery first, then Bootstrap Bundle JS -->--}}
-{{--<script src="assets/js/jquery.min.js"></script>--}}
-{{--<script src="assets/js/bootstrap.bundle.min.js"></script>--}}
-{{--<script src="assets/js/moment.min.js"></script>--}}
+<!-- Required jQuery first, then Bootstrap Bundle JS -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/moment.min.js"></script>
 
 <!-- *************
         ************ Vendor Js Files *************
     ************* -->
 
 <!-- Overlay Scroll JS -->
-{{--<script src="assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>--}}
-{{--<script src="assets/vendor/overlay-scroll/custom-scrollbar.js"></script>--}}
+<script src="assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
+<script src="assets/vendor/overlay-scroll/custom-scrollbar.js"></script>
 
 <!-- Date Range JS -->
-{{--<script src="assets/vendor/daterange/daterange.js"></script>--}}
-{{--<script src="assets/vendor/daterange/custom-daterange.js"></script>--}}
+<script src="assets/vendor/daterange/daterange.js"></script>
+<script src="assets/vendor/daterange/custom-daterange.js"></script>
 
-{{--<!-- Apex js -->--}}
-{{--<script src="assets/vendor/apex/apexcharts.min.js"></script>--}}
-{{--<script src="assets/vendor/apex/custom/graphs/area.js"></script>--}}
-{{--<script src="assets/vendor/apex/custom/graphs/line.js"></script>--}}
-{{--<script src="assets/vendor/apex/custom/graphs/bar.js"></script>--}}
-{{--<script src="assets/vendor/apex/custom/graphs/column-area.js"></script>--}}
-{{--<script src="assets/vendor/apex/custom/graphs/candlestick.js"></script>--}}
-{{--<script src="assets/vendor/apex/custom/graphs/heatmap.js"></script>--}}
-{{--<script src="assets/vendor/apex/custom/graphs/donut.js"></script>--}}
-{{--<script src="assets/vendor/apex/custom/graphs/pie.js"></script>--}}
-{{--<script src="assets/vendor/apex/custom/graphs/gauge.js"></script>--}}
-{{--<script src="assets/vendor/apex/custom/graphs/radial-bar.js"></script>--}}
-{{--<script src="assets/vendor/apex/custom/graphs/funnel.js"></script>--}}
-{{--<script src="assets/vendor/apex/custom/graphs/pyramid.js"></script>--}}
+<!-- Apex js -->
+<script src="assets/vendor/apex/apexcharts.min.js"></script>
+<script src="assets/vendor/apex/custom/graphs/area.js"></script>
+<script src="assets/vendor/apex/custom/graphs/line.js"></script>
+<script src="assets/vendor/apex/custom/graphs/bar.js"></script>
+<script src="assets/vendor/apex/custom/graphs/column-area.js"></script>
+<script src="assets/vendor/apex/custom/graphs/candlestick.js"></script>
+<script src="assets/vendor/apex/custom/graphs/heatmap.js"></script>
+<script src="assets/vendor/apex/custom/graphs/donut.js"></script>
+<script src="assets/vendor/apex/custom/graphs/pie.js"></script>
+<script src="assets/vendor/apex/custom/graphs/gauge.js"></script>
+<script src="assets/vendor/apex/custom/graphs/radial-bar.js"></script>
+<script src="assets/vendor/apex/custom/graphs/funnel.js"></script>
+<script src="assets/vendor/apex/custom/graphs/pyramid.js"></script>
 
 <!-- Custom JS files -->
 <script src="assets/js/custom.js"></script>

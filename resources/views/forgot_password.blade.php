@@ -25,8 +25,7 @@
     </div>
 
     <!-- Forgot Password Form -->
-    <form action="{{ url('/reset-success') }}" method="POST">
-        @csrf
+    <form action="{{ url('/homepage') }}" method="GET">
 
         <div class="auth-box gradient-box">
 
@@ -81,23 +80,16 @@
                         minlength="8"
                         required
                     >
-                    <button type="button" class="btn btn-outline-secondary toggle-password">
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                         <i class="ri-eye-line"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Submit -->
-            <div class="mb-3 d-grid">
-                <button type="submit" class="btn btn-light">
-                    Reset Password
-                </button>
-            </div>
-
-            <!-- Submit and Return to login, cancel password change -->
+            <!-- Submit and go to homepage, cancel password change -->
             <div class="mb-3 d-grid gap-2">
                 <button type="submit" class="btn btn-light">Reset Password</button>
-                <a href="{{ url('/') }}" class="btn btn-secondary">Not registered? Signup</a>
+                <a href="{{ url('/') }}" class="btn btn-secondary">Cancel reset password</a>
             </div>
 
         </div>
