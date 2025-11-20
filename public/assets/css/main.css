@@ -17746,3 +17746,26 @@ body {
 .header-text {
     color: #FD7596;
 }
+
+/*Report CSS kleuring, patient-name, label-date en label-exercise etc.# is voor class soort*/
+.label-date,
+.label-exercise {
+    color: #FD7596 !important;
+    font-size: 1.3rem;
+}
+
+.patient-name {
+    color: #FD7596 !important;
+    font-size: 2rem;
+}
+
+/* Grootte tekst van exercise select en report date*/
+#report-date,           /*# is voor id soort*/
+#exercise-select {
+    font-size: 1rem;
+}
+
+/*Titel van Gauge grafiek centreren*/
+.card-title{
+    text-align: center;
+}
