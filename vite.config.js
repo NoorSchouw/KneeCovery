@@ -17,14 +17,7 @@ export default defineConfig({
             input: [
                 // CSS
                 'resources/css/app.css',
-                'resources/css/main.css',
-                'resources/css/daterange.css',
-                'resources/css/overlayScrollbars.css',
-                'resources/css/remixicon.css',
-
-                // JS
                 'resources/js/app.js',
-                'resources/js/vendor.js'
             ],
             refresh: true,
         }),

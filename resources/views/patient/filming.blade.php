@@ -35,6 +35,250 @@
 
 </head>
 
+<script>
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        // DOM-elementen ophalen
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('output');
+        const ctx = canvas.getContext('2d');
+        const recordCanvas = document.getElementById('recordCanvas');
+        const rctx = recordCanvas.getContext('2d');
+
+        const kneeSelect = document.getElementById('kneeSelect');
+        const recordBtn = document.getElementById('recordBtn');
+
+        const camBadge = document.getElementById('camStatus');
+        const trackBadge = document.getElementById('trackStatus');
+        const refBadge = document.getElementById('refStatus');
+        const msgEl = document.getElementById('msg');
+        const angleDisplay = document.getElementById('angle-display');
+
+        const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+        const csrfToken = csrfMeta ? csrfMeta.getAttribute('content') : '';
+
+        // Variabelen
+        let detector;
+        let kneeSide = 'left';
+        let referenceData = null;
+        let emaAngle = null;
+        let angleHistory = [];
+
+        let mediaRecorder = null;
+        let recordedChunks = [];
+        let isRecording = false;
+
+        // Event listeners
+        kneeSelect.addEventListener('change', () => kneeSide = kneeSelect.value);
+        recordBtn.addEventListener('click', () => {
+            if (!isRecording) startRecording();
+            else stopRecording();
+        });
+
+        // Helper functies
+        function setBadge(el, on, labelOn, labelOff) {
+            el.classList.remove('on','off','warn');
+            el.classList.add(on ? 'on' : 'off');
+            el.textContent = on ? labelOn : labelOff;
+        }
+
+        function setWarn(el, text) {
+            el.classList.remove('on','off','warn');
+            el.classList.add('warn');
+            el.textContent = text;
+        }
+
+        function logMsg(t) { msgEl.textContent = t; }
+
+        function ema(prev, value, alpha = 0.25) {
+            return prev == null ? value : prev*(1-alpha) + value*alpha;
+        }
+
+        function calculateAngle(a,b,c) {
+            const ab = {x:a.x-b.x, y:a.y-b.y};
+            const cb = {x:c.x-b.x, y:c.y-b.y};
+            const dot = ab.x*cb.x + ab.y*cb.y;
+            const abLen = Math.hypot(ab.x, ab.y);
+            const cbLen = Math.hypot(cb.x, cb.y);
+            const cos = Math.min(1, Math.max(-1, dot/(abLen*cbLen)));
+            return Math.acos(cos)*(180/Math.PI);
+        }
+
+        function drawFanWithPoints(hip, knee, ankle, colour, angle) {
+            ctx.beginPath();
+            ctx.moveTo(hip.x, hip.y);
+            ctx.lineTo(knee.x, knee.y);
+            ctx.lineTo(ankle.x, ankle.y);
+            ctx.closePath();
+            ctx.fillStyle = colour;
+            ctx.globalAlpha = 0.35;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+
+            ctx.strokeStyle = colour;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(knee.x, knee.y);
+            ctx.lineTo(hip.x, hip.y);
+            ctx.moveTo(knee.x, knee.y);
+            ctx.lineTo(ankle.x, ankle.y);
+            ctx.stroke();
+
+            [hip, knee, ankle].forEach(pt => {
+                ctx.beginPath();
+                ctx.arc(pt.x, pt.y, 6, 0, 2*Math.PI);
+                ctx.fillStyle = colour;
+                ctx.fill();
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            });
+
+            ctx.font = "16px Arial";
+            ctx.fillStyle = colour;
+            ctx.fillText(`${angle.toFixed(1)}°`, knee.x + 10, knee.y - 10);
+        }
+
+        function getFanColour(liveAngle) {
+            if(!referenceData) return 'limegreen';
+            const {peakAngle, direction} = referenceData;
+            if(direction === 'extension' && liveAngle > peakAngle) return 'red';
+            if(direction === 'flexion' && liveAngle < peakAngle) return 'red';
+            return 'limegreen';
+        }
+
+        // Camera setup
+        async function setupCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({video:{width:640,height:480},audio:false});
+                video.srcObject = stream;
+                return new Promise(resolve => video.onloadedmetadata = () => {
+                    canvas.width = 640; canvas.height = 480;
+                    recordCanvas.width = 640; recordCanvas.height = 480;
+                    video.play();
+                    setBadge(camBadge, true, 'Camera: on', 'Camera: off');
+                    resolve();
+                });
+            } catch (e) {
+                logMsg('❌ Camera access denied');
+                throw e;
+            }
+        }
+
+        // Pose detector
+        async function initDetector() {
+            detector = await poseDetection.createDetector(poseDetection.SupportedModels.BlazePose, {
+                runtime:'mediapipe',
+                modelType:'full',
+                solutionPath:'https://cdn.jsdelivr.net/npm/@mediapipe/pose'
+            });
+            setBadge(trackBadge, true, 'Tracking: on', 'Tracking: off');
+        }
+
+        // Reference data
+        async function loadReference() {
+            setWarn(refBadge,'Reference: loading');
+            const refUrl = @json($referenceJson ?? '');
+            if(!refUrl){ setWarn(refBadge,'Reference: none'); return; }
+            try {
+                const res = await fetch(refUrl);
+                referenceData = await res.json();
+                setBadge(refBadge,true,'Reference: loaded','Reference: none');
+            } catch(e) {
+                console.error(e);
+                setWarn(refBadge,'Reference: failed');
+            }
+        }
+
+        // Recording
+        function startRecording() {
+            recordedChunks = [];
+            const stream = recordCanvas.captureStream(30);
+            const options = { mimeType: 'video/webm;codecs=vp9' };
+            try { mediaRecorder = new MediaRecorder(stream, options); }
+            catch { mediaRecorder = new MediaRecorder(stream); }
+
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data && event.data.size > 0) recordedChunks.push(event.data);
+            };
+
+            mediaRecorder.onstop = () => {
+                if(recordedChunks.length === 0) return;
+                const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                const url = URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'recording.webm';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(()=> {
+                    URL.revokeObjectURL(url);
+                    a.remove();
+                }, 1000);
+            };
+
+            mediaRecorder.start();
+            isRecording = true;
+            recordBtn.classList.add('recording');
+            recordBtn.textContent = 'Stop recording';
+        }
+
+        function stopRecording() {
+            if(mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+            isRecording = false;
+            recordBtn.classList.remove('recording');
+            recordBtn.textContent = 'Start recording';
+        }
+
+        // Render loop
+        async function render() {
+            const poses = await detector.estimatePoses(video);
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+
+            if(poses.length > 0) {
+                const kps = poses[0].keypoints;
+                const hip = kps.find(k => k.name === `${kneeSide}_hip`);
+                const knee = kps.find(k => k.name === `${kneeSide}_knee`);
+                const ankle = kps.find(k => k.name === `${kneeSide}_ankle`);
+
+                if(hip && knee && ankle && hip.score>0.1 && knee.score>0.1 && ankle.score>0.1){
+                    const a = calculateAngle(hip,knee,ankle);
+                    emaAngle = ema(emaAngle, a);
+                    angleHistory.push(emaAngle);
+
+                    const colour = getFanColour(emaAngle);
+                    drawFanWithPoints(hip,knee,ankle,colour,emaAngle);
+
+                    const refDisplay = referenceData ? referenceData.peakAngle.toFixed(1) : '--';
+                    angleDisplay.textContent = `Angle: ${emaAngle.toFixed(1)}° | Reference: ${refDisplay}°`;
+                }
+            }
+
+            if(isRecording){
+                rctx.clearRect(0,0,recordCanvas.width, recordCanvas.height);
+                rctx.drawImage(video, 0, 0, recordCanvas.width, recordCanvas.height);
+                rctx.drawImage(canvas, 0, 0, recordCanvas.width, recordCanvas.height);
+            }
+
+            requestAnimationFrame(render);
+        }
+
+        // Initialization
+        try {
+            await setupCamera();
+            await initDetector();
+            await loadReference();
+            render();
+        } catch(err) {
+            console.error(err);
+            logMsg('⚠️ Initialisation failed');
+        }
+    });
+
+</script>
+
 <body>
 
 <!-- Loading starts -->
@@ -104,7 +348,7 @@
 
                 <!-- App brand starts -->
                 <div class="app-brand ms-3">
-                    <a href="{{ url('/homepage')}}">
+                    <a href="{{ url('/homepage') }}">
                         <img src="{{ asset ('assets/images/logo.png') }} " class="logo"
                             alt="Dental Care Admin Template">
                     </a>
@@ -192,7 +436,7 @@
                         <a id="userSettings" class="dropdown-toggle d-flex align-items-center" href="#" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="avatar-box">
-                                <img src="{{ asset('assets/images/doctor5.png')}}"
+                                <img src="{{ asset('assets/images/doctor5.png') }}"
                                      class="img-2xx rounded-5 border border-3 border-white"
                                      alt="Dentist Dashboard">
                                 <span class="status busy"></span>
@@ -201,7 +445,7 @@
                         <div class="dropdown-menu dropdown-menu-end dropdown-300 shadow-lg">
                             <div class="d-flex align-items-center justify-content-between p-3">
                                 <div>
-                                    <span class="small">Doctor</span>
+                                    <span class="small">Patient</span>
                                     <h6 class="m-0">John Doe, M</h6>
                                 </div>
                             </div>
@@ -254,35 +498,46 @@
                     <!-- Alles gecentreerd -->
                     <div class="filming-center">
 
-                        <!-- Controls -->
-                        <div id="controls" class="filming-controls">
-                            <label for="kneeSelect">Select knee:</label>
-                            <select id="kneeSelect">
-                                <option value="left">Left knee</option>
-                                <option value="right">Right knee</option>
-                            </select>
-                            <button id="recordBtn">Start recording</button>
+                        <!-- Linker kolom: Webcam + Angle -->
+                        <div class="video-side">
+                            <div id="video-container" class="filming-video-container">
+                                <video id="video" autoplay playsinline muted></video>
+                                <canvas id="output"></canvas>
+                            </div>
+
+                            <!-- Hidden canvas voor opname -->
+                            <canvas id="recordCanvas" style="display:none;"></canvas>
+
+                            <!-- Angle display -->
+                            <div id="angle-display" class="filming-angle-display">
+                                Angle: --° | Reference: --°
+                            </div>
                         </div>
 
-                        <!-- Statusbar -->
-                        <div id="statusbar" class="filming-statusbar">
-                            <span id="camStatus" class="badge off">Camera: off</span>
-                            <span id="trackStatus" class="badge off">Tracking: off</span>
-                            <span id="refStatus" class="badge warn">Reference: unknown</span>
-                            <span id="msg"></span>
+                        <!-- Rechter kolom: Controls + Badges -->
+                        <div class="controls-side">
+                            <!-- Select knee -->
+                            <div class="filming-controls">
+                                <label for="kneeSelect">Select knee:</label>
+                                <select id="kneeSelect">
+                                    <option value="left">Left knee</option>
+                                    <option value="right">Right knee</option>
+                                </select>
+                            </div>
+
+                            <!-- Start recording knop -->
+                            <div class="filming-controls">
+                                <button id="recordBtn">Start recording</button>
+                            </div>
+
+                            <!-- Statusbar badges -->
+                            <div id="statusbar" class="filming-statusbar">
+                                <span id="camStatus" class="badge off">Camera: off</span>
+                                <span id="trackStatus" class="badge off">Tracking: off</span>
+                                <span id="refStatus" class="badge warn">Reference: unknown</span>
+                                <span id="msg"></span>
+                            </div>
                         </div>
-
-                        <!-- Video container -->
-                        <div id="video-container" class="filming-video-container">
-                            <video id="video" autoplay playsinline muted></video>
-                            <canvas id="output"></canvas>
-                        </div>
-
-                        <!-- Hidden canvas voor opname -->
-                        <canvas id="recordCanvas" style="display:none;"></canvas>
-
-                        <!-- Angle display -->
-                        <div id="angle-display" class="filming-angle-display">Angle: --° | Reference: --°</div>
 
                     </div> <!-- .filming-center -->
 
@@ -323,7 +578,6 @@
 
 <!-- Custom JS files -->
 <script src="{{ asset('assets/js/custom.js') }}"></script>
-<script src="{{ asset('assets/js/filming.js') }}"></script>
 </body>
 
 </html>

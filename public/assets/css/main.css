@@ -17574,7 +17574,7 @@ body.body-auth{
 
 /* --- Body en pagina achtergrond --- */
 body {
-    background: white;
+    background: #FFFFFFFF;
     color: #ecf0ff;
     margin: 0;
     padding: 0;
@@ -17585,7 +17585,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0px auto;
-    max-width: 800px;
+    max-width: 1000px; /* breder voor webcam + controls */
 }
 
 /* --- Header (Titel + Subtitel) --- */
@@ -17604,32 +17604,48 @@ body {
 .filming-subtitle {
     color: #353333;
     font-size: 18px;
-    margin-bottom: 0;
+    margin-bottom: 8px;
 }
 
-/* --- Centered content: Controls, Statusbar, Video --- */
+/* --- Filming center: Video links, controls rechts --- */
 .filming-center {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
     background: linear-gradient(135deg, rgba(253, 117, 150, 0.75) 0%, rgba(250, 170, 137, 0.75) 100%);
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 20px #FD7596;
+    gap: 30px; /* ruimte tussen video en controls */
+    flex-wrap: wrap;
+}
+
+/* --- Video kolom --- */
+.video-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Controls kolom --- */
+.controls-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 15px; /* ruimte tussen controls */
 }
 
 /* --- Controls --- */
 .filming-controls {
     display: flex;
-    gap: 12px;
     align-items: center;
-    margin-bottom: 20px;
+    gap: 12px;
 }
 
 .filming-controls label {
-    color: #353333; /* kies hier je gewenste kleur */
-    font-weight: 500; /* optioneel: maakt de tekst iets dikker */
-    font-size: 16px; /* optioneel: verander de grootte */
+    color: #353333;
+    font-weight: 500;
+    font-size: 16px;
 }
 
 /* Dropdown styling */
@@ -17650,10 +17666,10 @@ body {
 /* --- Statusbar --- */
 .filming-statusbar {
     display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 10px;
 }
 
 .badge {
@@ -17665,20 +17681,9 @@ body {
     text-align: center;
 }
 
-.on {
-    background: #76d1a2;
-    color: white;
-}
-
-.off {
-    background: #f6b4b4;
-    color: white;
-}
-
-.warn {
-    background: #eadb95;
-    color: white;
-}
+.on { background: #76d1a2; color: white; }
+.off { background: #f6b4b4; color: white; }
+.warn { background: #eadb95; color: white; }
 
 /* --- Record knop --- */
 #recordBtn {
@@ -17705,12 +17710,12 @@ body {
     position: relative;
     width: 640px;
     height: 480px;
-    margin-bottom: 20px;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
+/* Video & canvas overlay */
 .filming-video-container video,
 .filming-video-container canvas {
     position: absolute;
@@ -17726,26 +17731,196 @@ body {
     font-size: 18px;
     font-weight: bold;
     color: #353333;
-    margin-top: 10px;
+    margin-top: 15px;
     text-align: center;
 }
 
 /* --- Responsive --- */
-@media (max-width: 700px) {
+@media (max-width: 900px) {
+    .filming-center {
+        flex-direction: column;
+        align-items: center;
+    }
+    .controls-side {
+        flex-direction: row;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 20px;
+    }
     .filming-video-container {
         width: 100%;
         height: auto;
     }
-
-    .filming-center {
-        padding: 15px;
-    }
 }
 
-/*header text color */
-.header-text {
+/* ========================
+   KneeCovery Upload_exercises - Final Styling
+   ======================== */
+
+/* MAIN LAYOUT */
+.physio-wrapper {
+    margin-top: 20px;
+}
+
+/* LEFT PANEL */
+.physio-left {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    min-height: 600px;
+    border: 1px solid #eee;
+}
+
+/* Add exercise button */
+.physio-add-btn {
+    background-color: #FD7596;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.physio-search {
+    border-radius: 8px;
+}
+
+/* Exercise list */
+.physio-exercise-list {
+    border: 1px solid #ffb3c2;
+    border-radius: 10px;
+    margin-top: 15px;
+    padding: 0;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.physio-ex-item {
+    padding: 10px 14px;
+    border-bottom: 1px solid #ffe1e8;
+    cursor: pointer;
+    color: #000; /* zwart */
+    transition: background 0.3s;
+}
+
+.physio-ex-item:hover {
+    background: #ffe5ec;
+}
+
+.physio-ex-item.selected {
+    background: #FD7596;
+    color: white;
+}
+
+/* Add selected to calendar */
+.physio-add-selected {
+    margin-top: 15px;
+    background: #FD7596;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* RIGHT PANEL */
+.physio-calendar {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+.physio-cal-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+/* "This week" title zwart */
+.cal-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #000;
+}
+
+.cal-nav {
+    background: none;
+    border: none;
+    font-size: 20px;
     color: #FD7596;
+    cursor: pointer;
 }
+
+/* Calendar table - auto kolombreedte en afgeronde hoeken */
+.physio-cal-table {
+    width: 100%;
+    border-collapse: separate; /* nodig voor afgeronde hoeken */
+    border-spacing: 0;          /* voorkomt dubbele randen */
+    table-layout: auto;         /* kolommen passen zich aan */
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid #FAAA89; /* roze rand rondom */
+}
+
+/* Header styling - roze achtergrond */
+.physio-cal-table th {
+    background: #FAAA89; /* roze */
+    color: #000;          /* zwart lettertype */
+    font-weight: 600;
+    padding: 12px;
+    border: 1px solid #FAAA89; /* roze rand */
+    text-align: center;
+}
+
+/* Cellen styling */
+.physio-cal-table td {
+    color: #000;  /* zwart lettertype */
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #FAAA89; /* roze rand */
+    font-size: 15px;
+    vertical-align: top;
+    word-wrap: break-word;
+    transition: background 0.3s;
+}
+
+/* Hover effect voor rijen */
+.physio-cal-table tbody tr:hover td {
+    background: rgba(250, 170, 137, 0.25);
+}
+
+/* Exercise kolom links uitlijnen */
+.physio-cal-table td.ex-name {
+    font-weight: 600;
+    text-align: left;
+    padding-left: 14px;
+    color: #000;
+}
+
+/* Afgeronde hoeken op de buitenste cellen */
+.physio-cal-table th:first-child {
+    border-top-left-radius: 12px;
+}
+.physio-cal-table th:last-child {
+    border-top-right-radius: 12px;
+}
+.physio-cal-table tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+.physio-cal-table tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+/* Modal styling placeholder */
+.physio-modal {
+    display: none;
+}
+
+
 
 /*Report CSS kleuring, patient-name, label-date en label-exercise etc.# is voor class soort*/
 .label-date,
