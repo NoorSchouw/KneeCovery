@@ -74,7 +74,9 @@
                     <div class="col-md-4">
                         <label class="label-exercise">Exercise</label>
                         <select id="exercise-select" class="form-control form-control-sm">
-                            <option>Select exercise</option>
+                            <option>Heel slide</option>
+                            <option>Squat</option>
+                            <option>Hamstring curls</option>
                         </select>
                     </div>
                 </div>
@@ -139,13 +141,13 @@
 <!-- Page wrapper ends -->
 
 <!-- JS -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/moment.min.js"></script>
-<script src="assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
-<script src="assets/vendor/daterange/daterange.js"></script>
-<script src="assets/vendor/apex/apexcharts.min.js"></script>
-<script src="assets/js/Fysio.js"></script>
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/moment.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/daterange/daterange.js') }}"></script>
+<script src="{{ asset('assets/vendor/apex/apexcharts.min.js') }}"></script>
+<script src="{{ asset('assets/js/Fysio.js') }}"></script>
 </body>
 
 </html>
