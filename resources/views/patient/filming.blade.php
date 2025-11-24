@@ -348,7 +348,7 @@
 
                 <!-- App brand starts -->
                 <div class="app-brand ms-3">
-                    <a href="{{ url('/homepage')}}">
+                    <a href="{{ url('/homepage') }}">
                         <img src="{{ asset ('assets/images/logo.png') }} " class="logo"
                             alt="Dental Care Admin Template">
                     </a>
@@ -436,7 +436,7 @@
                         <a id="userSettings" class="dropdown-toggle d-flex align-items-center" href="#" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="avatar-box">
-                                <img src="{{ asset('assets/images/doctor5.png')}}"
+                                <img src="{{ asset('assets/images/doctor5.png') }}"
                                      class="img-2xx rounded-5 border border-3 border-white"
                                      alt="Dentist Dashboard">
                                 <span class="status busy"></span>

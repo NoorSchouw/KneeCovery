@@ -14,6 +14,9 @@ Route::get('/signup', function () {
 Route::get('/forgot-password', function () {
     return view('forgot_password');
 });
+Route::get('/upload-exercises', function () {
+    return view('/fysio/upload_exercises');
+});
 
 //-------------------------------------------------- Patient -------------------------------
 Route::get('/homepage', function () {
