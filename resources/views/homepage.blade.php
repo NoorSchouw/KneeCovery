@@ -72,15 +72,28 @@
                             <div class="col-sm-12">
                                 <div class="card mb-4">
                                     <div class="card-header pb-0 d-flex align-items-center justify-content-between">
-                                        <h5 class="card-title">Knee extension and flexion</h5>
+                                        <h5 class="card-title">Progress</h5>
                                         <div class="btn-group btn-group-sm" role="group">
-                                            <button id="weekButton" type="button" class="btn btn-primary">Current week
-                                            </button>
+                                            <select id="exerciseSelector" class="form-select form-select-sm" style="width: 180px;">
+                                                <option value="heelSlides">Heel Slides</option>
+                                                <option value="squat">Squat</option>
+                                                <option value="hamstringCurls">Hamstring Curls</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="overflow-hidden">
-                                            <div id="income"></div>
+                                            <div id="Progress"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card mb-4">
+                                    <div class="card-header pb-0 d-flex align-items-center justify-content-between">
+                                        <h5 class="card-title">Knee extension and flexion</h5>
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="overflow-hidden">
+                                            <div id="Knee-extension-flexion"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -177,7 +190,8 @@
 <script src="{{ asset('assets/vendor/apex/apexcharts.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/apex/custom/home/patients.js') }}"></script>
 <script src="{{ asset('assets/vendor/apex/custom/home/department-income.js') }}"></script>
-<script src="{{ asset('assets/vendor/apex/custom/home/income.js') }}"></script>
+<script src="{{ asset('assets/vendor/apex/custom/home/knee-extension-flexion.js') }}"></script>
+<script src="{{ asset('assets/vendor/apex/custom/home/progress.js') }}"></script>
 <script src="{{ asset('assets/vendor/apex/custom/home/appointments-overview.js') }}"></script>
 <script src="{{ asset('assets/vendor/apex/custom/home/sparklines.js') }}"></script>
 
