@@ -15,79 +15,26 @@
 
 <body>
 <div class="page-wrapper">
+
     <div class="main-container">
 
-        <!-- Sidebar -->
-        <nav id="sidebar" class="sidebar-wrapper">
-            <div class="brand-container d-flex align-items-center justify-content-between">
-                <div class="app-brand ms-3">
-                    <a href="{{ url('/homepage') }}">
-                        <img src="{{ asset('assets/images/logo.png') }}" class="logo" alt="Dental Care Admin Template">
-                    </a>
-                </div>
-            </div>
-
-            <div class="sidebar-profile">
-                <img src="{{ asset('assets/images/doctor5.png') }}" class="rounded-5 border border-primary border-3" alt="Dentist Admin Templates">
-                <h6 class="mb-1 profile-name text-nowrap text-truncate text-primary">John Doe</h6>
-                <small class="profile-name text-nowrap text-truncate">Physio</small>
-            </div>
-
-            <div class="sidebarMenuScroll">
-                <ul class="sidebar-menu">
-                    <li class="active current page">
-                        <a href="#">
-                            <i class="ri-dossier-line"></i>
-                            <span class="menu-text">Upload exercises</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <!-- Sidebar Component -->
+        <x-sidebar-physio/>
 
         <!-- App container -->
         <div class="app-container">
-            <!-- Header -->
-            <div class="app-header d-flex align-items-center">
-                <div class="brand-container-sm d-xl-none d-flex align-items-center">
-                    <div class="app-brand">
-                        <a href="#"><img src="{{ asset('assets/images/logo.png') }}" class="logo" alt="Dental Care Admin Template"></a>
-                    </div>
-                </div>
 
-                <div class="search-container d-xl-block d-none">
-                    <input type="text" class="form-control" id="searchId" placeholder="Search">
-                    <i class="ri-search-line"></i>
-                </div>
+            <!-- Header Component -->
+            <x-header/>
 
-                <div class="header-actions">
-                    <div class="dropdown ms-3">
-                        <a id="userSettings" class="dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="avatar-box">
-                                <img src="{{ asset('assets/images/doctor5.png') }}" class="img-2xx rounded-5 border border-3 border-white" alt="Dentist Dashboard">
-                                <span class="status busy"></span>
-                            </div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-300 shadow-lg">
-                            <div class="d-flex align-items-center justify-content-between p-3">
-                                <div>
-                                    <span class="small">Physio</span>
-                                    <h6 class="m-0">John Doe, M</h6>
-                                </div>
-                            </div>
-                            <div class="mx-3 my-2 d-grid">
-                                <a href="login.html" class="btn btn-primary">Logout</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hero header -->
-            <div class="app-hero-header d-flex align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html"><i class="ri-home-3-line"></i></a></li>
-                    <li class="breadcrumb-item text-primary" aria-current="page">Upload exercises</li>
+            <!-- Hero Header -->
+            <div class="app-hero-header d-flex justify-content-between align-items-center">
+                <!-- Breadcrumb -->
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item">
+                        <a href="{{ url('/homepage') }}"><i class="ri-home-3-line"></i></a>
+                    </li>
+                    <li class="breadcrumb-item text-primary">Add exercises</li>
                 </ol>
             </div>
 

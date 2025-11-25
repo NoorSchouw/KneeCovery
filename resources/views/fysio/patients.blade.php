@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Clove Dental Care Admin Template</title>
+    <title>Select patients - Physiotherapist page </title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/remix/remixicon.css') }}">
@@ -16,65 +16,17 @@
 <body>
 
 <div class="page-wrapper">
+
     <div class="main-container">
 
-        <!-- Sidebar wrapper starts -->
-        <nav id="sidebar" class="sidebar-wrapper">
-
-            <!-- Brand container starts -->
-            <div class="brand-container d-flex align-items-center justify-content-between">
-
-                <!-- App brand starts -->
-                <div class="app-brand ms-3">
-                    <a href="{{ url('/homepage') }}">
-                        <img src="assets/images/logo.png" class="logo" alt="Dental Care Admin Template">
-                    </a>
-                </div>
-                <!-- App brand ends -->
-
-            </div>
-            <!-- Brand container ends -->
-
-            <!-- Sidebar profile starts -->
-            <div class="sidebar-profile">
-                <img src="{{ asset('assets/images/doctor5.png') }}" class="rounded-5 border border-primary border-3"
-                     alt="Dentist Admin Templates">
-                <h6 class="mb-1 profile-name text-nowrap text-truncate text-primary">Sarah Smith</h6>
-                <small class="profile-name text-nowrap text-truncate">Physiotherapist</small>
-            </div>
-            <!-- Sidebar profile ends -->
-
-            <!-- Sidebar menu starts -->
-            <div class="sidebarMenuScroll">
-                <ul class="sidebar-menu">
-                    <li>
-                        <a href="{{ url('/homepage') }}">
-                            <i class="ri-home-6-line"></i>
-                            <span class="menu-text">Homepage</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <!-- Sidebar menu ends -->
-
-            <!-- Sidebar contact starts -->
-            <div class="sidebar-contact">
-                <p class="fw-light mb-1 text-nowrap text-truncate">Emergency Contact</p>
-                <h5 class="m-0 lh-1 text-nowrap text-truncate">0987654321</h5>
-                <i class="ri-phone-line"></i>
-            </div>
-            <!-- Sidebar contact ends -->
-
-        </nav>
-        <!-- Sidebar wrapper ends -->
+        <!-- Sidebar Component -->
+        <x-sidebar-physio/>
 
         <!-- App container -->
         <div class="app-container">
 
-            <!-- Header -->
-            <div class="app-header d-flex align-items-center">
-                <!-- Header content -->
-            </div>
+            <!-- Header Component -->
+            <x-header/>
 
             <!-- Hero Header -->
             <div class="app-hero-header d-flex justify-content-between align-items-center">

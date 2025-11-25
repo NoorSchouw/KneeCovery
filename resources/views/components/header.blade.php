@@ -17,6 +17,11 @@
     </div>
 
     <div class="header-actions">
+        <div class="mx-3 my-2 d-grid">
+            <a href="/privacy-policy" class="btn btn-primary">
+                Privacy policy
+            </a>
+        </div>
 
         <!-- User dropdown -->
         <div class="dropdown ms-3">
@@ -36,13 +41,13 @@
                 </div>
 
                 <div class="mx-3 my-2 d-grid">
-                    <a href="/patient/information" class="btn btn-primary">
+                    <a href="/information" class="btn btn-primary">
                         Account information
                     </a>
                 </div>
 
                 <div class="mx-3 my-2 d-grid">
-                    <a href="/logout" class="btn btn-secondary">
+                    <a href="/" class="btn btn-light">
                         Logout
                     </a>
                 </div>

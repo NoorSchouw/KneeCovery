@@ -18,49 +18,32 @@
     <!-- Main container starts -->
     <div class="main-container">
 
-        <!-- Sidebar wrapper starts -->
-        <nav id="sidebar" class="sidebar-wrapper">
-            <!-- Brand -->
-            <div class="brand-container d-flex align-items-center justify-content-between">
-                <div class="app-brand ms-3">
-                    <a href="/homepage">
-                        <img src="assets/images/logo.svg" class="logo" alt="Logo">
-                    </a>
-                </div>
-            </div>
-
-            <!-- Sidebar profile starts -->
-            <div class="sidebar-profile">
-                <img src="assets/images/doctor5.png" class="rounded-5 border border-primary border-3"
-                     alt="Dentist Admin Templates">
-                <h6 class="mb-1 profile-name text-nowrap text-truncate text-primary">Jennifer Arter</h6>
-                <small class="profile-name text-nowrap text-truncate">Department Head</small>
-            </div>
-            <!-- Sidebar menu, exercises link moet misschien aangepast worden-->
-            <div class="sidebarMenuScroll">
-                <ul class="sidebar-menu">
-                    <li><a href="/patients"><i class="ri-home-6-line"></i> <span class="menu-text">Homepage</span></a></li>
-                    <li><a href="/report"><i class="ri-file-text-line"></i> <span class="menu-text">Report</span></a></li>
-                    <li><a href="/exercises"><i class="ri-add-line"></i> <span class="menu-text">Add Exercise</span></a></li>
-                </ul>
-            </div>
-
-        </nav>
-
+        <!-- Sidebar Component -->
+        <x-sidebar-physio/>
 
         <!-- App container starts -->
         <div class="app-container">
 
-            <!-- App header (leeg) -->
-            <div class="app-header d-flex align-items-center"></div>
+           <x-header/>
+
+            <!-- Hero Header -->
+            <div class="app-hero-header d-flex justify-content-between align-items-center">
+                <!-- Breadcrumb -->
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item">
+                        <a href="{{ url('/homepage') }}"><i class="ri-home-3-line"></i></a>
+                    </li>
+                    <li class="breadcrumb-item text-primary">Report</li>
+                </ol>
+            </div>
 
             <!-- App body starts -->
             <div class="app-body p-4">
 
+
                 <!-- Patiënt info -->
                 <div class="mb-3">
                     <h2 class="patient-name" >Report Jane Doe (Female)</h2>
-
                 </div>
 
                 <div class="row mb-3">

@@ -17,9 +17,6 @@ Route::get('/forgot-password', function () {
 Route::get('/privacy-policy', function () {
     return view('privacy');
 });
-Route::get('/upload-exercises', function () {
-    return view('/fysio/upload_exercises');
-});
 
 //-------------------------------------------------- Patient -------------------------------
 Route::get('/homepage', function () {
@@ -48,7 +45,7 @@ Route::get('/patients', function () {
 Route::get('/report', function () {
     return view('/fysio/report');
 });
-Route::get('/exercises', function () {
+Route::get('/upload-exercises', function () {
     return view('/fysio/upload_exercises');
 });
 //------------------------------- Tracking -------------------------------------------------

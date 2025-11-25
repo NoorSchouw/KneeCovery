@@ -46,7 +46,7 @@
             <div class="app-hero-header d-flex align-items-center">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="/homepage.blade.php">
+                        <a href="/homepage">
                             <i class="ri-home-3-line"></i>
                         </a>
                     </li>

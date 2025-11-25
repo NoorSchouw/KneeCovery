@@ -30,28 +30,22 @@
     <!-- Sidebar menu starts -->
     <div class="sidebarMenuScroll">
         <ul class="sidebar-menu">
-            <li class="{{ request()->is('homepage') ? 'active current-page' : '' }}">
-                <a href="{{ url('/homepage') }}">
-                    <i class="ri-home-6-line"></i>
-                    <span class="menu-text">Homepage</span>
+            <li class="{{ request()->is('patients') ? 'active current-page' : '' }}">
+                <a href="{{ url('/patients') }}">
+                    <i class="ri-team-line"></i>
+                    <span class="menu-text">Patients</span>
                 </a>
             </li>
-            <li class="{{ request()->is('calendar') ? 'active current-page' : '' }}">
-                <a href="{{ url('/calendar') }}">
-                    <i class="ri-calendar-close-line"></i>
-                    <span class="menu-text">Calendar</span>
-                </a>
-            </li>
-            <li class="{{ request()->is('all-exercises') ? 'active current-page' : '' }}">
-                <a href="{{ url('/all-exercises') }}">
-                    <i class="ri-body-scan-line"></i>
-                    <span class="menu-text">Exercises</span>
-                </a>
-            </li>
-            <li class="{{ request()->is('patient-report') ? 'active current-page' : '' }}">
-                <a href="{{ url('/patient-report') }}">
+            <li class="{{ request()->is('report') ? 'active current-page' : '' }}">
+                <a href="{{ url('/report') }}">
                     <i class="ri-file-chart-line"></i>
                     <span class="menu-text">Report</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('upload-exercises') ? 'active current-page' : '' }}">
+                <a href="{{ url('/upload-exercises') }}">
+                    <i class="ri-add-line"></i>
+                    <span class="menu-text">Add exercise</span>
                 </a>
             </li>
         </ul>
