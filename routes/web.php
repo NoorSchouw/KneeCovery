@@ -3,14 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FysioController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\SignUpController;
 // All links for the website
 //------------------------------------------------General-------------------------------------
 Route::get('/', function () {
     return view('login');
 });
-Route::get('/signup', function () {
-    return view('signup');
-});
+
+Route::get('/signup', [SignUpController::class, 'showSignupForm'])->name('signup.form');
+Route::post('/signup', [SignUpController::class, 'createUser'])->name('signup.create');
+
+
 Route::get('/forgot-password', function () {
     return view('forgot_password');
 });
@@ -90,3 +93,4 @@ Route::get('/patient', [PatientController::class, 'showTrackingPage'])->name('pa
 Route::get('/patient/{exercise}', [PatientController::class, 'track']);
 Route::post('/sessions', [PatientController::class, 'storeSession']);
 Route::get('/references/latest', [PatientController::class, 'getLatestReference']);
+
