@@ -1,16 +1,25 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FysioController;
 use App\Http\Controllers\PatientController;
 // All links for the website
 //------------------------------------------------General-------------------------------------
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', [LoginController::class, 'showLogin'])->name('login.show');
+
+// Login POST
+Route::post('/', [LoginController::class, 'login'])->name('login.perform');
+
+// Homepage (alleen als voorbeeld)
+Route::get('/homepage', function () {
+    return 'Welcome to your personal homepage!';
+})->middleware('auth');
+
 Route::get('/signup', function () {
     return view('signup');
 });
+
 Route::get('/forgot-password', function () {
     return view('forgot_password');
 });
