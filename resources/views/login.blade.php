@@ -30,7 +30,8 @@
     </div>
 
     <!-- Log in -->
-    <form action="{{ url('/homepage') }}" method="GET">   <!-- Deze regel laat zien waar de gebruiker heen gaat wanneer deze op login knop drukt -->
+    <form action="{{ route('login.perform') }}" method="POST">
+        @csrf
 
         <div class="auth-box gradient-box">
             <h4>Login</h4> <!-- De tekst bovenin wat het blokje is -->
@@ -38,14 +39,14 @@
             <!-- Hier wordt het email veld geschreven -->
             <div class="mb-3">  <!-- mb-3 is de maat van het veld, dus uiterlijk -->
                 <label class="form-label" for="email">Your email <span class="text-danger">*</span></label>
-                <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" required>
             </div>
 
             <!-- Hier wordt het veld PassWord beschreven -->
             <div class="mb-3">
                 <label class="form-label" for="pwd">Your password <span class="text-danger">*</span></label>
                 <div class="input-group">
-                    <input type="password" id="pwd" class="form-control" placeholder="Enter password" required>
+                    <input type="password" name="password" id="pwd" class="form-control" placeholder="Enter password" required>
                     <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                         <i class="ri-eye-line"></i>
                     </button>

@@ -142,7 +142,7 @@ create table patient
     user_id              int not null,
     phy_user_id          int not null,
     physio_number        int not null,
-    start_date           varchar(256) not null,
+    start_date           date not null,
     treatment_status     varchar(256) not null,
     medical_notes        varchar(256),
     primary key (user_id)
