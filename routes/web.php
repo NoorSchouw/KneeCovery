@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PatientExerciseController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FysioController;
 use App\Http\Controllers\PatientController;
@@ -34,9 +36,12 @@ Route::get('/homepage', function () {
 Route::get('/calendar', function () {
     return view('patient/calendar');
 });
-Route::get('/all-exercises', function () {
-    return view('/patient/exercises');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/all-exercises', [PatientExerciseController::class, 'index'])
+        ->name('patient.exercises');
 });
+
 Route::get('/patient-report', function () {
     return view('/patient/report');
 });

@@ -192,7 +192,7 @@ create table physiotherapist
 /*==============================================================*/
 create table progress
 (
-    progess_id           int not null,
+    progress_id           int not null,
     user_id              int not null,
     metric_name          varchar(256) not null,
     metric_value         int not null,
