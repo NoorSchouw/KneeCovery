@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,8 +15,11 @@ class Patient extends Model
     // De primaire sleutel instellen (anders gaat Eloquent ervan uit dat het 'id' is)
     protected $primaryKey = 'user_id';
 
+    public $incrementing = false; // Needs user_id from user table not its own increments
+
     // Mass assignment: kolommen die gevuld mogen worden via create() of fill()
     protected $fillable = [
+        'user_id',
         'phy_user_id',
         'physio_number',
         'start_date',
@@ -36,16 +38,27 @@ class Patient extends Model
     // Relatie: een patient behoort tot één user
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-        // 'user_id' is de FK in patient
-        // 'id' is de PK in user
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Een patient behoort tot één fysiotherapeut
+    public function assignedExercises()
+    {
+        return $this->hasMany(PatientExerciseAssigned::class, 'pat_user_id', 'user_id');
+    }
+
+    public function exercises()
+    {
+        return $this->belongsToMany(
+            Exercise::class,
+            'patientExerciseAssigned', // table name EXACTLY as in DB
+            'pat_user_id',             // FK pointing to patient.user_id
+            'exercise_id'              // FK pointing to exercises.id
+        );
+    }
+
     public function physiotherapist()
     {
         return $this->belongsTo(Physio::class, 'physio_number', 'physio_number');
         // 'physio_number' in patient verwijst naar physio_number in physiotherapist
     }
 }
-

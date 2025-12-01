@@ -1,15 +1,31 @@
-<!-- Sidebar wrapper starts -->
+@php
+    use Illuminate\Support\Facades\Auth;
+
+    $user = Auth::user(); // currently logged-in user
+
+    // Full name
+    $userName = $user ? $user->first_name . ' ' . $user->last_name : 'John Doe';
+
+    // Determine role based on related models
+    if ($user && $user->patient) {
+        $userRole = 'Patient';
+    } elseif ($user && $user->physiotherapist) {
+        $userRole = 'Physiotherapist';
+    } else {
+        $userRole = 'Guest';
+    }
+@endphp
+
+    <!-- Sidebar wrapper starts -->
 <nav id="sidebar" class="sidebar-wrapper">
 
     <!-- Brand container starts -->
     <div class="brand-container d-flex align-items-center justify-content-between">
-
         <div class="app-brand ms-3">
             <a href="{{ url('/homepage') }}">
                 <img src="{{ asset('assets/images/logo.png') }}" class="logo" alt="Kneecovery">
             </a>
         </div>
-
     </div>
     <!-- Brand container ends -->
 
@@ -19,10 +35,10 @@
              class="rounded-5 border border-primary border-3"
              alt="profile">
         <h6 class="mb-1 profile-name text-nowrap text-truncate text-primary">
-            {{ $userName ?? 'John Doe' }}
+            {{ $userName }}
         </h6>
         <small class="profile-name text-nowrap text-truncate text-black">
-            {{ $userRole ?? 'Patient' }}
+            {{ $userRole }}
         </small>
     </div>
     <!-- Sidebar profile ends -->

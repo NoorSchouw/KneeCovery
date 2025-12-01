@@ -9,12 +9,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('physiotherapist', function (Blueprint $table) {
-            $table->id('user_id'); // PK en FK naar User
-            $table->string('physio_number', 50)->unique(); // Unieke identifier voor physio
+            $table->unsignedBigInteger('user_id');      // must match users.user_id (BIGINT)
+            $table->unsignedInteger('physio_number');   // stays INT
+
+            // Composite PK
+            $table->primary(['user_id', 'physio_number']);
+
+            // FK to user
+            $table->foreign('user_id')
+                ->references('user_id')->on('user')
+                ->onDelete('restrict')->onUpdate('restrict');
         });
     }
-
-    public $timestamps = false; // Geen created_at / updated_at
 
     public function down(): void
     {

@@ -60,7 +60,7 @@
 
             <div class="mb-3 d-grid gap-2">
                 <button type="submit" class="btn btn-light">Login</button>
-                <a href="{{ url('/') }}" class="btn btn-secondary">Not registered? Signup</a>
+                <a href="{{ url('/signup') }}" class="btn btn-secondary">Not registered? Signup</a>
             </div>
 
             <!-- Errormelding onderaan in de auth-box -->
