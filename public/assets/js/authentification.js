@@ -1,12 +1,25 @@
-// Toggle password visibility
-const togglePassword = document.querySelector('#togglePassword');
-const passwordInput = document.querySelector('#pwd');
+// Selecteer alle toggle knoppen
+document.querySelectorAll('.toggle-password, #togglePassword').forEach(button => {
+    button.addEventListener('click', () => {
+        // Zoek de input binnen dezelfde input-group
+        const input = button.closest('.input-group').querySelector('input[type="password"], input[type="text"]');
+        if (!input) return;
 
-togglePassword?.addEventListener('click', () => {
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-    togglePassword.querySelector('i').classList.toggle('ri-eye-off-line');
+        // Wissel type password <-> text
+        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+        input.setAttribute('type', type);
+
+        // Wissel het oog-icoon
+        const icon = button.querySelector('i');
+        if (icon) {
+            icon.classList.toggle('ri-eye-line');
+            icon.classList.toggle('ri-eye-off-line');
+        }
+    });
 });
+
+
+
 
 // Password Reset Validation
 document.addEventListener("DOMContentLoaded", function () {

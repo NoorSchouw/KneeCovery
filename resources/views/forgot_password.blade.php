@@ -25,9 +25,12 @@
     </div>
 
     <!-- Forgot Password Form -->
-    <form action="{{ url('/homepage') }}" method="GET">
+{{--    <form action="{{ url('/homepage') }}" method="GET">--}}
+    <form action="{{ route('password.update') }}" method="POST">
 
-        <div class="auth-box gradient-box">
+    @csrf
+
+            <div class="auth-box gradient-box">
 
             <h4>Reset Password</h4>
 
@@ -45,7 +48,10 @@
                     class="form-control"
                     placeholder="Enter your email"
                     required
+
                 >
+
+
             </div>
 
             <!-- New Password -->
@@ -91,6 +97,11 @@
                 <button type="submit" class="btn btn-light">Reset Password</button>
                 <a href="{{ url('/') }}" class="btn btn-secondary">Cancel reset password</a>
             </div>
+
+{{--            Error melding--}}
+            @error('email')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
 
         </div>
 

@@ -1,4 +1,4 @@
-// Date picker init
+// Date picker init (moet nog aangepast worden)
 $('#report-date').daterangepicker({
     singleDatePicker: true,
     showDropdowns: true,
@@ -8,7 +8,7 @@ $('#report-date').daterangepicker({
     }
 });
 
-
+// Gauge
 var options = {
     chart: { type: 'radialBar', height: 250 },
     series: [67],

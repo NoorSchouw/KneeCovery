@@ -22,9 +22,18 @@ Route::get('/homepage', function () {
 Route::get('/signup', [SignUpController::class, 'showSignupForm'])->name('signup.form');
 Route::post('/signup', [SignUpController::class, 'createUser'])->name('signup.create');
 
-Route::get('/forgot-password', function () {
-    return view('forgot_password');
-});
+//Forgot password
+use App\Http\Controllers\ForgotPasswordController;
+
+// Toon het reset-scherm (GET)
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showResetForm'])
+    ->name('password.reset');
+
+// Verwerk nieuw wachtwoord (POST)
+Route::post('/forgot-password', [ForgotPasswordController::class, 'reset'])
+    ->name('password.update');
+
+
 Route::get('/privacy-policy', function () {
     return view('privacy');
 });
