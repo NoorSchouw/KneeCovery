@@ -62,7 +62,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item text-primary" aria-current="page">
-                        Appointments
+                        Calendar
                     </li>
                 </ol>
                 <!-- Breadcrumb ends -->
@@ -78,8 +78,7 @@
                     <div class="col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="card-title">Applointments</h5>
-                                <a href="book-appointment.html" class="btn btn-primary ms-auto">Book Appointment</a>
+                                <h5 class="card-title">Exercises</h5>
                             </div>
                             <div class="card-body">
 
