@@ -27,7 +27,6 @@
     <!-- Forgot Password Form -->
 {{--    <form action="{{ url('/homepage') }}" method="GET">--}}
     <form action="{{ route('password.update') }}" method="POST">
-
     @csrf
 
             <div class="auth-box gradient-box">
@@ -48,10 +47,7 @@
                     class="form-control"
                     placeholder="Enter your email"
                     required
-
                 >
-
-
             </div>
 
             <!-- New Password -->

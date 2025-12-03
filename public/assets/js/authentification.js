@@ -1,140 +1,85 @@
-// Selecteer alle toggle knoppen
+// ---------------------------------------------
+// Toggle password visibility
+// ---------------------------------------------
 document.querySelectorAll('.toggle-password, #togglePassword').forEach(button => {
     button.addEventListener('click', () => {
-        // Zoek de input binnen dezelfde input-group
-        const input = button.closest('.input-group').querySelector('input[type="password"], input[type="text"]');
+
+        // Vind het wachtwoordveld binnen dezelfde input-group
+        const input = button.closest('.input-group')
+            .querySelector('input[type="password"], input[type="text"]');
+
         if (!input) return;
 
-        // Wissel type password <-> text
-        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-        input.setAttribute('type', type);
+        // Toggle type
+        const type = input.type === "password" ? "text" : "password";
+        input.type = type;
 
-        // Wissel het oog-icoon
-        const icon = button.querySelector('i');
+        // Toggle icoon
+        const icon = button.querySelector("i");
         if (icon) {
-            icon.classList.toggle('ri-eye-line');
-            icon.classList.toggle('ri-eye-off-line');
+            icon.classList.toggle("ri-eye-line");
+            icon.classList.toggle("ri-eye-off-line");
         }
     });
 });
 
 
+// ---------------------------------------------
+// Password match validation (with green check)
+// ---------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
 
-
-// Password Reset Validation
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("form");
-    if (!form) return;
-
-    const email = document.querySelector("#email");
     const newPass = document.querySelector("#new-password");
     const confirmPass = document.querySelector("#confirm-password");
+    const form = document.querySelector("form");
 
-    // Reset alle rode velden live tijdens typen
-    [email, newPass, confirmPass].forEach(input => {
-        input.addEventListener("input", () => {
-            input.classList.remove("is-invalid");
-            input.classList.remove("is-valid");
-        });
-    });
+    // Live update: toon geldig/ongeldig tijdens typen
+    function validatePasswords() {
 
-    form.addEventListener("submit", function (e) {
+        // Check new password
+        if (newPass.value.trim().length >= 8) {
+            newPass.classList.remove("is-invalid");
+            newPass.classList.add("is-valid");
+        } else {
+            newPass.classList.remove("is-valid");
+        }
+
+        // Check confirm password
+        if (confirmPass.value.trim() === "") {
+            confirmPass.classList.remove("is-valid");
+            confirmPass.classList.remove("is-invalid");
+            return;
+        }
+
+        if (newPass.value === confirmPass.value) {
+            confirmPass.classList.remove("is-invalid");
+            confirmPass.classList.add("is-valid");
+        } else {
+            confirmPass.classList.remove("is-valid");
+            confirmPass.classList.add("is-invalid");
+        }
+    }
+
+    // Live validation
+    newPass.addEventListener("input", validatePasswords);
+    confirmPass.addEventListener("input", validatePasswords);
+
+    // Final validation on submit
+    form.addEventListener("submit", e => {
         let valid = true;
 
-        // EMAIL
-        if (!email.value.trim()) {
-            email.classList.add("is-invalid");
-            email.setCustomValidity("Please enter your email.");
-            valid = false;
-        } else {
-            email.setCustomValidity("");
-            email.classList.add("is-valid");
-        }
-
-        // NEW PASSWORD
-        if (!newPass.value.trim()) {
+        if (newPass.value.length < 8) {
             newPass.classList.add("is-invalid");
-            newPass.setCustomValidity("Please enter a password.");
             valid = false;
-        } else {
-            newPass.setCustomValidity("");
-            newPass.classList.add("is-valid");
         }
 
-        // CONFIRM PASSWORD
-        if (!confirmPass.value.trim()) {
+        if (newPass.value !== confirmPass.value) {
             confirmPass.classList.add("is-invalid");
-            confirmPass.setCustomValidity("Please confirm your password.");
             valid = false;
-
-        } else if (confirmPass.value !== newPass.value) {
-            confirmPass.classList.add("is-invalid");
-            confirmPass.setCustomValidity("Passwords do not match.");
-            valid = false;
-
-        } else {
-            confirmPass.setCustomValidity("");
-            confirmPass.classList.remove("is-invalid");   // <--- BELANGRIJK
-            confirmPass.classList.add("is-valid");
         }
 
-
-        // Stop form if invalid
         if (!valid) {
             e.preventDefault();
-            form.reportValidity();
         }
     });
 });
-
-// Succesmelding wanneer wachtwoord correct verandert is
-if (valid) {
-    const successDiv = document.querySelector('#successMessage');
-    if (successDiv) {
-        successDiv.classList.remove('d-none');
-    }
-}
-
-/* ------------------------
-   Validation: check matching passwords
-------------------------- */
-(function () {
-    const form = document.getElementById("signupForm");
-    const email = document.getElementById("email");
-    const pass1 = document.getElementById("password");
-    const pass2 = document.getElementById("password_confirm");
-
-    function clearValidity() {
-        [email, pass1, pass2].forEach(el => el.setCustomValidity(""));
-    }
-
-    function setValidation() {
-        clearValidity();
-
-        if (!email.value.trim()) {
-            email.setCustomValidity("Please enter your email address.");
-        } else if (email.validity.typeMismatch) {
-            email.setCustomValidity("Please enter a valid email address.");
-        }
-
-        if (pass1.value.length < 8) {
-            pass1.setCustomValidity("Password must be at least 8 characters.");
-        }
-
-        if (pass1.value !== pass2.value) {
-            pass2.setCustomValidity("Passwords do not match.");
-        }
-    }
-
-    [email, pass1, pass2].forEach(input => {
-        input.addEventListener("input", () => input.setCustomValidity(""));
-    });
-
-    form.addEventListener("submit", e => {
-        setValidation();
-        if (!form.checkValidity()) {
-            e.preventDefault();
-            form.reportValidity();
-        }
-    });
-})();

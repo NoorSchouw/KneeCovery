@@ -8,7 +8,7 @@ $('#report-date').daterangepicker({
     }
 });
 
-// Gauge
+// Gauge !!Moet niet clickable zijn want dat is die nu wel
 var options = {
     chart: { type: 'radialBar', height: 250 },
     series: [67],
