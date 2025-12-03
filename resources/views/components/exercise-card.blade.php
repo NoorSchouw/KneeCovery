@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="text-end">
-                        <a href="/resources/views/patient/filming.blade.php" class="btn btn-primary">Start Exercise</a>
+                        <a href="{{url("/filming")}}" class="btn btn-primary">Start Exercise</a>
                     </div>
 
                 </div>
