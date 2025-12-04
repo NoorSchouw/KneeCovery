@@ -37,18 +37,18 @@ var options = {
         {
             name: "Flexion (°)",
             type: "line",
-            data: [45, 55, 65, 72, 78, 83, 88], // realistic week-1 flexion
+            data: [150, 145 , 145, 130, 120, 110], // realistic week-1 flexion
         },
         {
             name: "Extension (°)",
             type: "line",
-            data: [-8, -7, -6, -5, -3, -2, -1], // realistic week-1 extension
+            data: [160, 160, 165, 168, 170, 170], // realistic week-1 extension
         }
     ],
 
     xaxis: {
         categories: [
-            "Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"
+            "25/11", "27/11", "29/11", "01/12", "03/12", "05/12"
         ],
         labels: {
             style: { fontSize: "13px", colors: "#6B7280", fontWeight: 500 },
@@ -58,6 +58,8 @@ var options = {
     },
 
     yaxis: {
+        min: 90,
+        max: 180,
         labels: {
             style: { colors: "#9CA3AF" },
             formatter: (val) => val + "°",
