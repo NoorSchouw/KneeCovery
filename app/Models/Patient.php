@@ -25,6 +25,12 @@ class Patient extends Model
         'start_date',
         'treatment_status',
         'medical_notes',
+        'injured_knee',
+        'mobile',
+        'address',
+        'country',
+        'city',
+        'postal_code'
     ];
 
     // Optioneel: als je datatypes wilt casten
