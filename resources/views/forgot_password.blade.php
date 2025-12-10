@@ -67,6 +67,9 @@
                         <i class="ri-eye-line"></i>
                     </button>
                 </div>
+                <div class="form-text">
+                    Your password must be 8-20 characters long.
+                </div>
             </div>
 
             <!-- Confirm Password -->

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FysioController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\SignUpController;
+use App\Http\COntrollers\ReportController;
+use App\Http\Controllers\ForgotPasswordController;
 // All links for the website
 //------------------------------------------------General-------------------------------------
 Route::get('/', [LoginController::class, 'showLogin'])->name('login.show');
@@ -23,8 +25,6 @@ Route::get('/signup', [SignUpController::class, 'showSignupForm'])->name('signup
 Route::post('/signup', [SignUpController::class, 'createUser'])->name('signup.create');
 
 //Forgot password
-use App\Http\Controllers\ForgotPasswordController;
-
 // Toon het reset-scherm (GET)
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showResetForm'])
     ->name('password.reset');
@@ -38,10 +38,15 @@ Route::get('/privacy-policy', function () {
     return view('privacy');
 });
 
-//-------------------------------------------------- Patient -------------------------------
+Route::get('/contact',function () {
+    return view('contact');
+});
+
+// -------------------------------------------------- Patient ---------------------------------
 Route::get('/homepage', function () {
     return view('homepage');
 });
+
 Route::get('/calendar', function () {
     return view('patient/calendar');
 });
@@ -51,26 +56,37 @@ Route::middleware(['auth'])->group(function () {
         ->name('patient.exercises');
 });
 
-Route::get('/patient-report', function () {
-    return view('/patient/report');
-});
+// Patient report (frontend)
+Route::get('/patient-report', [ReportController::class, 'index']);
+
 Route::get('/information', function () {
-    return view('/patient/information');
-});
-Route::get('/filming', function () {
-    return view('/patient/filming');
+    return view('patient/information');
 });
 
-//----------------------------------------------------Physio----------------------------------
+Route::get('/filming', function () {
+    return view('patient/filming');
+});
+
+
+// -------------------------------------------------- Physio ----------------------------------
 Route::get('/patients', function () {
-    return view('/fysio/patients');
+    return view('fysio/patients');
 });
+
+// Physio report (frontend)
 Route::get('/report', function () {
-    return view('/fysio/report');
-});
+    return view('physio/report');     // <-- juiste folder + bestand
+})->name('physio.report');
+
 Route::get('/upload-exercises', function () {
-    return view('/fysio/upload_exercises');
+    return view('fysio/upload_exercises');
 });
+
+
+// -------------------------------------------------- Backend Report Data ----------------------
+
+Route::get('/report/get-executions', [ReportController::class, 'getExecutions']);
+
 //------------------------------- Tracking -------------------------------------------------
 
 Route::get('/motion', function () {

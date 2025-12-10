@@ -17920,8 +17920,6 @@ body {
     display: none;
 }
 
-
-
 /*Report CSS kleuring, patient-name, label-date en label-exercise etc.# is voor class soort*/
 .label-date,
 .label-exercise {
@@ -17943,4 +17941,102 @@ body {
 /*Titel van Gauge grafiek centreren*/
 .card-title{
     text-align: center;
+}
+
+/*Contact*/
+.card .contact-card {
+    margin-bottom: 1rem;
+}
+
+.card .contact-card:last-child {
+    margin-bottom: 0;
+}
+
+.contact-card-icon {
+    flex: 0 0 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    color: var(--primary, #FAAA89);
+}
+
+/* Card spacing tussen de contact-items */
+.contact-card-wrapper .contact-card-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.contact-card-wrapper .contact-card-item:last-child {
+    margin-bottom: 0;
+}
+
+.contact-card-position {
+    margin-left: 700px;
+    margin-right: 200px; /* kies zelf */
+}
+
+
+.contact-card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--bs-black);
+}
+
+.contact-card-text {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--bs-black);
+}
+
+.contact-card-sub {
+    margin: 4px 0 0 0;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.contact-hours-list .hours-row {
+    display: flex;
+    justify-content: space-between;
+    width: 220px; /* pas aan naar wens */
+}
+
+.contact-info {
+    padding: 1rem; /* of wat past bij jouw design */
+}
+
+.contact-card-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.contact-row {
+    display: flex;
+    gap: 2rem; /* ruimte tussen kaart en contactgegevens */
+    flex-wrap: wrap; /* mobiel: stapelen */
+}
+
+.contact-col {
+    flex: 1; /* beide kolommen nemen evenveel ruimte */
+    min-width: 300px; /* voorkom te klein op smalle schermen */
+}
+
+.contact-card-content {
+    flex: 1;
+}
+
+.hours-row {
+    display: flex;
+    justify-content: flex-start;
+    padding: 2px 0;
+}
+
+.hours-row .day {
+    width: 100px;
+    font-weight: 500;
 }
