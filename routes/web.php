@@ -9,6 +9,11 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\SignUpController;
 use App\Http\COntrollers\ReportController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\ReferenceVideoController;
+use App\Http\Controllers\UserExerciseController;
+
 // All links for the website
 //------------------------------------------------General-------------------------------------
 Route::get('/', [LoginController::class, 'showLogin'])->name('login.show');
@@ -33,6 +38,12 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showResetForm'
 Route::post('/forgot-password', [ForgotPasswordController::class, 'reset'])
     ->name('password.update');
 
+Route::get('/', function () {
+    return view('login');
+})->name('login');
+Route::get('/signup', function () {
+    return view('signup');
+});
 
 Route::get('/privacy-policy', function () {
     return view('privacy');
@@ -82,51 +93,45 @@ Route::get('/upload-exercises', function () {
     return view('fysio/upload_exercises');
 });
 
-
-// -------------------------------------------------- Backend Report Data ----------------------
-
+Route::get('/user-exercises', [ExerciseController::class, 'getUserExercises']);
+Route::post('/user-exercises/sync', [ExerciseController::class, 'sync']);
+Route::get('/user-calendar', [CalendarController::class, 'getUserCalendar']);
+Route::post('/calendar-exercise', [CalendarController::class, 'store']);
+Route::post('/calendar-update', [CalendarController::class,'update']);
+Route::post('/calendar-exercise/delete-day',[CalendarController::class,'deleteDay']);
+Route::post('/calendar-exercise/delete-week',[CalendarController::class,'deleteWeek']);
 Route::get('/report/get-executions', [ReportController::class, 'getExecutions']);
 
-//------------------------------- Tracking -------------------------------------------------
+// Reference storage routes
+Route::post('/reference-video',[ReferenceVideoController::class,'store'])->name('reference.video');
+Route::post('/reference-analysis',[ReferenceVideoController::class,'saveAnalysis'])->name('reference.analysis');
+Route::get('/reference/{exercise}',[ReferenceVideoController::class,'get'])->name('reference.get');
 
-Route::get('/motion', function () {
-    return view('motion');
+Route::get('/user-exercises',[UserExerciseController::class,'index']);
+Route::post('/user-exercises/sync',[UserExerciseController::class,'sync']);
+
+Route::get('/videos/{file}', function($file){
+    $path = storage_path('app/public/videos/' . $file);
+    if (!file_exists($path)) {
+        abort(404);
+    }
+    return response()->file($path, [
+        'Content-Type' => 'video/mp4',
+        'Access-Control-Allow-Origin' => '*',
+        'Access-Control-Allow-Methods' => 'GET',
+        'Access-Control-Allow-Headers' => 'Content-Type, Authorization'
+    ]);
 });
-// Fysio pagina (video upload en analyse)
-Route::get('/fysio', [FysioController::class, 'showUploadPage']);
-Route::post('/fysio/upload', [FysioController::class, 'uploadVideo'])->name('fysio.upload');
-Route::post('/fysio/analyze', [FysioController::class, 'analyzeVideo'])->name('fysio.analyze');
 
-// Serve public videos via Laravel to avoid webserver 403 on /storage
-Route::get('/videos/{file}', function ($file) {
-    if (!\Illuminate\Support\Facades\Storage::disk('public')->exists('videos/' . $file)) {
-        abort(404);
-    }
-    return \Illuminate\Support\Facades\Storage::disk('public')->response('videos/' . $file);
-})->where('file', '.*');
+Route::get('/data/{file}', function($file){
+    if (!Storage::disk('public')->exists("data/$file")) abort(404);
 
-// Serve public data files (JSON) via Laravel
-Route::get('/data/{file}', function ($file) {
-    if (!\Illuminate\Support\Facades\Storage::disk('public')->exists('data/' . $file)) {
-        abort(404);
-    }
-    return \Illuminate\Support\Facades\Storage::disk('public')->get('data/' . $file);
-})->where('file', '.*');
+    return response()->json(
+        json_decode(Storage::disk('public')->get("data/$file"), true)
+    );
+});
 
-// Patient pagina
-Route::get('/patient', [PatientController::class, 'showTrackingPage']);
 
-// Nieuwe routes voor referentie JSON en sessies
-Route::get('/patient/track/{exercise}', [PatientController::class, 'track'])->name('patient.track');
-Route::post('/sessions', [PatientController::class, 'storeSession'])->name('sessions.store');
-Route::post('/references', [FysioController::class, 'storeReference'])->name('references.store');
-Route::get('/references/{exercise}', [FysioController::class, 'getReference'])->name('references.get');
 
-// Endpoint voor patient om laatste referentie JSON op te halen (blijft voorlopig voor backward compat.)
-Route::get('/patient/data/latest', [PatientController::class, 'getLatestReference']);
 
-Route::get('/patient', [PatientController::class, 'showTrackingPage'])->name('patient.track');
-Route::get('/patient/{exercise}', [PatientController::class, 'track']);
-Route::post('/sessions', [PatientController::class, 'storeSession']);
-Route::get('/references/latest', [PatientController::class, 'getLatestReference']);
 

@@ -61,4 +61,23 @@ class User extends Authenticatable
     {
         return $this->hasOne(Physio::class, 'user_id', 'user_id');
     }
+
+
+public function exercises()
+{
+    // pivot: exercise_user (user_id, exercise_id)
+    return $this->belongsToMany(
+        Exercise::class,
+        'exercise_user',
+        'user_id',
+        'exercise_id'
+    )->withTimestamps();
 }
+
+public function calendarEntries()
+{
+    return $this->hasMany(CalendarEntry::class, 'user_id', 'user_id');
+}
+
+}
+

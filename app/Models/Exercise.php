@@ -10,19 +10,21 @@ class Exercise extends Model
     protected $primaryKey = 'exercise_id';
     public $timestamps = false;
 
-    protected $fillable = [
-        'exercise_name',
-        'exercise_description',
-        'exercise_video_path',
-    ];
+    protected $fillable = ['exercise_name','exercise_description'];
 
-    public function patients()
+    // 1 exercise -> 1 reference video
+    public function referenceVideo()
     {
-        return $this->belongsToMany(Patient::class, 'patientExerciseAssigned');
+        return $this->hasOne(ReferenceVideo::class, 'exercise_id', 'exercise_id');
     }
 
-    public function assignments()
+    public function calendarEntries()
     {
-        return $this->hasMany(PatientExerciseAssigned::class, 'exercise_id', 'exercise_id');
+        return $this->hasMany(CalendarEntry::class, 'exercise_id', 'exercise_id');
     }
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'exercise_user', 'exercise_id', 'user_id');
+    }
+
 }
