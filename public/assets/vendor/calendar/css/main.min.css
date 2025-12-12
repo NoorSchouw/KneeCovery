@@ -194,12 +194,12 @@ a.fc-event:hover {
 }
 
 .fc .fc-button-primary {
-  color: #646973;
-  color: var(--fc-button-text-color, #646973);
-  background-color: #d6dfe4;
-  background-color: var(--fc-button-bg-color, #d6dfe4);
-  border-color: #d6dfe4;
-  border-color: var(--fc-button-border-color, #d6dfe4);
+  color: #FD7596;
+  color: var(--fc-button-text-color, #FD7596);
+  background-color: #FD7596;
+  background-color: var(--fc-button-bg-color, #FD7596);
+  border-color: #FD7596;
+  border-color: var(--fc-button-border-color, #FD7596);
 }
 
 .fc .fc-button-primary:hover {
@@ -224,10 +224,10 @@ a.fc-event:hover {
 .fc .fc-button-primary:not(:disabled):active {
   color: #fff;
   color: var(--fc-button-text-color, #fff);
-  background-color: #18202b;
-  background-color: var(--fc-button-active-bg-color, #18202b);
-  border-color: #151e27;
-  border-color: var(--fc-button-active-border-color, #151e27);
+  background-color: #FD7596;
+  background-color: var(--fc-button-active-bg-color, #FD7596);
+  border-color: #FD7596;
+  border-color: var(--fc-button-active-border-color, #FD7596);
 }
 
 .fc .fc-button .fc-icon {
@@ -637,7 +637,7 @@ a.fc-event:hover {
 :root {
   --fc-daygrid-event-dot-width: 8px;
   --fc-list-event-dot-width: 10px;
-  --fc-list-event-hover-bg-color: #f5f5f5;
+  --fc-list-event-hover-bg-color: #faaa89;
 }
 
 .fc .fc-popover {
@@ -692,8 +692,8 @@ a.fc-event:hover {
 }
 
 .fc .fc-daygrid-day.fc-day-today {
-  background-color: rgba(0, 132, 217, 0.1);
-  background-color: #d9f3f2;
+  background-color: rgba(250, 170, 137, 0.5);
+
 }
 
 .fc .fc-daygrid-day-frame {

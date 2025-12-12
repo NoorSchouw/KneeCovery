@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // Exercise Progress Data (Week 1)
     // -------------------------------
     const exerciseProgress = {
-        heelSlides: [85, 88, 92, 95, 100, 105, 110],
-        squat: [80, 83, 87, 90, 95, 100, 105],
-        hamstringCurls: [82, 85, 88, 92, 97, 102, 108]
+        heelSlides: [95, 90, 92, 95, 100],
+        squat: [100, 95, 87, 90, 95, 100, 100],
+        hamstringCurls: [88, 85, 88, 92, 97, 100, 100]
     };
 
     const exerciseNames = {
@@ -40,14 +40,14 @@ document.addEventListener("DOMContentLoaded", function() {
             { name: exerciseNames.heelSlides + " (%)", data: exerciseProgress.heelSlides }
         ],
         xaxis: {
-            categories: ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7"],
+            categories: ["25/11", "27/11", "29/11", "01/12", "03/12", "05/12"],
             labels: { style: { fontSize: "13px", colors: "#6B7280", fontWeight: 500 } },
             axisBorder: { show: false },
             axisTicks: { show: false }
         },
         yaxis: {
             min: 80,
-            max: 120,
+            max: 100,
             labels: { style: { colors: "#9CA3AF" }, formatter: (val) => val + "%" }
         },
         grid: { borderColor: "#E5E7EB", strokeDashArray: 4 },

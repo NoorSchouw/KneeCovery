@@ -25,7 +25,7 @@
 .schedule-calendar .fc .fc-button-primary {
   background-color: transparent;
   border-color: transparent;
-  color: #566fe2;
+  color: #FD7596;
 }
 
 .schedule-calendar .fc .fc-toolbar-title {
@@ -43,12 +43,12 @@
 .schedule-calendar .fc a[data-navlink],
 .schedule-calendar .fc-event.fc-event-draggable,
 .schedule-calendar .fc-event[href] {
-  color: #566fe2;
+  color: #FD7596;
 }
 
 .schedule-calendar .fc .fc-button-primary:not(:disabled).fc-button-active,
 .fc .fc-button-primary:not(:disabled):active {
-  color: #566fe2;
+  color: #FD7596;
   background-color: transparent;
   border-color: transparent;
 }
@@ -142,12 +142,12 @@
 .fc .fc-button-primary:hover {
   border-color: #e9e7ff;
   background-color: #e9e7ff;
-  color: #566fe2;
+  color: #FD7596;
 }
 
 .fc .fc-button-primary:not(:disabled).fc-button-active {
-  border-color: #566fe2;
-  background-color: #566fe2;
+  border-color: #FD7596;
+  background-color: #FD7596;
 }
 
 .fc .fc-col-header-cell-cushion {
