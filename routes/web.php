@@ -13,6 +13,8 @@ use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ReferenceVideoController;
 use App\Http\Controllers\UserExerciseController;
+use App\Http\Controllers\PatientCalendarController;
+
 
 // All links for the website
 //------------------------------------------------General-------------------------------------
@@ -58,14 +60,14 @@ Route::get('/homepage', function () {
     return view('homepage');
 });
 
+//Calendar
 Route::get('/calendar', function () {
     return view('patient/calendar');
 });
+Route::get('/api/calendar', [PatientCalendarController::class, 'getUserCalendar']);
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/all-exercises', [PatientExerciseController::class, 'index'])
-        ->name('patient.exercises');
-});
+Route::get('/calendar-data', [PatientCalendarController::class, 'getUserCalendar'])
+    ->middleware('auth');
 
 // Patient report (frontend)
 Route::get('/patient-report', [ReportController::class, 'index']);
@@ -100,6 +102,8 @@ Route::post('/calendar-exercise', [CalendarController::class, 'store']);
 Route::post('/calendar-update', [CalendarController::class,'update']);
 Route::post('/calendar-exercise/delete-day',[CalendarController::class,'deleteDay']);
 Route::post('/calendar-exercise/delete-week',[CalendarController::class,'deleteWeek']);
+
+//Backend report
 Route::get('/report/get-executions', [ReportController::class, 'getExecutions']);
 
 // Reference storage routes

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Exercise;
 use App\Models\ReferenceVideo;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ReferenceVideoController extends Controller
 {
@@ -14,11 +15,18 @@ class ReferenceVideoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'exercise' => 'required|string',
             'video'    => 'nullable|file|mimes:mp4,mov,avi,webm|max:512000',
             'payload'  => 'nullable'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors'  => $validator->errors()
+            ], 422);
+        }
 
         // Zoek of maak oefening aan
         $exercise = Exercise::firstOrCreate(['exercise_name' => $request->exercise]);
