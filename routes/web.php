@@ -64,10 +64,13 @@ Route::get('/homepage', function () {
 Route::get('/calendar', function () {
     return view('patient/calendar');
 });
-Route::get('/api/calendar', [PatientCalendarController::class, 'getUserCalendar']);
 
 Route::get('/calendar-data', [PatientCalendarController::class, 'getUserCalendar'])
     ->middleware('auth');
+
+Route::get('/all-exercises', function () {
+    return view('/patient/exercises');
+});
 
 // Patient report (frontend)
 Route::get('/patient-report', [ReportController::class, 'index']);

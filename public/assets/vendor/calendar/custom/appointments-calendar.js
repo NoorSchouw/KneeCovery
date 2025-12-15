@@ -18,6 +18,12 @@ document.addEventListener("DOMContentLoaded", function () {
             failure: function () {
                 alert('Was not able to load the calendar');
             }
+        },
+
+        //Redirection naar /all-exercises
+        eventClick: function (info) {
+            info.jsEvent.preventDefault();
+            window.location.href = '/all-exercises';
         }
 
     });
