@@ -15,13 +15,34 @@ class CalendarController extends Controller
             ->where('user_id',$id)
             ->get()
             ->map(fn($c)=>[
+                'id' => $c->id, // 👈 DIT IS DE CRUCIALE REGEL
                 'exercise' => $c->exercise->exercise_name,
                 'date' => $c->date->format('Y-m-d'),
                 'settings' => $c->settings
             ]);
 
+
         return response()->json(['entries'=>$entries]);
     }
+
+    public function todayExercises($userId)
+    {
+        $today = now()->toDateString();
+
+        $entries = CalendarEntry::with('exercise')
+            ->where('user_id', $userId)
+            ->whereDate('date', $today)
+            ->get()
+            ->map(fn($c)=>[
+                'id' => $c->id, // 👈 BELANGRIJK
+                'exercise' => $c->exercise->exercise_name,
+                'settings' => $c->settings,
+                'date' => $c->date->format('Y-m-d'),
+            ]);
+
+        return response()->json($entries);
+    }
+
 
     public function store(Request $request){
         $request->validate([

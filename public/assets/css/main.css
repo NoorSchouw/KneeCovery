@@ -17690,6 +17690,7 @@ body {
     padding: 8px 16px;
     border-radius: 6px;
     border: none;
+    margin-top: 10px;
     background: #FD7596;
     color: #fff;
     font-weight: 600;
@@ -17703,6 +17704,11 @@ body {
 
 #recordBtn.recording {
     background: #FAAA89;
+}
+
+button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /* --- Video container --- */
@@ -17741,17 +17747,158 @@ body {
         flex-direction: column;
         align-items: center;
     }
+
     .controls-side {
         flex-direction: row;
         gap: 15px;
         justify-content: center;
         margin-top: 20px;
     }
+
     .filming-video-container {
         width: 100%;
         height: auto;
     }
+
+    #video-container {
+        position: relative; /* belangrijk zodat overlay kan positioneren */
+    }
 }
+    #countdown-overlay{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 90px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 15px rgba(0,0,0,0.9);
+        z-index: 9999;           /* zorgt dat het BOVEN video & canvas staat */
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        pointer-events: none;
+    }
+
+    #countdown-overlay.show{
+        display: block;
+        opacity: 1;
+    }
+
+/* Popup overlay */
+.popup-overlay{
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+/* Popup box */
+.popup-box{
+    background: #fff;
+    padding: 25px 35px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 280px;
+    box-shadow: 0 0 20px rgba(0,0,0,.3);
+}
+
+.popup-box h3{
+    color:#333;
+    margin-bottom:10px;
+}
+
+.popup-buttons{
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    margin-top:20px;
+}
+
+.btn-save, .btn-retry{
+    padding:8px 16px;
+    border-radius:6px;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-save{
+    background:#76d1a2;
+    color:#fff;
+}
+
+.btn-retry{
+    background:#FAAA89;
+    color:#fff;
+}
+
+.popup-overlay.show{
+    display:flex;
+}
+.popup-text {
+    color: black;
+    font-weight: 600;
+}
+
+/* Zorg dat video links & controls rechts blijven staan */
+.filming-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    flex-wrap: nowrap; /* voorkomt dat hij onder webcam valt */
+}
+
+/* Linkerkant */
+.video-side {
+    flex: 0 0 auto;
+}
+
+/* Rechterkant */
+.controls-side {
+    flex: 0 0 300px;      /* vaste breedte zodat hij niet wrapt */
+    max-width: 350px;
+}
+
+/* Zorg dat label boven select komt */
+.filming-controls label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+/* Forceer dat alles in filming-controls onder elkaar staat */
+.filming-controls {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start;
+    gap: 6px; /* ruimte tussen label en dropdown */
+}
+
+.filming-controls label {
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+#exerciseSelect {
+    width: 75%;
+    height: auto;
+    padding: 8px 10px;
+    font-size: 15px;
+    border-radius: 6px;
+}
+#exerciseSelect {width:75%;padding:7px;font-size:15px;border-radius:6px;white-space:normal;}
+#matchScore {font-size:18px;font-weight:bold;margin-top:6px;color:#353333;}
+#feedbackBox {font-size:18px;font-weight:bold;margin-top:4px;color:#ef4444;}
+
+
 
 /* =========================================
    KneeCovery – Upload Exercises Styling
