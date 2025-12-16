@@ -14,7 +14,9 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ReferenceVideoController;
 use App\Http\Controllers\UserExerciseController;
 use App\Http\Controllers\PatientCalendarController;
-
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ExerciseExecutionController;
+use Illuminate\Support\Facades\Response;
 
 // All links for the website
 //------------------------------------------------General-------------------------------------
@@ -105,6 +107,7 @@ Route::post('/calendar-exercise', [CalendarController::class, 'store']);
 Route::post('/calendar-update', [CalendarController::class,'update']);
 Route::post('/calendar-exercise/delete-day',[CalendarController::class,'deleteDay']);
 Route::post('/calendar-exercise/delete-week',[CalendarController::class,'deleteWeek']);
+Route::get('/patient/today-exercises/{userId}', [CalendarController::class, 'todayExercises']);
 
 //Backend report
 Route::get('/report/get-executions', [ReportController::class, 'getExecutions']);
@@ -116,6 +119,11 @@ Route::get('/reference/{exercise}',[ReferenceVideoController::class,'get'])->nam
 
 Route::get('/user-exercises',[UserExerciseController::class,'index']);
 Route::post('/user-exercises/sync',[UserExerciseController::class,'sync']);
+
+Route::post('/exercise/store', [ExerciseExecutionController::class, 'store']);
+
+Route::post('/exercise-executions', [ExerciseExecutionController::class, 'store']);
+
 
 Route::get('/videos/{file}', function($file){
     $path = storage_path('app/public/videos/' . $file);
@@ -138,7 +146,33 @@ Route::get('/data/{file}', function($file){
     );
 });
 
+//Filming page
 
 
+Route::get('/patient/today-exercises/{user}', function($user){
+    $today = date('Y-m-d');
+
+    return DB::table('calendar_entries')
+        ->join('exercise', 'calendar_entries.exercise_id', '=', 'exercise.exercise_id')
+        ->where('calendar_entries.user_id', $user)
+        ->whereDate('calendar_entries.date', $today)
+        ->select(
+            'exercise.exercise_name as exercise',
+            'calendar_entries.settings',
+            'calendar_entries.date'
+        )
+        ->get();
+});
+
+Route::get('/video/{execution}', function ($execution) {
+
+    $exec = \App\Models\ExerciseExecution::findOrFail($execution);
+
+    $path = storage_path('app/public/' . $exec->execution_video_path);
+
+    return response()->file($path, [
+        'Content-Type' => 'video/webm'
+    ]);
+});
 
 

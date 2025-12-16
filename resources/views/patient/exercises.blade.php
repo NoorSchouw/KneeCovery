@@ -77,7 +77,7 @@
                         <x-exercise-card
                             :title="$exercise->exercise_name"
                             :video="$exercise->exercise_video_path"
-                            :steps="explode('|', $exercise->exercise_description)"
+                            :steps="explode('|', (string) $exercise->exercise_description)"
                         />
                     @endforeach
                 @endif

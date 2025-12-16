@@ -26,7 +26,11 @@
                     </div>
 
                     <div class="text-end">
-                        <a href="{{url("/filming")}}" class="btn btn-primary">Start Exercise</a>
+                        @if(isset($schedule) && $schedule)
+                            <a href="{{ route('filming.show', ['assignment' => $assignment->assignment_id, 'schedule' => $schedule->schedule_id]) }}" class="btn btn-primary">Start Exercise</a>
+                        @else
+                            <span class="text-muted">Not scheduled for today</span>
+                        @endif
                     </div>
 
                 </div>
