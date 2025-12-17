@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientExerciseController;
 use App\Http\Controllers\FysioController;
@@ -43,9 +44,12 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/patient-report', function () {
     return view('/patient/report');
 });
-Route::get('/information', function () {
-    return view('/patient/information');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/information', [InformationController::class, 'information'])->name('patient.information');
+    Route::post('/information/update', [InformationController::class, 'update'])->name('patient.information.update');
 });
+
 Route::get('/filming', function () {
     return view('/patient/filming');
 });
