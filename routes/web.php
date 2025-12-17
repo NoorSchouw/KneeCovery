@@ -54,6 +54,10 @@ Route::get('/filming', function () {
 Route::get('/report', function () {
     return view('/fysio/report');
 });
+
+Route::get('/patients/{user}/report', [AddPatientsController::class, 'report'])
+    ->name('patients.report');
+
 Route::get('/upload-exercises', function () {
     return view('/fysio/upload_exercises');
 });
@@ -95,21 +99,4 @@ Route::get('/references/{exercise}', [FysioController::class, 'getReference'])->
 
 Route::resource('patients', AddPatientsController::class);
 
-
-// GET alle patiënten (optioneel)
-Route::get('/patients', function () {
-    return view('/fysio/patients'); // jouw Blade view
-})->name('patients.index');
-
-// CREATE (save)
-Route::post('/patients', [AddPatientsController::class, 'store'])
-    ->name('patients.store');
-
-// UPDATE (edit)
-Route::put('/patients/{id}', [AddPatientsController::class, 'update'])
-    ->name('patients.update');
-
-// DELETE
-Route::delete('/patients/{id}', [AddPatientsController::class, 'destroy'])
-    ->name('patients.destroy');
 

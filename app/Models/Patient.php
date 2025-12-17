@@ -25,12 +25,9 @@ class Patient extends Model
         'start_date',
         'treatment_status',
         'medical_notes',
-        'injured_knee',
-        'mobile',
-        'address',
-        'country',
-        'city',
-        'postal_code'
+        'phone_number',
+        'date_of_birth',
+        'patient_number', // new
     ];
 
     // Optioneel: als je datatypes wilt casten
@@ -67,4 +64,10 @@ class Patient extends Model
         return $this->belongsTo(Physio::class, 'physio_number', 'physio_number');
         // 'physio_number' in patient verwijst naar physio_number in physiotherapist
     }
+
+    public function injury()
+    {
+        return $this->hasOne(PatientInjury::class, 'user_id', 'user_id');
+    }
+
 }

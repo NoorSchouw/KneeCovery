@@ -10,8 +10,8 @@ class PatientInjury extends Model
     public $timestamps = false;
 
     // composite PK — manually managed
-    protected $primaryKey = ['user_id', 'phy_user_id', 'affected_area', 'physio_number'];
-    public $incrementing = false;
+    protected $primaryKey = 'id'; // single primary key
+    public $incrementing = true;
 
     protected $fillable = [
         'affected_area',

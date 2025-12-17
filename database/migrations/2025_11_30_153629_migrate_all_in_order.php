@@ -26,6 +26,9 @@ return new class extends Migration {
             '2025_11_28_081814_create_exercise_execution_table',
             '2025_11_28_081817_create_patient_injury_table',
             '2025_11_28_081817_create_progress_table',
+            '2025_11_27_120336_create_exercise_user_table',
+            '2025_11_27_120400_create_reference_videos_table',
+            '2025_11_27_120346_create_calendar_entries_table',
         ];
 
         foreach ($migrations as $migration) {
@@ -58,6 +61,9 @@ return new class extends Migration {
             '2025_11_28_081814_create_exercise_execution_table',
             '2025_11_28_081817_create_patient_injury_table',
             '2025_11_28_081817_create_progress_table',
+            '2025_11_27_120336_create_exercise_user_table',
+            '2025_11_27_120400_create_reference_videos_table',
+            '2025_11_27_120346_create_calendar_entries_table',
         ]);
 
         foreach ($migrations as $migration) {
