@@ -1,5 +1,6 @@
     <?php
 
+    use App\Models\PatientInjury;
     use Illuminate\Database\Migrations\Migration;
     use Illuminate\Database\Schema\Blueprint;
     use Illuminate\Support\Facades\Schema;
@@ -35,5 +36,13 @@
         {
             Schema::dropIfExists('patient');
         }
+
+        public function injury()
+        {
+            return $this->hasOne(PatientInjury::class, 'user_id', 'user_id')
+                ->where('phy_user_id', auth()->user()->user_id)
+                ->where('physio_number', auth()->user()->physiotherapist->physio_number ?? 1);
+        }
+
     };
 

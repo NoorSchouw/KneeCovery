@@ -1,37 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Select patients - Physiotherapist page </title>
+    <title>Select patients - Physiotherapist page</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/remix/remixicon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/overlay-scroll/OverlayScrollbars.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/dataTables.bs5.css') }}">
 </head>
-
 <body>
 
 <div class="page-wrapper">
-
     <div class="main-container">
-
-        <!-- Sidebar Component -->
         <x-sidebar-physio/>
-
-        <!-- App container -->
         <div class="app-container">
-
-            <!-- Header Component -->
             <x-header/>
 
-            <!-- Hero Header -->
             <div class="app-hero-header d-flex justify-content-between align-items-center">
-
-                <!-- Breadcrumb -->
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item">
                         <a href="{{ url('/homepage') }}"><i class="ri-home-3-line"></i></a>
@@ -39,83 +26,82 @@
                     <li class="breadcrumb-item text-primary">Patients</li>
                 </ol>
 
-                <!-- Search container starts -->
-                <div class="search-container d-xl-block d-none">
-                    <input type="text" class="form-control" id="searchId" placeholder="Search"
-                           style="border: 2px solid lightgray; border-radius: 5px;">
-                    <i class="ri-search-line"></i>
-                </div>
-                <!-- Search container ends -->
-
-                <!-- Add Patient Button -->
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPatientModal">
                     Add Patient
                 </button>
-
             </div>
 
-            <!-- Body -->
             <div class="app-body">
                 <div class="row gx-4">
                     <div class="col-sm-12">
-                        <!-- Card met afgeronde hoeken -->
                         <div class="card" style="border-radius: 12px; overflow: hidden;">
-
                             <div class="card-body pt-0 p-0">
-
                                 <div class="table-responsive">
-                                    <table class="table truncate m-0 align-middle" id="patientsTable">
+                                    <table class="table align-middle">
                                         <thead>
-                                        <tr>
+                                        <tr class="table-header-pink">
                                             <th>ID</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Patient Number</th>
+                                            <th>First name</th>
+                                            <th>Last name</th>
+                                            <th>Patient number</th>
                                             <th>Gender</th>
-                                            <th>Date of Birth</th>
-                                            <th>Actions</th>
+                                            <th>Date of birth</th>
+                                            <th class="text-center">Actions</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>#0001</td>
-                                            <td>Jane</td>
-                                            <td>Doe</td>
-                                            <td>349157</td>
-                                            <td>Female</td>
-                                            <td>1982-06-15</td>
-                                            <td>
-                                                <button class="btn btn-outline-success btn-sm editBtn" data-firstname="Jane" data-lastname="Doe" data-number="349157" data-gender="Female" data-dob="1982-06-15" data-bs-toggle="modal" data-bs-target="#editPatientModal"><i class="ri-edit-box-line"></i></button>
-                                                <button class="btn btn-outline-info btn-sm viewBtn" data-number="349157"><i class="ri-eye-line"></i></button>
-                                                <button class="btn btn-outline-danger btn-sm deleteBtn"><i class="ri-delete-bin-line"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#0002</td>
-                                            <td>John</td>
-                                            <td>Doe</td>
-                                            <td>648515</td>
-                                            <td>Male</td>
-                                            <td>1964-07-19</td>
-                                            <td>
-                                                <button class="btn btn-outline-success btn-sm editBtn" data-firstname="John" data-lastname="Doe" data-number="648515" data-gender="Male" data-dob="1964-07-19" data-bs-toggle="modal" data-bs-target="#editPatientModal"><i class="ri-edit-box-line"></i></button>
-                                                <button class="btn btn-outline-info btn-sm viewBtn" data-number="648515"><i class="ri-eye-line"></i></button>
-                                                <button class="btn btn-outline-danger btn-sm deleteBtn"><i class="ri-delete-bin-line"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#0003</td>
-                                            <td>Baby</td>
-                                            <td>Doe</td>
-                                            <td>852146</td>
-                                            <td>Female</td>
-                                            <td>1985-03-27</td>
-                                            <td>
-                                                <button class="btn btn-outline-success btn-sm editBtn" data-firstname="Jane" data-lastname="Doe" data-number="349157" data-gender="Female" data-dob="1982-06-15" data-bs-toggle="modal" data-bs-target="#editPatientModal"><i class="ri-edit-box-line"></i></button>
-                                                <button class="btn btn-outline-info btn-sm viewBtn" data-number="349157"><i class="ri-eye-line"></i></button>
-                                                <button class="btn btn-outline-danger btn-sm deleteBtn"><i class="ri-delete-bin-line"></i></button>
-                                            </td>
-                                        </tr>
+                                        @foreach($patients as $patient)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $patient->user->first_name }}</td>
+                                                <td>{{ $patient->user->last_name }}</td>
+                                                <td>{{ $patient->patient_number }}</td>
+                                                <td>{{ ucfirst($patient->user->gender) }}</td>
+                                                <td>{{ $patient->date_of_birth }}</td>
+
+                                                <td class="text-center">
+
+                                                    <!-- EDIT BUTTON -->
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-outline-success btn-sm editBtn"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editPatientModal"
+
+                                                        data-id="{{ $patient->user_id }}"
+                                                        data-first_name="{{ $patient->user->first_name }}"
+                                                        data-last_name="{{ $patient->user->last_name }}"
+                                                        data-email="{{ $patient->user->email }}"
+                                                        data-gender="{{ $patient->user->gender }}"
+                                                        data-dob="{{ $patient->date_of_birth }}"
+                                                        data-phone="{{ $patient->phone_number }}"
+                                                        data-injured="{{ optional($patient->injury)->affected_area }}"
+                                                        data-notes="{{ $patient->medical_notes }}"
+                                                    >
+                                                        <i class="ri-edit-box-line"></i>
+                                                    </button>
+
+                                                    <!-- DELETE BUTTON -->
+                                                    <form action="{{ route('patients.destroy', $patient->user_id) }}"
+                                                          method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-outline-danger btn-sm"
+                                                                onclick="return confirm('Are you sure you want to delete this patient?')">
+                                                            <i class="ri-delete-bin-line"></i>
+                                                        </button>
+                                                    </form>
+
+                                                    <!-- REPORT BUTTON -->
+                                                    <a href="{{ route('patients.report', $patient->user_id) }}"
+                                                       class="btn btn-outline-info btn-sm"
+                                                       title="View Report">
+                                                        <i class="ri-file-list-3-line"></i>
+                                                    </a>
+
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -124,85 +110,154 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 
-<!-- Edit Patient Modal -->
-<div class="modal fade" id="editPatientModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5>Edit Patient Details</h5>
-                <button class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="editPatientForm">
-                    <div class="mb-3"><label>First Name</label><input type="text" id="editFirstName" class="form-control"></div>
-                    <div class="mb-3"><label>Last Name</label><input type="text" id="editLastName" class="form-control"></div>
-                    <div class="mb-3"><label>Patient Number</label><input type="text" id="editPatientNum" class="form-control"></div>
-                    <div class="mb-3"><label>Gender</label>
-                        <select id="editGender" class="form-select">
-                            <option value="Female">Female</option>
-                            <option value="Male">Male</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div class="mb-3"><label>Date of Birth</label><input type="date" id="editDob" class="form-control"></div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary" id="savePatientBtn">Save Changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Add Patient Modal -->
+<!-- ADD PATIENT MODAL -->
 <div class="modal fade" id="addPatientModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5>Add Patient</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="addPatientForm">
-                    <div class="mb-3"><label>First Name</label><input type="text" id="addFirstName" class="form-control" required></div>
-                    <div class="mb-3"><label>Last Name</label><input type="text" id="addLastName" class="form-control" required></div>
-                    <div class="mb-3"><label>Patient Number (from dossier)</label><input type="text" id="addPatientNumber" class="form-control"></div>
-                    <div class="mb-3"><label>Gender</label>
-                        <select id="addGender" class="form-select">
-                            <option value="Female">Female</option>
-                            <option value="Male">Male</option>
-                            <option value="Other">Other</option>
+            <form method="POST" action="{{ route('patients.store') }}">
+                @csrf
+                <div class="modal-header">
+                    <h5>Add Patient</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label>First Name *</label>
+                        <input type="text" name="first_name" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Last Name *</label>
+                        <input type="text" name="last_name" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Patient Number *</label>
+                        <input type="text" name="patient_number" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Gender *</label>
+                        <select name="gender" class="form-select" required>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
-                    <div class="mb-3"><label>Date of Birth</label><input type="date" id="addDob" class="form-control" required></div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-success" id="saveNewPatient">Add Patient</button>
-            </div>
+
+                    <div class="mb-3">
+                        <label>Date of Birth *</label>
+                        <input type="date" name="dob" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Phone Number</label>
+                        <input type="text" name="phone_number" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Injured Knee *</label>
+                        <select name="injured_knee" class="form-select" required>
+                            <option value="left knee">Left</option>
+                            <option value="right knee">Right</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Medical Notes</label>
+                        <textarea name="medical_notes" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Add Patient</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<!-- Delete Patient Modal -->
-<div class="modal fade" id="deletePatientModal" tabindex="-1">
-    <div class="modal-dialog modal-sm">
+<!-- EDIT PATIENT MODAL -->
+<div class="modal fade" id="editPatientModal" tabindex="-1">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5>Confirm</h5>
-                <button class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">Are you sure you want to delete this patient?</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                <button class="btn btn-danger" id="confirmDeleteBtn" data-bs-dismiss="modal">Yes</button>
-            </div>
+            <form id="editPatientForm" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="modal-header">
+                    <h5>Edit Patient</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label>First Name</label>
+                        <input type="text" name="edit_first_name" id="editFirstName" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Last Name</label>
+                        <input type="text" name="edit_last_name" id="editLastName" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email" name="edit_email" id="editEmail" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Gender</label>
+                        <select name="edit_gender" id="editGender" class="form-select" required>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Date of Birth</label>
+                        <input type="date" name="edit_dob" id="editDob" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Phone Number</label>
+                        <input type="text" name="edit_phone_number" id="editPhoneNumber" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Injured Knee</label>
+                        <select name="edit_injured_knee" id="editInjuredKnee" class="form-select" required>
+                            <option value="left knee">Left</option>
+                            <option value="right knee">Right</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Medical Notes</label>
+                        <textarea name="edit_medical_notes" id="editMedicalNotes" class="form-control"></textarea>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -211,91 +266,24 @@
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
 <script>
-    $(document).ready(function(){
-        let rowToEdit = null;
-        let rowToDelete = null;
+    $(document).ready(function () {
 
-        // Edit button
-        $(document).on("click", ".editBtn", function(){
-            rowToEdit = $(this).closest("tr");
-            $("#editFirstName").val($(this).data("firstname"));
-            $("#editLastName").val($(this).data("lastname"));
-            $("#editPatientNum").val($(this).data("number"));
-            $("#editGender").val($(this).data("gender"));
-            $("#editDob").val($(this).data("dob"));
+        $('.editBtn').on('click', function () {
+
+            const btn = $(this);
+
+            $('#editFirstName').val(btn.data('first_name'));
+            $('#editLastName').val(btn.data('last_name'));
+            $('#editEmail').val(btn.data('email') || '');
+            $('#editGender').val(btn.data('gender'));
+            $('#editDob').val(btn.data('dob'));
+            $('#editPhoneNumber').val(btn.data('phone') || '');
+            $('#editInjuredKnee').val(btn.data('injured'));
+            $('#editMedicalNotes').val(btn.data('notes') || '');
+
+            $('#editPatientForm').attr('action', '/patients/' + btn.data('id'));
         });
 
-        // Save edited patient
-        $("#savePatientBtn").click(function(){
-            if(rowToEdit){
-                rowToEdit.find("td:eq(1)").html('<img src="{{ asset('assets/images/doctor.png') }}" class="img-2x rounded-5 me-1">'+$("#editFirstName").val());
-                rowToEdit.find("td:eq(2)").text($("#editLastName").val());
-                rowToEdit.find("td:eq(3)").text($("#editPatientNum").val());
-                rowToEdit.find("td:eq(4)").text($("#editGender").val());
-                rowToEdit.find("td:eq(5)").text($("#editDob").val());
-
-                rowToEdit.find(".editBtn")
-                    .data("firstname", $("#editFirstName").val())
-                    .data("lastname", $("#editLastName").val())
-                    .data("number", $("#editPatientNum").val())
-                    .data("gender", $("#editGender").val())
-                    .data("dob", $("#editDob").val());
-            }
-            $("#editPatientModal").modal("hide");
-        });
-
-        // Delete button
-        $(document).on("click", ".deleteBtn", function(){
-            rowToDelete = $(this).closest("tr");
-            $("#deletePatientModal").modal("show");
-        });
-
-        // Confirm delete
-        $("#confirmDeleteBtn").click(function(){
-            if(rowToDelete) rowToDelete.remove();
-        });
-
-        // View Profile button
-        $(document).on("click", ".viewBtn", function(){
-            const patientNumber = $(this).data("number");
-            window.location.href = `/report/${patientNumber}`;
-        });
-
-        // Add patient
-        $("#saveNewPatient").click(function(){
-            const first = $("#addFirstName").val().trim();
-            const last = $("#addLastName").val().trim();
-            const number = $("#addPatientNumber").val().trim();
-            const gender = $("#addGender").val();
-            const dob = $("#addDob").val();
-
-            if(!first || !last || !dob){
-                alert("Please fill in First Name, Last Name, and Date of Birth.");
-                return;
-            }
-
-            const tbody = $("#patientsTable tbody");
-            const rowCount = tbody.find("tr").length;
-            const newId = '#' + String(rowCount+1).padStart(4,'0');
-
-            const newRow = `<tr>
-            <td>${newId}</td>
-            <td><img src="assets/images/doctor.png" class="img-2x rounded-5 me-1">${first}</td>
-            <td>${last}</td>
-            <td>${number}</td>
-            <td>${gender}</td>
-            <td>${dob}</td>
-            <td>
-                <button class="btn btn-outline-success btn-sm editBtn" data-firstname="${first}" data-lastname="${last}" data-number="${number}" data-gender="${gender}" data-dob="${dob}" data-bs-toggle="modal" data-bs-target="#editPatientModal"><i class="ri-edit-box-line"></i></button>
-                <button class="btn btn-outline-info btn-sm viewBtn" data-number="${number}"><i class="ri-eye-line"></i></button>
-                <button class="btn btn-outline-danger btn-sm deleteBtn"><i class="ri-delete-bin-line"></i></button>
-            </td>
-        </tr>`;
-
-            tbody.append(newRow);
-            $("#addPatientModal").modal("hide");
-            $("#addPatientForm")[0].reset();
-        });
     });
 </script>
 

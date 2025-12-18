@@ -17,6 +17,9 @@ use App\Http\Controllers\PatientCalendarController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ExerciseExecutionController;
 use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\AddPatientsController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 // All links for the website
 //------------------------------------------------General-------------------------------------
@@ -77,8 +80,9 @@ Route::get('/all-exercises', function () {
 // Patient report (frontend)
 Route::get('/patient-report', [ReportController::class, 'index']);
 
-Route::get('/information', function () {
-    return view('patient/information');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/information', [InformationController::class, 'information'])->name('patient.information');
+    Route::post('/information/update', [InformationController::class, 'update'])->name('patient.information.update');
 });
 
 Route::get('/filming', function () {
@@ -95,6 +99,9 @@ Route::get('/patients', function () {
 Route::get('/report', function () {
     return view('physio/report');     // <-- juiste folder + bestand
 })->name('physio.report');
+
+Route::get('/patients/{user}/report', [AddPatientsController::class, 'report'])
+    ->name('patients.report');
 
 Route::get('/upload-exercises', function () {
     return view('fysio/upload_exercises');
@@ -175,4 +182,7 @@ Route::get('/video/{execution}', function ($execution) {
     ]);
 });
 
+//-----------------------------AddPatients---------------------------------------------------------
+
+Route::resource('patients', AddPatientsController::class);
 
