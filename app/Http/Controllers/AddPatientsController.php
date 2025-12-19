@@ -127,7 +127,7 @@ class AddPatientsController extends Controller
         $patient = Patient::with(['user', 'injury'])->findOrFail($user_id);
 
         // Pass the patient data to the report view
-        return view('fysio.report', compact('patient'));
+        return view('fysio.upload_exercises', compact('patient'));
     }
 
 }

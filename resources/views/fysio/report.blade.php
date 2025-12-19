@@ -123,7 +123,7 @@
 <script src="{{ asset('assets/vendor/apex/apexcharts.min.js') }}"></script>
 
 <!-- Your logic -->
-<script src="{{ asset('assets/js/Fysio.js') }}"></script>
+<script src="{{ asset('assets/js/Report.js') }}"></script>
 
 </body>
 </html>

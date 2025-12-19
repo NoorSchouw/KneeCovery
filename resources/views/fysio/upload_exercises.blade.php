@@ -7,7 +7,7 @@
 
     <!-- CSRF + USER ID -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="user-id" content="{{ 1 }}">
+    <meta name="user-id" content="{{ auth()->user()->id ?? 1 }}">
 
     <!-- Existing styles -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/remix/remixicon.css') }}">

@@ -8,30 +8,34 @@ use Illuminate\Http\Request;
 
 class ExerciseController extends Controller
 {
-    public function getUserExercises(){
-        $user = auth()->user() ?? User::find(1);
+    // Haal oefeningen op voor een specifieke patiënt (user uit URL)
+    public function getUserExercises(User $user)
+    {
         return response()->json([
-            'exercises' => $user->calendarEntries->pluck('exercise.exercise_name')->unique()->values()
+            'exercises' => $user->calendarEntries
+                ->pluck('exercise.exercise_name')
+                ->unique()
+                ->values()
         ]);
     }
 
-    public function sync(Request $request){
+    // Sync oefeningen naar een specifieke patiënt
+    public function sync(Request $request, User $user)
+    {
         $request->validate([
-            'user_id'=>'required',
-            'exercises'=>'required|array'
+            'exercises' => 'required|array'
         ]);
 
-        $user = User::find($request->user_id);
-
-        $exerciseIds = collect($request->exercises)->map(function($name){
+        $exerciseIds = collect($request->exercises)->map(function ($name) {
             return Exercise::firstOrCreate(
-                ['exercise_name'=>$name],
-                ['exercise_description'=>'']
+                ['exercise_name' => $name],
+                ['exercise_description' => '']
             )->exercise_id;
         });
 
+        // Belangrijk: gebruik de User uit de URL ($user), NIET auth()->user()
         $user->exercises()->sync($exerciseIds);
 
-        return response()->json(['success'=>true]);
+        return response()->json(['success' => true]);
     }
 }
