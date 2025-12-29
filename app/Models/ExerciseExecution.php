@@ -7,27 +7,30 @@ use Illuminate\Database\Eloquent\Model;
 class ExerciseExecution extends Model
 {
     protected $table = 'excerciseExecution';
-    protected $primaryKey = ['schedule_id', 'execution_id']; // composite key (manual)
-    public $incrementing = false;
-    public $timestamps = false;
-
+    protected $primaryKey = 'execution_id';
+    public $timestamps = false; // laten staan
     protected $fillable = [
-        'schedule_id',
-        'execution_id',
-        'assignment_id',
+        'calendar_entry_id',
         'execution_date',
         'feedback',
         'score',
+        'match_percentage',
+        'min_angle',
+        'max_angle',
         'start_time',
         'end_time',
         'duration',
         'execution_video_path',
     ];
 
-    public function schedule()
+
+
+
+    public function calendarEntry()
     {
-        return $this->belongsTo(ExerciseSchedule::class, 'schedule_id', 'schedule_id');
+        return $this->belongsTo(CalendarEntry::class, 'calendar_entry_id');
     }
+
 
     public function assignment()
     {
