@@ -7,7 +7,7 @@
 
     <!-- CSRF + USER ID -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="user-id" content="{{ 1 }}">
+    <meta name="selected-patient-id" content="{{ session('selected_patient_id') ?? '' }}">
 
     <!-- Existing styles -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/remix/remixicon.css') }}">
@@ -196,8 +196,14 @@
     document.addEventListener("DOMContentLoaded", function() {
         // ----- Globals -----
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
-        const metaUser = document.querySelector('meta[name="user-id"]')?.getAttribute('content');
-        const userId = metaUser && metaUser !== '' ? metaUser : 1; // fallback voor testen
+        // Get selected patient ID from session meta
+        const metaPatient = document.querySelector('meta[name="selected-patient-id"]');
+        const userId = metaPatient && metaPatient.getAttribute('content') || null;
+
+        if (!userId) {
+            alert("No patient selected. Please select a patient first.");
+            window.location.href = "/patients"; // redirect to patient selector
+        }
 
         const exerciseList = document.getElementById("exerciseList");
         const addExerciseBtn = document.getElementById("addExerciseBtn");

@@ -126,8 +126,11 @@ class AddPatientsController extends Controller
     {
         $patient = Patient::with(['user', 'injury'])->findOrFail($user_id);
 
-        // Pass the patient data to the report view
+        // Store selected patient in a session, so I can access the selected user all the time
+        session([
+            'selected_patient_id' => $patient->user_id
+        ]);
+
         return view('fysio.report', compact('patient'));
     }
-
 }

@@ -27,8 +27,11 @@ return new class extends Migration {
             '2025_11_28_081817_create_patient_injury_table',
             '2025_11_28_081817_create_progress_table',
             '2025_11_27_120336_create_exercise_user_table',
-            '2025_11_27_120400_create_reference_videos_table',
-            '2025_11_27_120346_create_calendar_entries_table',
+            '0013_create_reference_videos_table',
+            '0014_create_calendar_entries_table',
+            '2025_12_15_120604_refactor_excercise_execution_use_calendar_entry',
+            '2025_12_15_141856_add_metrics_to_excercise_execution',
+            '2025_12_16_115312_add_missing_columns_to_patient_table'
         ];
 
         foreach ($migrations as $migration) {
@@ -48,22 +51,25 @@ return new class extends Migration {
     {
         // Rollback in precise reverse order
         $migrations = array_reverse([
-            '0001_01_01_000000_create_users_table',
-            '0001_01_01_000001_create_cache_table',
-            '0001_01_01_000002_create_jobs_table',
-            '2025_11_27_123704_create_user_table',
-            '2025_11_27_134350_create_physiotherapist_table',
-            '2025_11_28_081813_create_exercise_table',
-            '2025_11_28_081816_create_injury_table',
-            '2025_11_27_132948_create_patient_table',
-            '2025_11_28_081815_create_patient_exercise_assigned_table',
-            '2025_11_28_081813_create_exercise_schedule_table',
-            '2025_11_28_081814_create_exercise_execution_table',
-            '2025_11_28_081817_create_patient_injury_table',
-            '2025_11_28_081817_create_progress_table',
-            '2025_11_27_120336_create_exercise_user_table',
-            '2025_11_27_120400_create_reference_videos_table',
-            '2025_11_27_120346_create_calendar_entries_table',
+                      '0001_01_01_000000_create_users_table',
+                      '0001_01_01_000001_create_cache_table',
+                      '0001_01_01_000002_create_jobs_table',
+                      '2025_11_27_123704_create_user_table',
+                      '2025_11_27_134350_create_physiotherapist_table',
+                      '2025_11_28_081813_create_exercise_table',
+                      '2025_11_28_081816_create_injury_table',
+                      '2025_11_27_132948_create_patient_table',
+                      '2025_11_28_081815_create_patient_exercise_assigned_table',
+                      '2025_11_28_081813_create_exercise_schedule_table',
+                      '2025_11_28_081814_create_exercise_execution_table',
+                      '2025_11_28_081817_create_patient_injury_table',
+                      '2025_11_28_081817_create_progress_table',
+                      '2025_11_27_120336_create_exercise_user_table',
+                      '2025_11_27_120400_create_reference_videos_table',
+                      '2025_11_27_120346_create_calendar_entries_table',
+                      '2025_12_15_120604_refactor_excercise_execution_use_calendar_entry',
+                      '2025_12_15_141856_add_metrics_to_excercise_execution',
+                      '2025_12_16_115312_add_missing_columns_to_patient_table'
         ]);
 
         foreach ($migrations as $migration) {

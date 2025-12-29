@@ -66,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/filming', function () {
     return view('/patient/filming');
-});
+})->name('filming.show');
 
 //----------------------------------------------------Physio----------------------------------
 Route::get('/report', function () {
@@ -76,18 +76,21 @@ Route::get('/report', function () {
 Route::get('/patients/{user}/report', [AddPatientsController::class, 'report'])
     ->name('patients.report');
 
-Route::get('/upload-exercises', function () {
-    return view('/fysio/upload_exercises');
-});
-
 Route::get('/user-exercises', [ExerciseController::class, 'getUserExercises']);
 Route::post('/user-exercises/sync', [ExerciseController::class, 'sync']);
-Route::get('/user-calendar', [CalendarController::class, 'getUserCalendar']);
-Route::post('/calendar-exercise', [CalendarController::class, 'store']);
-Route::post('/calendar-update', [CalendarController::class,'update']);
-Route::post('/calendar-exercise/delete-day',[CalendarController::class,'deleteDay']);
-Route::post('/calendar-exercise/delete-week',[CalendarController::class,'deleteWeek']);
-Route::get('/patient/today-exercises/{userId}', [CalendarController::class, 'todayExercises']);
+Route::middleware(['auth', 'patient.selected'])->group(function () {
+
+    Route::get('/upload-exercises', function () {
+        return view('/fysio/upload_exercises');
+    });
+    Route::get('/user-calendar', [CalendarController::class, 'getUserCalendar']);
+    Route::post('/calendar-exercise', [CalendarController::class, 'store']);
+    Route::post('/calendar-update', [CalendarController::class,'update']);
+    Route::post('/calendar-exercise/delete-day',[CalendarController::class,'deleteDay']);
+    Route::post('/calendar-exercise/delete-week',[CalendarController::class,'deleteWeek']);
+    Route::get('/patient/today-exercises', [CalendarController::class, 'todayExercises']);
+
+});
 
 // Reference storage routes
 Route::post('/reference-video',[ReferenceVideoController::class,'store'])->name('reference.video');
@@ -151,5 +154,10 @@ Route::get('/video/{execution}', function ($execution) {
         'Content-Type' => 'video/webm'
     ]);
 });
+
+//-----------------------------AddPatients---------------------------------------------------------
+
+Route::resource('patients', AddPatientsController::class);
+
 
 
