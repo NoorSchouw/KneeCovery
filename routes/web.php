@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientExerciseController;
@@ -22,10 +23,6 @@ use Illuminate\Support\Facades\Response;
 Route::get('/', [LoginController::class, 'showLogin'])->name('login.show');
 Route::post('/', [LoginController::class, 'login'])->name('login.perform');
 
-Route::get('/homepage', function () {
-    return 'Welcome to your personal homepage!';
-})->middleware('auth');
-
 Route::get('/signup', [SignUpController::class, 'showSignupForm'])->name('signup.form');
 Route::post('/signup', [SignUpController::class, 'createUser'])->name('signup.create');
 
@@ -43,9 +40,16 @@ Route::get('/privacy-policy', function () {
 });
 
 //---------------------------------------------------- Patient -------------------------------
-Route::get('/homepage', function () {
-    return view('homepage');
-});
+Route::get('/homepage', [HomepageController::class, 'index']);
+
+Route::get(
+    '/homepage/calendar/{date}',
+    [HomepageController::class, 'calendarByDate']
+);
+Route::get('/homepage/progress', [HomepageController::class, 'progress']);
+Route::get('/homepage/knee-metrics', [HomepageController::class, 'kneeMetrics']);
+
+
 Route::get('/calendar', function () {
     return view('patient/calendar');
 });

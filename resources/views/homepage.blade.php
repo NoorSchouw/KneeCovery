@@ -5,202 +5,223 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KneeCovery</title>
-
-    <!-- Meta -->
-    <meta name="description" content="Marketplace for Bootstrap Admin Dashboards">
+    <meta name="description" content="Overview page for the patient">
     <meta property="og:title" content="KneeCovery">
-    <meta property="og:description" content="Overview page for the patient">
     <meta property="og:type" content="Website">
+
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}">
 
-    <!-- *************
-		************ CSS Files *************
-	  ************* -->
-    <link rel="stylesheet" href="{{  asset ('assets/fonts/remix/remixicon.css') }}">
-    <link rel="stylesheet" href="{{  asset ('assets/css/main.css') }}">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/fonts/remix/remixicon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
-    <!-- Vendor CSS Files -->
+    <!-- Vendor CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/overlay-scroll/OverlayScrollbars.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/daterange/daterange.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/dataTables.bs5.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/dataTables.bs5-custom.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/buttons/dataTables.bs5-custom.css') }}">
 </head>
+
 <body>
 
-<!-- Page wrapper starts -->
 <div class="page-wrapper">
-
-    <!-- Main container starts -->
     <div class="main-container">
 
-        <!-- Sidebar Component -->
         <x-sidebar-patient/>
 
-        <!-- App container -->
         <div class="app-container">
 
-            <!-- Header Component -->
             <x-header/>
 
-            <!-- App hero header starts -->
             <div class="app-hero-header d-flex align-items-center">
-
-                <!-- Breadcrumb starts -->
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="#">
-                            <i class="ri-home-3-line"></i>
-                        </a>
+                        <i class="ri-home-3-line"></i>
                     </li>
                 </ol>
-                <!-- Breadcrumb ends -->
             </div>
-            <!-- App Hero header ends -->
 
-            <!-- App body starts -->
             <div class="app-body">
-
-                <!-- Row starts -->
                 <div class="row gx-4">
+
+                    <!-- LEFT COLUMN: Graphs -->
                     <div class="col-xxl-9 col-sm-12">
 
-                        <!-- Row starts -->
-                        <div class="row gx-4">
-                            <div class="col-sm-12"></div>
-                            <div class="col-sm-12">
-                                <div class="card mb-4">
-                                    <div class="card-header pb-0 d-flex align-items-center justify-content-between">
-                                        <h5 class="card-title">Progress</h5>
-                                        <div class="btn-group btn-group-sm" role="group">
-                                            <select id="exerciseSelector" class="form-select form-select-sm" style="width: 180px;">
-                                                <option value="heelSlides">Heel Slides</option>
-                                                <option value="squat">Squat</option>
-                                                <option value="hamstringCurls">Hamstring Curls</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="overflow-hidden">
-                                            <div id="Progress"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card mb-4">
-                                    <div class="card-header pb-0 d-flex align-items-center justify-content-between">
-                                        <h5 class="card-title">Knee extension and flexion</h5>
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="overflow-hidden">
-                                            <div id="Knee-extension-flexion"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="d-flex gap-2 mb-3">
+                            <select id="exerciseSelector" class="form-select form-select-sm">
+                                @foreach($exercises as $exercise)
+                                    <option value="{{ $exercise->exercise_name }}">{{ $exercise->exercise_name }}</option>
+                                @endforeach
+                            </select>
+
+                            <select id="rangeSelector" class="form-select form-select-sm">
+                                <option value="week">Week</option>
+                                <option value="2weeks">2 weeks</option>
+                                <option value="month">Month</option>
+                            </select>
+                        </div>
+
+                        <!-- Match % Progress -->
+                        <div class="card mb-4">
+                            <div class="card-header pb-0">
+                                <h5 class="card-title">Match % Progress</h5>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div id="Progress"></div>
                             </div>
                         </div>
-                        <!-- Row ends -->
+
+                        <!-- Knee Metrics -->
+                        <div class="card mb-4">
+                            <div class="card-header pb-0">
+                                <h5 class="card-title">Knee Metrics (Flexion/Extension)</h5>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div id="Knee-extension-flexion"></div>
+                            </div>
+                        </div>
 
                     </div>
+
+                    <!-- RIGHT COLUMN: Calendar & Exercises -->
                     <div class="col-xxl-3 col-sm-12">
+
                         <div class="card mb-4">
                             <div class="card-header pb-0">
                                 <h5 class="card-title">Exercises</h5>
                             </div>
                             <div class="card-body">
 
-                                <!-- Date calendar starts -->
-                                <div class="datepicker-bg d-flex justify-content-center align-items-center mb-3">
-                                    <!-- Loader starts -->
-                                    <div id="datepicker-loader" class="text-center">
-                                        <div class="spinner-border text-primary" role="status">
-                                            <span class="visually-hidden">Loading...</span>
-                                        </div>
-                                    </div>
-                                    <!-- Loader ends -->
-                                    <div id="datepicker" class="d-none w-100"></div>
+                                <!-- Calendar -->
+                                <div class="mb-3">
+                                    <div id="datepicker"></div>
                                 </div>
-                                <!-- Date calendar ends -->
 
-                                <!-- Appointments starts -->
-                                <div class="mb-4">
-                                    <div class="scroll300">
-
-                                        <!-- Grid starts -->
-                                        <div class="d-grid gap-2">
-
-                                            <a href="{{ url('/exercises') }}"
-                                               class="d-flex flex-column gap-1 appointment-card">
-                                                <div class="fw-semibold">Heel slide</div>
-                                                <span class="badge bg-danger w-fit">3x 10</span>
-                                            </a>
-
-                                            <a href="{{ url('/exercises') }}"
-                                               class="d-flex flex-column gap-1 appointment-card">
-                                                <div class="fw-semibold">Squat</div>
-                                                <span class="badge bg-danger w-fit">3x 10</span>
-                                            </a>
-
-                                            <a href="{{ url('/exercises') }}"
-                                               class="d-flex flex-column gap-1 appointment-card">
-                                                <div class="fw-semibold">Ham string curls</div>
-                                                <span class="badge bg-danger w-fit">3x 10</span>
-                                            </a>
-
-                                        </div>
-                                        <!-- Grid ends -->
-
+                                <!-- Exercise list -->
+                                <div class="scroll300">
+                                    <div class="d-grid gap-2" id="exercise-list">
+                                        <div class="text-muted text-center">Select a date</div>
                                     </div>
                                 </div>
-                                <!-- Appointments ends -->
 
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- Row ends -->
 
+                    </div>
+
+                </div>
             </div>
-            <!-- App body ends -->
 
         </div>
-        <!-- App container ends -->
-
     </div>
-    <!-- Main container ends -->
-
 </div>
-<!-- Page wrapper ends -->
 
-<!-- JavaScript Files -->
+<!-- JS -->
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/js/moment.min.js') }}"></script>
-
-<!-- Vendor Js Files -->
-<script src="{{ asset('assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/overlay-scroll/custom-scrollbar.js') }}"></script>
-
-<script src="{{ asset('assets/vendor/daterange/daterange.js') }}"></script>
-<script src="{{ asset('assets/vendor/daterange/custom-daterange.js') }}"></script>
-
 <script src="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/jquery-ui/custom.js') }}"></script>
-
 <script src="{{ asset('assets/vendor/apex/apexcharts.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/apex/custom/home/patients.js') }}"></script>
-<script src="{{ asset('assets/vendor/apex/custom/home/department-income.js') }}"></script>
-<script src="{{ asset('assets/vendor/apex/custom/home/knee-extension-flexion.js') }}"></script>
-<script src="{{ asset('assets/vendor/apex/custom/home/progress.js') }}"></script>
-<script src="{{ asset('assets/vendor/apex/custom/home/appointments-overview.js') }}"></script>
-<script src="{{ asset('assets/vendor/apex/custom/home/sparklines.js') }}"></script>
 
-<script src="{{ asset('assets/vendor/datatables/dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/datatables/custom/custom-datatables.js') }}"></script>
+<script>
+    $(function () {
 
-<!-- Custom JS files -->
-<script src="{{ asset('assets/js/custom.js') }}"></script>
+        // ---------- Calendar ----------
+        function loadExercises(date) {
+            $('#exercise-list').html('<div class="text-muted text-center">Loading...</div>');
+
+            $.get(`/homepage/calendar/${date}`, function (data) {
+                if (!data.length) {
+                    $('#exercise-list').html('<div class="text-muted text-center">No exercises</div>');
+                    return;
+                }
+
+                let html = '';
+                data.forEach(exercise => {
+                    html += `
+                    <a href="/exercises" class="appointment-card d-flex flex-column gap-1">
+                        <div class="fw-semibold">${exercise.name}</div>
+                        ${exercise.frequency ? `<span class="badge bg-danger w-fit">${exercise.frequency}</span>` : ''}
+                    </a>
+                `;
+                });
+
+                $('#exercise-list').html(html);
+            });
+        }
+
+        $('#datepicker').datepicker({
+            dateFormat: 'yy-mm-dd',
+            onSelect: function (dateText) { loadExercises(dateText); }
+        });
+
+        const today = $.datepicker.formatDate('yy-mm-dd', new Date());
+        $('#datepicker').datepicker('setDate', today);
+        loadExercises(today);
+
+        // ---------- Graphs ----------
+        function loadProgressGraph(exercise, range) {
+            $.get('/homepage/progress', { exercise, range }, function(data) {
+                if (!data.length) {
+                    $('#Progress').html('<div class="text-center text-muted">No data for this exercise</div>');
+                    return;
+                }
+
+                let dates = data.map(d => d.execution_date);
+                let percentages = data.map(d => d.match_percentage);
+
+                let options = {
+                    chart: { type: 'line', height: 300 },
+                    series: [{ name: 'Match %', data: percentages }],
+                    xaxis: { categories: dates },
+                    stroke: { curve: 'smooth', width: 3 , colors: ['#FD98B1'] }
+                };
+
+                $('#Progress').html('');
+                new ApexCharts(document.querySelector("#Progress"), options).render();
+            });
+        }
+
+        function loadKneeMetricsGraph(exercise, range) {
+            $.get('/homepage/knee-metrics', { exercise, range }, function(data) {
+                if (!data.length) {
+                    $('#Knee-extension-flexion').html('<div class="text-center text-muted">No data for this exercise</div>');
+                    return;
+                }
+
+                let dates = data.map(d => d.execution_date);
+                let maxAngles = data.map(d => d.max_angle);
+                let minAngles = data.map(d => d.min_angle);
+
+                let options = {
+                    chart: { type: 'line', height: 300 },
+                    series: [
+                        { name: 'Max Angle', data: maxAngles },
+                        { name: 'Min Angle', data: minAngles }
+                    ],
+                    xaxis: { categories: dates },
+                    stroke: { curve: 'smooth', width: 3, colors: ['#FD98B1','#FAAA89FF'] },
+                };
+
+                $('#Knee-extension-flexion').html('');
+                new ApexCharts(document.querySelector("#Knee-extension-flexion"), options).render();
+            });
+        }
+
+        function loadGraphs() {
+            let exercise = $('#exerciseSelector').val();
+            let range = $('#rangeSelector').val();
+            loadProgressGraph(exercise, range);
+            loadKneeMetricsGraph(exercise, range);
+        }
+
+        // Initial load
+        loadGraphs();
+
+        // Update graphs on selector change
+        $('#exerciseSelector, #rangeSelector').on('change', loadGraphs);
+
+    });
+</script>
+
+
 
 </body>
 </html>

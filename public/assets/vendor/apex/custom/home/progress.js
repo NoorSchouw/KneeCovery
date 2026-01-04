@@ -1,76 +1,56 @@
-document.addEventListener("DOMContentLoaded", function() {
+let progressChart;
 
-    // -------------------------------
-    // Exercise Progress Data (Week 1)
-    // -------------------------------
-    const exerciseProgress = {
-        heelSlides: [85, 88, 92, 95, 100, 105, 110],
-        squat: [80, 83, 87, 90, 95, 100, 105],
-        hamstringCurls: [82, 85, 88, 92, 97, 102, 108]
-    };
+function loadProgress() {
+    const exercise = $('#exerciseSelector').val();
+    const range = $('#rangeSelector').val();
 
-    const exerciseNames = {
-        heelSlides: "Heel Slide Flexion",
-        squat: "Squat Depth",
-        hamstringCurls: "Hamstring Curls"
-    };
+    $.get('/homepage/progress', { exercise, range }, function (data) {
+        if (!data.length) {
+            $('#Progress').html('<div class="text-center text-muted">No data for this exercise</div>');
+            return;
+        }
 
-    // -------------------------------
-    // ApexCharts Options
-    // -------------------------------
-    var options = {
-        chart: {
-            height: 370,
-            type: "line",
-            stacked: false,
-            toolbar: { show: false },
-            fontFamily: "SF Pro Display, Inter, sans-serif",
-            animations: {
-                enabled: true,
-                easing: "easeOutQuart",
-                speed: 900,
-                animateGradually: { enabled: true, delay: 200 },
-                dynamicAnimation: { enabled: true, speed: 600 },
-            }
-        },
-        stroke: { curve: "smooth", width: 4, colors: ["#fd7596"] },
-        markers: { size: 5, strokeWidth: 3, strokeColors: "#fff", colors: ["#fd7596"], hover: { size: 8 } },
-        dataLabels: { enabled: false },
-        series: [
-            { name: exerciseNames.heelSlides + " (%)", data: exerciseProgress.heelSlides }
-        ],
-        xaxis: {
-            categories: ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7"],
-            labels: { style: { fontSize: "13px", colors: "#6B7280", fontWeight: 500 } },
-            axisBorder: { show: false },
-            axisTicks: { show: false }
-        },
-        yaxis: {
-            min: 80,
-            max: 120,
-            labels: { style: { colors: "#9CA3AF" }, formatter: (val) => val + "%" }
-        },
-        grid: { borderColor: "#E5E7EB", strokeDashArray: 4 },
-        tooltip: { theme: "dark", y: { formatter: val => val + "%" } },
-        legend: { position: "top", horizontalAlign: "right", fontSize: "13px", labels: { colors: "#4B5563" } }
-    };
+        const dates = data.map(d => d.execution_date);
+        const values = data.map(d => d.match_percentage);
 
-    // -------------------------------
-    // Initialize Chart
-    // -------------------------------
-    var chart = new ApexCharts(document.querySelector("#Progress"), options);
-    chart.render();
+        const options = {
+            chart: {
+                type: 'line',
+                height: 300,
+                background: '#1c1c1c', // dark card background
+            },
+            series: [{
+                name: 'Match %',
+                data: values
+            }],
+            xaxis: {
+                categories: dates,
+                labels: { style: { colors: '#e5e5e5' } }
+            },
+            yaxis: {
+                max: 100,
+                labels: { style: { colors: '#e5e5e5' } }
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 3
+            },
+            colors: ['#ff69b4'], // Pink line
+            grid: { borderColor: '#333' },
+            tooltip: { theme: 'dark' },
+        };
 
-    // -------------------------------
-    // Update Chart on Exercise Selection
-    // -------------------------------
-    const selector = document.getElementById("exerciseSelector");
-    selector.addEventListener("change", function() {
-        const selected = this.value;
-        chart.updateSeries([{
-            name: exerciseNames[selected] + " (%)",
-            data: exerciseProgress[selected]
-        }]);
+        if (!progressChart) {
+            progressChart = new ApexCharts(document.querySelector("#Progress"), options);
+            progressChart.render();
+        } else {
+            progressChart.updateOptions(options);
+        }
     });
+}
 
-});
+// Trigger reload when selectors change
+$('#exerciseSelector, #rangeSelector').on('change', loadProgress);
+
+// Initial load
+loadProgress();
