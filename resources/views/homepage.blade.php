@@ -136,7 +136,7 @@
                 let html = '';
                 data.forEach(exercise => {
                     html += `
-                    <a href="/exercises" class="appointment-card d-flex flex-column gap-1">
+                    <a href="/filming" class="appointment-card d-flex flex-column gap-1">
                         <div class="fw-semibold">${exercise.name}</div>
                         ${exercise.frequency ? `<span class="badge bg-danger w-fit">${exercise.frequency}</span>` : ''}
                     </a>
@@ -149,6 +149,8 @@
 
         $('#datepicker').datepicker({
             dateFormat: 'yy-mm-dd',
+            prevText: 'Prev',
+            nextText: 'Next',
             onSelect: function (dateText) { loadExercises(dateText); }
         });
 
@@ -171,7 +173,20 @@
                     chart: { type: 'line', height: 300 },
                     series: [{ name: 'Match %', data: percentages }],
                     xaxis: { categories: dates },
-                    stroke: { curve: 'smooth', width: 3 , colors: ['#FD98B1'] }
+                    stroke: { curve: 'smooth', width: 3 , colors: ['#FD98B1'] },
+                    markers: {
+                        size: 3,
+                        colors: ['#FD98B1'],       // fill color of markers
+                        strokeColors: ['#FD98B1'] , // border color of markers
+                        strokeWidth: 2
+                    },
+                    tooltip: {
+                        marker: {
+                            show: true,
+                            fillColors: ['#FD98B1','#FAAA89FF'],
+                            strokeColors: ['#FD98B1','#FAAA89FF']
+                        }
+                    },
                 };
 
                 $('#Progress').html('');
@@ -198,6 +213,29 @@
                     ],
                     xaxis: { categories: dates },
                     stroke: { curve: 'smooth', width: 3, colors: ['#FD98B1','#FAAA89FF'] },
+                    markers: {
+                        size: 3,
+                        colors: ['#FD98B1','#FAAA89FF'],       // fill color of markers
+                        strokeColors: ['#FD98B1','#FAAA89FF'], // border color of markers
+                        strokeWidth: 2
+                    },
+                    tooltip: {
+                        marker: {
+                            show: true,
+                            fillColors: ['#FD98B1','#FAAA89FF'],
+                            strokeColors: ['#FD98B1','#FAAA89FF']
+                        }
+                    },
+
+                    // ---------- LEGEND COLORS ----------
+                    legend: {
+                        markers: {
+                            width: 12,
+                            height: 12,
+                            radius: 12, // round circles
+                            fillColors: ['#FD98B1','#FAAA89FF'] // pink for max, orange for min
+                        }
+                    }
                 };
 
                 $('#Knee-extension-flexion').html('');
@@ -220,8 +258,5 @@
 
     });
 </script>
-
-
-
 </body>
 </html>
