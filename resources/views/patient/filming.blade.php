@@ -120,6 +120,7 @@
             const saveVideoBtn = document.getElementById('saveVideoBtn');
             const retryBtn = document.getElementById('retryBtn');
 
+
             /* Vars */
             let detector,isRecording=false,mediaRecorder=null,recordedChunks=[];
             let emaAngle=null,referencePeak=null,referenceDirection="flexion";
@@ -133,7 +134,63 @@
             let recordingDuration = 0;
             let minAngle = null;
             let maxAngle = null;
+            let lockedSide = null;
+            let lostFrames = 0;
+            let sideLocked = false;
 
+
+            /* SPEECH */
+            let lastSpokenMessage = "";
+            let lastSpokenTime = 0;
+            let preferredVoice = null;
+
+            function loadVoices() {
+                const voices = speechSynthesis.getVoices();
+
+                // Beste keuzes (Chrome / Edge / Safari)
+                preferredVoice =
+                    voices.find(v => v.name.includes("Google UK English Female")) ||
+                    voices.find(v => v.name.includes("Google UK English")) ||
+                    voices.find(v => v.lang === "en-GB") ||
+                    voices[0];
+            }
+
+            speechSynthesis.onvoiceschanged = loadVoices;
+            loadVoices();
+            function speakFeedback(text) {
+                const now = Date.now();
+
+                if (!text || (text === lastSpokenMessage && now - lastSpokenTime < 2000)) {
+                    return;
+                }
+
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = "en-GB";
+
+                // 👇 FALLBACK-BEVEILIGING
+                if (preferredVoice) {
+                    utterance.voice = preferredVoice;
+                }
+
+                utterance.rate = 0.95;
+                utterance.pitch = 1.05;
+                utterance.volume = 1;
+
+                speechSynthesis.cancel();
+                speechSynthesis.speak(utterance);
+
+                lastSpokenMessage = text;
+                lastSpokenTime = now;
+            }
+
+
+
+            function warmUpSpeech() {
+                const utterance = new SpeechSynthesisUtterance(" ");
+                utterance.lang = "en-GB";
+                utterance.volume = 0; // 🔇 volledig stil
+                speechSynthesis.speak(utterance);
+            }
 
             /* LOAD EXERCISES */
             async function loadExercisesOfToday() {
@@ -205,26 +262,36 @@
 
             /* FAN COLOUR */
             function getFanColour(angle){
+                const TOLERANCE = 3;
                 if(!referencePeak) return "limegreen";
-                if(referenceDirection==="flexion"&&angle<referencePeak) return "red";
-                if(referenceDirection==="extension"&&angle>referencePeak) return "red";
+                if(referenceDirection==="flexion"&&angle<referencePeak - TOLERANCE) return "red";
+                if(referenceDirection==="extension"&&angle>referencePeak + TOLERANCE) return "red";
                 return "limegreen";
             }
 
             /* FEEDBACK ON ERROR ONLY */
             function giveFeedbackOnlyOnError(angle){
+                if (!referencePeak || !hasStartedRecording) return;
+                const TOLERANCE = 3;
                 if(!referencePeak) return;
 
-                if(referenceDirection==="flexion"&&angle<referencePeak){
-                    feedbackBox.textContent="⚠ Flex less – too deep!";
+                if(referenceDirection==="flexion" && angle < referencePeak- TOLERANCE){
+                    const msg = "Flex less - too deep!";
+                    feedbackBox.textContent = "⚠" + msg;
+                    speakFeedback(msg);
                     return;
                 }
-                if(referenceDirection==="extension"&&angle>referencePeak){
-                    feedbackBox.textContent="⚠ Extend less – too far!";
+
+                if(referenceDirection==="extension" && angle > referencePeak + TOLERANCE){
+                    const msg = "Extend less - too far";
+                    feedbackBox.textContent = "⚠" + msg;
+                    speakFeedback(msg);
                     return;
                 }
-                feedbackBox.textContent="";
+
+                feedbackBox.textContent = "";
             }
+
 
             /* MATCH SCORE */
             function updateMatchScore(angle){
@@ -243,7 +310,6 @@
                     ctx.fillStyle=col;ctx.fill();ctx.strokeStyle="#fff";ctx.stroke();});
 
                 ctx.fillStyle=col;ctx.font="16px Arial";
-                ctx.fillText(ang.toFixed(1)+"°",k.x+10,k.y-10);
             }
 
             const smooth=(p,v,a=.2)=>p==null?v:p*(1-a)+v*a;
@@ -265,6 +331,7 @@
                     rCanvas.height = 480;
 
                     await video.play();
+                    warmUpSpeech();
 
                     cameraReady = true;
                     camBadge.className = "badge on";
@@ -338,6 +405,8 @@
                 recordedChunks=[];
                 minAngle = null;
                 maxAngle = null;
+                lockedSide = null;
+                sideLocked = false;
                 const stream=rCanvas.captureStream(30);
                 mediaRecorder=new MediaRecorder(stream);
                 mediaRecorder.ondataavailable=e=>recordedChunks.push(e.data);
@@ -355,6 +424,8 @@
             function stopRecording(){
                 mediaRecorder.stop();
                 isRecording = false;
+                lockedSide = null;
+                sideLocked = false;
 
                 recordBtn.textContent = "Start recording";
                 recordBtn.classList.remove("recording"); // 👈 TERUG NAAR ROZE
@@ -368,6 +439,9 @@
                 finalScore = Number(
                     ((goodFrames / totalFrames) * 100 || 0).toFixed(1)
                 );
+
+                window.speechSynthesis.cancel();
+                lastSpokenMessage = "";
 
                 // 🔁 RESET NA STOP RECORDING
                 hasStartedRecording = false;
@@ -439,6 +513,8 @@
                 goodFrames = 0;
                 emaAngle = null; // ✅ OOK HIER
                 feedbackBox.textContent = "";
+                window.speechSynthesis.cancel();
+                lastSpokenMessage = "";
 
                 angleDisplay.textContent =
                     `Knee: -- | Angle: --° | Ref: ${referencePeak ? referencePeak.toFixed(1) : "--"}° | Match: --%`;
@@ -448,53 +524,124 @@
 
 
             /* RENDER LOOP */
+            function getAngle(hip, knee, ankle) {
+                const AB = [hip.x - knee.x, hip.y - knee.y];
+                const CB = [ankle.x - knee.x, ankle.y - knee.y];
+                return Math.acos(
+                    (AB[0]*CB[0] + AB[1]*CB[1]) /
+                    (Math.hypot(...AB) * Math.hypot(...CB))
+                ) * (180 / Math.PI);
+            }
+
+            function resetAngleDisplay() {
+                emaAngle = null;
+                lockedSide = null;
+                sideLocked = false;
+
+
+                // 🔊 RESET SPEECH STATE
+                speechSynthesis.cancel();
+                lastSpokenMessage = "";
+                lastSpokenTime = 0;
+
+                angleDisplay.textContent =
+                    `Knee: -- | Angle: --° | Ref: ${referencePeak ? referencePeak.toFixed(1) : "--"}° | Match: --%`;
+
+                feedbackBox.textContent = "";
+            }
+
             async function render(){
-                const poses=await detector.estimatePoses(video);
+                const poses = await detector.estimatePoses(video);
                 ctx.clearRect(0,0,640,480);
 
-                if(poses.length) {
+                if (poses.length) {
                     const k = poses[0].keypoints;
-                    const h = k.find(x => x.name.includes("hip"));
-                    const kn = k.find(x => x.name.includes("knee"));
-                    const a = k.find(x => x.name.includes("ankle"));
 
-                    if (h && kn && a && h.score > .1 && kn.score > .1 && a.score > .1) {
-                        const AB = [h.x - kn.x, h.y - kn.y], CB = [a.x - kn.x, a.y - kn.y];
-                        const ang = Math.acos((AB[0] * CB[0] + AB[1] * CB[1]) / (Math.hypot(...AB) * Math.hypot(...CB))) * (180 / Math.PI);
+                    const lh = k.find(p => p.name === "left_hip");
+                    const lk = k.find(p => p.name === "left_knee");
+                    const la = k.find(p => p.name === "left_ankle");
+
+                    const rh = k.find(p => p.name === "right_hip");
+                    const rk = k.find(p => p.name === "right_knee");
+                    const ra = k.find(p => p.name === "right_ankle");
+
+                    let side = null;
+                    let hip, knee, ankle;
+
+                    function valid(h, k, a) {
+                        return h && k && a && h.score > 0.2 && k.score > 0.2 && a.score > 0.2;
+                    }
+
+                    // 👇 kies beste been
+                    if (valid(lh, lk, la) && valid(rh, rk, ra)) {
+                        const leftScore = lh.score + lk.score + la.score;
+                        const rightScore = rh.score + rk.score + ra.score;
+
+                        if (leftScore >= rightScore) {
+                            side = "left"; hip = lh; knee = lk; ankle = la;
+                        } else {
+                            side = "right"; hip = rh; knee = rk; ankle = ra;
+                        }
+                    } else if (valid(lh, lk, la)) {
+                        side = "left"; hip = lh; knee = lk; ankle = la;
+                    } else if (valid(rh, rk, ra)) {
+                        side = "right"; hip = rh; knee = rk; ankle = ra;
+                    }
+
+                    // 🔒 lock side tijdens opname
+                    if (hasStartedRecording && !sideLocked && side) {
+                        lockedSide = side;
+                        sideLocked = true;
+
+                    }
+                    if (lockedSide) {
+                        side = lockedSide;
+                        if (side === "left") { hip = lh; knee = lk; ankle = la; }
+                        else { hip = rh; knee = rk; ankle = ra; }
+                    }
+
+                    if (hip && knee && ankle) {
+                        lostFrames = 0;
+
+                        const ang = getAngle(hip, knee, ankle);
                         emaAngle = smooth(emaAngle, ang);
 
-                        if (hasStartedRecording && emaAngle != null) {
-
-                            if (minAngle === null || emaAngle < minAngle) {
-                                minAngle = emaAngle;
-                            }
-
-                            if (maxAngle === null || emaAngle > maxAngle) {
-                                maxAngle = emaAngle;
-                            }
+                        if (hasStartedRecording) {
+                            if (minAngle === null || emaAngle < minAngle) minAngle = emaAngle;
+                            if (maxAngle === null || emaAngle > maxAngle) maxAngle = emaAngle;
                         }
 
-                        let col = getFanColour(emaAngle);
-                        drawFan(h, kn, a, col, emaAngle);
+                        const col = getFanColour(emaAngle);
+                        drawFan(hip, knee, ankle, col, emaAngle);
 
-                        let baseText =
-                            `Knee:${kn.name.includes("left") ? 'left' : 'right'} | ` +
-                            `Angle:${emaAngle.toFixed(1)}° | ` +
-                            `Ref:${referencePeak ? referencePeak.toFixed(1) : "--"}° | `;
+                        const baseText =
+                            `Knee: ${side} | ` +
+                            `Angle: ${emaAngle.toFixed(1)}° | ` +
+                            `Ref: ${referencePeak ? referencePeak.toFixed(1) : "--"}° | `;
 
                         if (hasStartedRecording) {
                             updateMatchScore(emaAngle);
                             giveFeedbackOnlyOnError(emaAngle);
 
                             const percent = ((goodFrames / totalFrames) * 100 || 0).toFixed(1);
-                            angleDisplay.textContent = baseText + `Match:${percent}%`;
+                            angleDisplay.textContent = baseText + `Match: ${percent}%`;
                         } else {
                             angleDisplay.textContent = baseText + `Match: --%`;
                             feedbackBox.textContent = "";
                         }
+
+                    } else {
+                        lostFrames++;
+                        if (lostFrames > 10) resetAngleDisplay();
                     }
+
+                } else {
+                    // 👇 GEEN POSE GEDETECTEERD
+                    lostFrames++;
+                    if (lostFrames > 10) resetAngleDisplay();
                 }
-                if(isRecording){
+
+                if (isRecording) {
                     rctx.clearRect(0,0,640,480);
                     rctx.drawImage(video,0,0);
                     rctx.drawImage(canvas,0,0);
