@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AddPatientsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientExerciseController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FysioController;
@@ -62,11 +64,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Report
-Route::get('/patient-report', [ReportController::class, 'index']);
-Route::get('/report/get-executions', [ReportController::class, 'getExecutions']);
-Route::get('/patient-report', function () {
-    return view('/patient/report');
-});
+Route::get('/patient-report', [ReportController::class, 'index'])
+    ->name('patient.report');
 
 // Information
 Route::middleware(['auth'])->group(function () {

@@ -13,6 +13,29 @@
 </head>
 
 <body>
+{{--Tijdelijk!!!--}}
+<div style="background:#111;color:#0f0;padding:10px;font-size:12px">
+    <strong>DEBUG EXECUTIONS</strong><br>
+
+    Aantal executions: {{ $executions->count() }}
+
+    <br><br>
+
+    @if($executions->isEmpty())
+        GEEN EXECUTIONS GEVONDEN
+    @else
+        @foreach($executions as $exec)
+            ID: {{ $exec->execution_id ?? 'NULL' }} |
+            Date: {{ $exec->execution_date ?? 'NULL' }} |
+            Exercise: {{ optional($exec->assignment->exercise)->exercise_name ?? 'NO EXERCISE' }} |
+            Score: {{ $exec->score ?? 'NULL' }}
+            <br>
+        @endforeach
+    @endif
+</div>
+
+{{--EInde --}}
+
 <div class="page-wrapper">
 
     <!-- Main container starts -->
@@ -57,10 +80,14 @@
                     <div class="col-md-4">
                         <label class="label-exercise">Exercise</label>
                         <select id="exercise-select" class="form-control form-control-sm">
-                            <option>Heel slide</option>
-                            <option>Squat</option>
-                            <option>Hamstring curls</option>
+                            @foreach($executions->unique('assignment_id') as $exec)
+                                <option value="{{ $exec->assignment_id }}"
+                                        data-latest-date="{{ $exec->execution_date }}">
+                                    {{ $exec->assignment->exercise->exercise_name }}
+                                </option>
+                            @endforeach
                         </select>
+
                     </div>
                 </div>
 
@@ -130,7 +157,7 @@
 <script src="{{ asset('assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/daterange/daterange.js') }}"></script>
 <script src="{{ asset('assets/vendor/apex/apexcharts.min.js') }}"></script>
-<script src="{{ asset('assets/js/Fysio.js') }}"></script>
+<script src="{{ asset('assets/js/Report.js') }}"></script>
 </body>
 
 </html>

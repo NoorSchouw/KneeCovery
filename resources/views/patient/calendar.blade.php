@@ -11,27 +11,27 @@
     <meta property="og:title" content="Admin Templates - Dashboard Templates">
     <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
     <meta property="og:type" content="Website">
-    <link rel="shortcut icon" href="assets/images/favicon.svg">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}">
 
     <!-- *************
 		************ CSS Files *************
 	  ************* -->
-    <link rel="stylesheet" href="assets/fonts/remix/remixicon.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/remix/remixicon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
     <!-- *************
 		************ Vendor Css Files *************
 	  ************ -->
 
     <!-- Scrollbar CSS -->
-    <link rel="stylesheet" href="assets/vendor/overlay-scroll/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/overlay-scroll/OverlayScrollbars.min.css') }}">
 
     <!-- Date Range CSS -->
-    <link rel="stylesheet" href="assets/vendor/daterange/daterange.css">
+    <link rel="stylesheet" href="{{ ('assets/vendor/daterange/daterange.css') }}">
 
     <!-- Calendar CSS -->
-    <link rel="stylesheet" href="assets/vendor/calendar/css/main.min.css">
-    <link rel="stylesheet" href="assets/vendor/calendar/css/custom.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/calendar/css/main.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/calendar/css/custom.css') }}">
 
 </head>
 
@@ -62,7 +62,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item text-primary" aria-current="page">
-                        Appointments
+                        Calendar
                     </li>
                 </ol>
                 <!-- Breadcrumb ends -->
@@ -78,8 +78,7 @@
                     <div class="col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="card-title">Applointments</h5>
-                                <a href="book-appointment.html" class="btn btn-primary ms-auto">Book Appointment</a>
+                                <h5 class="card-title">Exercises</h5>
                             </div>
                             <div class="card-body">
 
@@ -113,28 +112,28 @@
         ************ JavaScript Files *************
     ************* -->
 <!-- Required jQuery first, then Bootstrap Bundle JS -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/moment.min.js"></script>
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/moment.min.js') }}"></script>
 
 <!-- *************
         ************ Vendor Js Files *************
     ************* -->
 
 <!-- Overlay Scroll JS -->
-<script src="assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
-<script src="assets/vendor/overlay-scroll/custom-scrollbar.js"></script>
+<script src="{{ asset('assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.j') }}s"></script>
+<script src="{{ asset('assets/vendor/overlay-scroll/custom-scrollbar.js') }}"></script>
 
 <!-- Date Range JS -->
-<script src="assets/vendor/daterange/daterange.js"></script>
-<script src="assets/vendor/daterange/custom-daterange.js"></script>
+<script src="{{ asset('assets/vendor/daterange/daterange.js') }}"></script>
+<script src="{{ asset('assets/vendor/daterange/custom-daterange.js') }}"></script>
 
 <!-- Calendar JS -->
-<script src="assets/vendor/calendar/js/main.min.js"></script>
-<script src="assets/vendor/calendar/custom/appointments-calendar.js"></script>
+<script src="{{ asset('assets/vendor/calendar/js/main.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/calendar/custom/appointments-calendar.js') }}"></script>
 
 <!-- Custom JS files -->
-<script src="assets/js/custom.js"></script>
+<script src="{{ asset('assets/js/custom.js') }}"></script>
 </body>
 
 </html>

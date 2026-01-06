@@ -32,8 +32,14 @@ class LoginController extends Controller
         }
 
         // 5. If failed
+        $user = \App\Models\User::where('email', $request->email)->first();
+        if (!$user) {
+            return back()->withErrors([
+                'email' => 'There is no user with this email.'
+            ])->onlyInput('email');
+        }
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.'
+            'email' => 'The provided credentials do not match.'
         ])->onlyInput('email');
     }
 
@@ -45,4 +51,5 @@ class LoginController extends Controller
 
         return redirect('/');
     }
+
 }

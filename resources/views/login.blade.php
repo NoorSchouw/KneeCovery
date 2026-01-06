@@ -59,10 +59,25 @@
 
             <div class="mb-3 d-grid gap-2">
                 <button type="submit" class="btn btn-light">Login</button>
-                <a href="{{ url('/signup') }}" class="btn btn-secondary">Not registered? Signup</a>
+                {{--                <a href="{{ url('/signup') }}" class="btn btn-secondary">Not registered? Signup</a>--}}
             </div>
 
+            <!-- Errormelding onderaan in de auth-box -->
+            @if($errors->any())
+                <div class="mt-3 alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+
         </div>
+
+    </form>
+
 
     </form>
     <!-- Form ends -->

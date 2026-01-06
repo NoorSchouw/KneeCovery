@@ -130,7 +130,7 @@
 <script src="{{ asset('assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/daterange/daterange.js') }}"></script>
 <script src="{{ asset('assets/vendor/apex/apexcharts.min.js') }}"></script>
-<script src="{{ asset('assets/js/Fysio.js') }}"></script>
+<script src="{{ asset('assets/js/Report.js') }}"></script>
 </body>
 
 </html>
