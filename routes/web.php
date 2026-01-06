@@ -22,17 +22,9 @@ Route::get('/', [LoginController::class, 'showLogin'])->name('login.show');
 // Login POST
 Route::post('/', [LoginController::class, 'login'])->name('login.perform');
 
-// Homepage (alleen als voorbeeld)
-Route::get('/homepage', function () {
-    return 'Welcome to your personal homepage!';
-})->middleware('auth');
-
 Route::get('/signup', [SignUpController::class, 'showSignupForm'])->name('signup.form');
 Route::post('/signup', [SignUpController::class, 'createUser'])->name('signup.create');
 
-Route::get('/', function () {
-    return view('login');
-})->name('login');
 Route::get('/signup', function () {
     return view('signup');
 });
@@ -44,32 +36,56 @@ Route::get('/privacy-policy', function () {
 });
 
 //-------------------------------------------------- Patient -------------------------------
+// Homepage
+Route::get('/homepage', [HomepageController::class, 'index']);
+
+Route::get(
+    '/homepage/calendar/{date}',
+    [HomepageController::class, 'calendarByDate']
+);
+Route::get('/homepage/progress', [HomepageController::class, 'progress']);
+Route::get('/homepage/knee-metrics', [HomepageController::class, 'kneeMetrics']);
 Route::get('/homepage', function () {
     return view('homepage');
 });
+
+// Calendar
 Route::get('/calendar', function () {
     return view('patient/calendar');
 });
+Route::get('/calendar-data', [PatientCalendarController::class, 'getUserCalendar']);
 
+// All exercises
 Route::middleware(['auth'])->group(function () {
     Route::get('/all-exercises', [PatientExerciseController::class, 'index'])
         ->name('patient.exercises');
 });
 
+// Report
+Route::get('/patient-report', [ReportController::class, 'index']);
+Route::get('/report/get-executions', [ReportController::class, 'getExecutions']);
 Route::get('/patient-report', function () {
     return view('/patient/report');
 });
-Route::get('/information', function () {
-    return view('/patient/information');
+
+// Information
+Route::middleware(['auth'])->group(function () {
+    Route::get('/information', [InformationController::class, 'information'])->name('patient.information');
+    Route::post('/information/update', [InformationController::class, 'update'])->name('patient.information.update');
 });
+
 Route::get('/filming', function () {
     return view('/patient/filming');
 });
-
 //----------------------------------------------------Physio----------------------------------
-Route::get('/patients', function () {
-    return view('/fysio/patients');
-});
+Route::get('/patients/{user}/report', [AddPatientsController::class, 'report'])
+    ->name('patients.report');
+
+//Route::get('/patients', function () {
+//    return view('/fysio/patients');
+//});
+
+// Report
 Route::get('/report', function () {
     return view('/fysio/report');
 });
@@ -149,4 +165,5 @@ Route::get('/video/{execution}', function ($execution) {
     ]);
 });
 
-
+// ------------------ AddPatients Resource ------------------
+Route::resource('patients', AddPatientsController::class);
