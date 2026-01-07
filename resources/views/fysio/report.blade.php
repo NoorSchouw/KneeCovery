@@ -42,7 +42,9 @@
 
                 <!-- Patiënt info -->
                 <div class="mb-3">
-                    <h2 class="patient-name" >Report</h2>
+                    <h2 class="text-2xl font-semibold text-primary">
+                        Report of {{ $patient->first_name }} {{ $patient->last_name }}
+                    </h2>
 
                 </div>
 

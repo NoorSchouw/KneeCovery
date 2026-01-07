@@ -8,8 +8,14 @@ use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
+    // Selected patient from addPatients page
+    private function patientId(): int
+    {
+        return session('selected_patient_id');
+    }
+
     public function getUserCalendar(Request $request){
-        $id = $request->user_id ?? 1;
+        $id = $this->patientId();
 
         $entries = CalendarEntry::with('exercise')
             ->where('user_id',$id)
@@ -25,12 +31,12 @@ class CalendarController extends Controller
         return response()->json(['entries'=>$entries]);
     }
 
-    public function todayExercises($userId)
+    public function todayExercises()
     {
         $today = now()->toDateString();
 
         $entries = CalendarEntry::with('exercise')
-            ->where('user_id', $userId)
+            ->where('user_id', $this->patientId())
             ->whereDate('date', $today)
             ->get()
             ->map(fn($c)=>[
@@ -46,7 +52,6 @@ class CalendarController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'user_id'=>'required',
             'exercise'=>'required|string',
             'date'=>'required|date',
             'settings'=>'nullable|array'
@@ -57,7 +62,7 @@ class CalendarController extends Controller
 
         /** create or update calendar row */
         $entry = CalendarEntry::updateOrCreate(
-            ['user_id'=>$request->user_id,'exercise_id'=>$exercise->exercise_id,'date'=>$request->date],
+            ['user_id'=>$this->patientId(),'exercise_id'=>$exercise->exercise_id,'date'=>$request->date],
             ['settings'=>$request->settings]
         );
 
@@ -66,7 +71,6 @@ class CalendarController extends Controller
 
     public function update(Request $request){
         $request->validate([
-            'user_id'=>'required',
             'exercise'=>'required',
             'date'=>'required|date',
             'settings'=>'nullable|array'
@@ -75,7 +79,7 @@ class CalendarController extends Controller
         $exercise = Exercise::where('exercise_name',$request->exercise)->first();
         if(!$exercise) return response()->json(['success'=>false,'msg'=>'exercise missing'],404);
 
-        $updated = CalendarEntry::where('user_id',$request->user_id)
+        $updated = CalendarEntry::where('user_id',$this->patientId())
             ->where('exercise_id',$exercise->exercise_id)
             ->where('date',$request->date)
             ->update(['settings'=>$request->settings]);
@@ -84,7 +88,6 @@ class CalendarController extends Controller
     }
     public function deleteDay(Request $request){
         $request->validate([
-            'user_id'=>'required|integer',
             'exercise'=>'required|string',
             'date'=>'required|date'
         ]);
@@ -92,7 +95,7 @@ class CalendarController extends Controller
         $exercise = Exercise::where('exercise_name',$request->exercise)->first();
         if(!$exercise) return response()->json(['error'=>'Exercise not found'],404);
 
-        CalendarEntry::where('user_id',$request->user_id)
+        CalendarEntry::where('user_id',$this->patientId())
             ->where('exercise_id',$exercise->exercise_id)
             ->whereDate('date',$request->date)
             ->delete();
@@ -103,7 +106,6 @@ class CalendarController extends Controller
 
     public function deleteWeek(Request $request){
         $request->validate([
-            'user_id'=>'required|integer',
             'exercise'=>'required|string',
             'start'=>'required|date',   // monday of week
             'end'=>'required|date'      // sunday of week
@@ -112,7 +114,7 @@ class CalendarController extends Controller
         $exercise = Exercise::where('exercise_name',$request->exercise)->first();
         if(!$exercise) return response()->json(['error'=>'Exercise not found'],404);
 
-        CalendarEntry::where('user_id',$request->user_id)
+        CalendarEntry::where('user_id',$this->patientId())
             ->where('exercise_id',$exercise->exercise_id)
             ->whereBetween('date',[$request->start,$request->end])
             ->delete();

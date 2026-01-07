@@ -3,23 +3,18 @@
 use App\Http\Controllers\AddPatientsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientExerciseController;
-use App\Http\Controllers\ReportPhysioController;
-use App\Http\Controllers\VideoController;
 use App\Http\Controllers\ReportController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FysioController;
-use App\Http\Controllers\PatientController;
+use App\Http\Controllers\ReportPhysioController;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ReferenceVideoController;
 use App\Http\Controllers\UserExerciseController;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ExerciseExecutionController;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
-// All links for the website
 //------------------------------------------------General-------------------------------------
 Route::get('/', [LoginController::class, 'showLogin'])->name('login.show');
 
@@ -50,15 +45,12 @@ Route::get('/privacy-policy', function () {
 //-------------------------------------------------- Patient -------------------------------
 Route::get('/homepage', function () {
     return view('homepage');
-});
-Route::get('/calendar', function () {
-    return view('patient/calendar');
+})->name('homepage');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/all-exercises', [PatientExerciseController::class, 'index'])->name('patient.exercises');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/all-exercises', [PatientExerciseController::class, 'index'])
-        ->name('patient.exercises');
-});
+Route::get('/calendar', function () { return view('patient/calendar'); });
 
 // Report
 Route::get('/patient-report', [ReportController::class, 'index'])
@@ -66,12 +58,8 @@ Route::get('/patient-report', [ReportController::class, 'index'])
 Route::get('/report/execution/by-id/{executionId}', [ReportController::class, 'executionById']);
 
 
-Route::get('/information', function () {
-    return view('/patient/information');
-});
-Route::get('/filming', function () {
-    return view('/patient/filming');
-});
+Route::get('/information', function () { return view('patient/information'); });
+Route::get('/filming', function () { return view('patient/filming'); })->name('filming.show');
 
 //----------------------------------------------------Physio----------------------------------
 //Patients list
@@ -86,53 +74,17 @@ Route::get('/report/execution/by-id/{executionId}', [ReportPhysioController::cla
 Route::get('/upload-exercises', function () {
     return view('/fysio/upload_exercises');
 });
-
+//----------------------------------------------------User/Calendar----------------------------------
 Route::get('/user-exercises', [ExerciseController::class, 'getUserExercises']);
 Route::post('/user-exercises/sync', [ExerciseController::class, 'sync']);
+
 Route::get('/user-calendar', [CalendarController::class, 'getUserCalendar']);
 Route::post('/calendar-exercise', [CalendarController::class, 'store']);
 Route::post('/calendar-update', [CalendarController::class,'update']);
 Route::post('/calendar-exercise/delete-day',[CalendarController::class,'deleteDay']);
 Route::post('/calendar-exercise/delete-week',[CalendarController::class,'deleteWeek']);
-Route::get('/patient/today-exercises/{userId}', [CalendarController::class, 'todayExercises']);
 
-// Reference storage routes
-Route::post('/reference-video',[ReferenceVideoController::class,'store'])->name('reference.video');
-Route::post('/reference-analysis',[ReferenceVideoController::class,'saveAnalysis'])->name('reference.analysis');
-Route::get('/reference/{exercise}',[ReferenceVideoController::class,'get'])->name('reference.get');
-
-Route::get('/user-exercises',[UserExerciseController::class,'index']);
-Route::post('/user-exercises/sync',[UserExerciseController::class,'sync']);
-
-Route::post('/exercise/store', [ExerciseExecutionController::class, 'store']);
-
-Route::post('/exercise-executions', [ExerciseExecutionController::class, 'store']);
-
-
-Route::get('/videos/{file}', function($file){
-    $path = storage_path('app/public/videos/' . $file);
-    if (!file_exists($path)) {
-        abort(404);
-    }
-    return response()->file($path, [
-        'Content-Type' => 'video/mp4',
-        'Access-Control-Allow-Origin' => '*',
-        'Access-Control-Allow-Methods' => 'GET',
-        'Access-Control-Allow-Headers' => 'Content-Type, Authorization'
-    ]);
-});
-
-Route::get('/data/{file}', function($file){
-    if (!Storage::disk('public')->exists("data/$file")) abort(404);
-
-    return response()->json(
-        json_decode(Storage::disk('public')->get("data/$file"), true)
-    );
-});
-
-//Filming page
-
-
+// THIS IS THE KEY: return `id` so frontend knows `calendar_entry_id`
 Route::get('/patient/today-exercises/{user}', function($user){
     $today = date('Y-m-d');
 
@@ -141,6 +93,7 @@ Route::get('/patient/today-exercises/{user}', function($user){
         ->where('calendar_entries.user_id', $user)
         ->whereDate('calendar_entries.date', $today)
         ->select(
+            'calendar_entries.id',        // 👈 MUST RETURN THIS
             'exercise.exercise_name as exercise',
             'calendar_entries.settings',
             'calendar_entries.date'
@@ -148,26 +101,35 @@ Route::get('/patient/today-exercises/{user}', function($user){
         ->get();
 });
 
-Route::get('/video/{execution}', function ($execution) {
+//----------------------------------------------------Reference----------------------------------
+Route::post('/reference-video', [ReferenceVideoController::class,'store'])->name('reference.video');
+Route::post('/reference-analysis', [ReferenceVideoController::class,'saveAnalysis'])->name('reference.analysis');
+Route::get('/reference/{exercise}', [ReferenceVideoController::class,'get'])->name('reference.get');
 
-    $exec = \App\Models\ExerciseExecution::findOrFail($execution);
+//----------------------------------------------------Exercise Executions----------------------------------
+Route::post('/exercise/store', [ExerciseExecutionController::class,'store']);
+Route::post('/exercise-executions', [ExerciseExecutionController::class,'store']);
 
-    $path = storage_path('app/public/' . $exec->execution_video_path);
+//----------------------------------------------------Videos----------------------------------
+Route::get('/videos/{file}', function($file){
+    $path = storage_path('app/public/videos/' . $file);
+    if (!file_exists($path)) abort(404);
 
     return response()->file($path, [
-        'Content-Type' => 'video/webm'
+        'Content-Type' => 'video/mp4',
+        'Access-Control-Allow-Origin' => '*',
+        'Access-Control-Allow-Methods' => 'GET',
+        'Access-Control-Allow-Headers' => 'Content-Type, Authorization'
     ]);
 });
 
+Route::get('/video/{execution}', function ($execution) {
+    $exec = \App\Models\ExerciseExecution::findOrFail($execution);
+    $path = storage_path('app/public/' . $exec->execution_video_path);
+    return response()->file($path, ['Content-Type' => 'video/webm']);
+});
 
-Route::middleware(['auth'])->group(function () {
-
-    // Page with all videos
-    Route::get('/videos', [VideoController::class, 'index'])
-        ->name('videos.index');
-
-    // Secure video streaming
-    Route::get('/video/{execution_id}', [VideoController::class, 'show'])
-        ->name('videos.show');
-
+Route::get('/data/{file}', function($file){
+    if (!Storage::disk('public')->exists("data/$file")) abort(404);
+    return response()->json(json_decode(Storage::disk('public')->get("data/$file"), true));
 });

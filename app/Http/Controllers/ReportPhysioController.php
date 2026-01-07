@@ -4,22 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\CalendarEntry;
 use App\Models\ExerciseExecution;
+use App\Models\User; // ⬅️ add this!
 use Illuminate\Http\Request;
 
 class ReportPhysioController extends Controller
 {
-    // Hulpfunctie om geselecteerde patient te krijgen
     private function patientId(): int
     {
-        return session('selected_patient_id'); // of andere manier van opslaan
+        return session('selected_patient_id');
     }
 
-    // Pagina laden
     public function index()
     {
         $patientId = $this->patientId();
 
-        // Alle executions van geselecteerde patient
+        // ⬅️ Fetch selected patient
+        $patient = User::find($patientId);
+
         $executions = ExerciseExecution::with('calendarEntry.exercise')
             ->whereHas('calendarEntry', function ($q) use ($patientId) {
                 $q->where('user_id', $patientId);
@@ -28,16 +29,15 @@ class ReportPhysioController extends Controller
             ->orderBy('start_time', 'desc')
             ->get();
 
-        // Eerste execution als default selectie
         $firstExecution = $executions->first();
 
         return view('fysio.report', [
             'execution'  => $firstExecution,
             'executions' => $executions,
+            'patient'    => $patient, // ⬅️ extra data for view
         ]);
     }
 
-    // Execution ophalen via AJAX
     public function executionById($executionId)
     {
         $execution = ExerciseExecution::with('calendarEntry.exercise')->find($executionId);
