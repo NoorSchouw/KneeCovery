@@ -49,7 +49,7 @@ Route::get('/homepage/progress', [HomepageController::class, 'progress']);
 Route::get('/homepage/knee-metrics', [HomepageController::class, 'kneeMetrics']);
 Route::get('/homepage', function () {
     return view('homepage');
-});
+})->name('homepage');
 
 // Calendar
 Route::get('/calendar', function () {

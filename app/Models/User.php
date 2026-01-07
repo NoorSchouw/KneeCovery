@@ -78,6 +78,15 @@ public function calendarEntries()
 {
     return $this->hasMany(CalendarEntry::class, 'user_id', 'user_id');
 }
+    public function isPhysiotherapist(): bool
+    {
+        return $this->physiotherapist()->exists();
+    }
+
+    public function isPatient(): bool
+    {
+        return $this->patient()->exists();
+    }
 
 }
 
