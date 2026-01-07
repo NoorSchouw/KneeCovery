@@ -62,14 +62,6 @@ class ReportController extends Controller
             ->orderBy('start_time', 'asc')
             ->first();
 
-        //Debug
-        $path = public_path($execution->execution_video_path);
-        if (file_exists($path)) {
-            dd("File exists at: " . $path);
-        } else {
-            dd("File NOT found at: " . $path);
-        }
-
         return view('patient.report', [
             'execution' => $execution
         ]);

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AddPatientsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientExerciseController;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,9 +24,17 @@ Route::get('/', [LoginController::class, 'showLogin'])->name('login.show');
 // Login POST
 Route::post('/', [LoginController::class, 'login'])->name('login.perform');
 
+// Homepage (alleen als voorbeeld)
+Route::get('/homepage', function () {
+    return 'Welcome to your personal homepage!';
+})->middleware('auth');
+
 Route::get('/signup', [SignUpController::class, 'showSignupForm'])->name('signup.form');
 Route::post('/signup', [SignUpController::class, 'createUser'])->name('signup.create');
 
+Route::get('/', function () {
+    return view('login');
+})->name('login');
 Route::get('/signup', function () {
     return view('signup');
 });
@@ -38,26 +46,13 @@ Route::get('/privacy-policy', function () {
 });
 
 //-------------------------------------------------- Patient -------------------------------
-// Homepage
-Route::get('/homepage', [HomepageController::class, 'index']);
-
-Route::get(
-    '/homepage/calendar/{date}',
-    [HomepageController::class, 'calendarByDate']
-);
-Route::get('/homepage/progress', [HomepageController::class, 'progress']);
-Route::get('/homepage/knee-metrics', [HomepageController::class, 'kneeMetrics']);
 Route::get('/homepage', function () {
     return view('homepage');
 });
-
-// Calendar
 Route::get('/calendar', function () {
     return view('patient/calendar');
 });
-Route::get('/calendar-data', [PatientCalendarController::class, 'getUserCalendar']);
 
-// All exercises
 Route::middleware(['auth'])->group(function () {
     Route::get('/all-exercises', [PatientExerciseController::class, 'index'])
         ->name('patient.exercises');
@@ -67,24 +62,17 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/patient-report', [ReportController::class, 'index'])
     ->name('patient.report');
 
-// Information
-Route::middleware(['auth'])->group(function () {
-    Route::get('/information', [InformationController::class, 'information'])->name('patient.information');
-    Route::post('/information/update', [InformationController::class, 'update'])->name('patient.information.update');
+Route::get('/information', function () {
+    return view('/patient/information');
 });
-
 Route::get('/filming', function () {
     return view('/patient/filming');
 });
+
 //----------------------------------------------------Physio----------------------------------
-Route::get('/patients/{user}/report', [AddPatientsController::class, 'report'])
-    ->name('patients.report');
-
-//Route::get('/patients', function () {
-//    return view('/fysio/patients');
-//});
-
-// Report
+Route::get('/patients', function () {
+    return view('/fysio/patients');
+});
 Route::get('/report', function () {
     return view('/fysio/report');
 });
@@ -164,5 +152,15 @@ Route::get('/video/{execution}', function ($execution) {
     ]);
 });
 
-// ------------------ AddPatients Resource ------------------
-Route::resource('patients', AddPatientsController::class);
+
+Route::middleware(['auth'])->group(function () {
+
+    // Page with all videos
+    Route::get('/videos', [VideoController::class, 'index'])
+        ->name('videos.index');
+
+    // Secure video streaming
+    Route::get('/video/{execution_id}', [VideoController::class, 'show'])
+        ->name('videos.show');
+
+});
