@@ -1,15 +1,12 @@
 <?php
 
-use App\Http\Controllers\HomepageController;
-use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientExerciseController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FysioController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\SignUpController;
-use App\Http\Controllers\AddPatientsController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ReferenceVideoController;
@@ -21,7 +18,14 @@ use Illuminate\Support\Facades\Response;
 // All links for the website
 //------------------------------------------------General-------------------------------------
 Route::get('/', [LoginController::class, 'showLogin'])->name('login.show');
+
+// Login POST
 Route::post('/', [LoginController::class, 'login'])->name('login.perform');
+
+// Homepage (alleen als voorbeeld)
+Route::get('/homepage', function () {
+    return 'Welcome to your personal homepage!';
+})->middleware('auth');
 
 Route::get('/signup', [SignUpController::class, 'showSignupForm'])->name('signup.form');
 Route::post('/signup', [SignUpController::class, 'createUser'])->name('signup.create');
@@ -39,17 +43,10 @@ Route::get('/privacy-policy', function () {
     return view('privacy');
 });
 
-//---------------------------------------------------- Patient -------------------------------
-Route::get('/homepage', [HomepageController::class, 'index']);
-
-Route::get(
-    '/homepage/calendar/{date}',
-    [HomepageController::class, 'calendarByDate']
-);
-Route::get('/homepage/progress', [HomepageController::class, 'progress']);
-Route::get('/homepage/knee-metrics', [HomepageController::class, 'kneeMetrics']);
-
-
+//-------------------------------------------------- Patient -------------------------------
+Route::get('/homepage', function () {
+    return view('homepage');
+});
 Route::get('/calendar', function () {
     return view('patient/calendar');
 });
@@ -62,39 +59,32 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/patient-report', function () {
     return view('/patient/report');
 });
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/information', [InformationController::class, 'information'])->name('patient.information');
-    Route::post('/information/update', [InformationController::class, 'update'])->name('patient.information.update');
+Route::get('/information', function () {
+    return view('/patient/information');
 });
-
 Route::get('/filming', function () {
     return view('/patient/filming');
-})->name('filming.show');
+});
 
 //----------------------------------------------------Physio----------------------------------
+Route::get('/patients', function () {
+    return view('/fysio/patients');
+});
 Route::get('/report', function () {
     return view('/fysio/report');
 });
-
-Route::get('/patients/{user}/report', [AddPatientsController::class, 'report'])
-    ->name('patients.report');
+Route::get('/upload-exercises', function () {
+    return view('/fysio/upload_exercises');
+});
 
 Route::get('/user-exercises', [ExerciseController::class, 'getUserExercises']);
 Route::post('/user-exercises/sync', [ExerciseController::class, 'sync']);
-Route::middleware(['auth', 'patient.selected'])->group(function () {
-
-    Route::get('/upload-exercises', function () {
-        return view('/fysio/upload_exercises');
-    });
-    Route::get('/user-calendar', [CalendarController::class, 'getUserCalendar']);
-    Route::post('/calendar-exercise', [CalendarController::class, 'store']);
-    Route::post('/calendar-update', [CalendarController::class,'update']);
-    Route::post('/calendar-exercise/delete-day',[CalendarController::class,'deleteDay']);
-    Route::post('/calendar-exercise/delete-week',[CalendarController::class,'deleteWeek']);
-    Route::get('/patient/today-exercises', [CalendarController::class, 'todayExercises']);
-
-});
+Route::get('/user-calendar', [CalendarController::class, 'getUserCalendar']);
+Route::post('/calendar-exercise', [CalendarController::class, 'store']);
+Route::post('/calendar-update', [CalendarController::class,'update']);
+Route::post('/calendar-exercise/delete-day',[CalendarController::class,'deleteDay']);
+Route::post('/calendar-exercise/delete-week',[CalendarController::class,'deleteWeek']);
+Route::get('/patient/today-exercises/{userId}', [CalendarController::class, 'todayExercises']);
 
 // Reference storage routes
 Route::post('/reference-video',[ReferenceVideoController::class,'store'])->name('reference.video');
@@ -159,9 +149,20 @@ Route::get('/video/{execution}', function ($execution) {
     ]);
 });
 
-//-----------------------------AddPatients---------------------------------------------------------
+use App\Http\Controllers\VideoController;
 
-Route::resource('patients', AddPatientsController::class);
+Route::middleware(['auth'])->group(function () {
+
+    // Page with all videos
+    Route::get('/videos', [VideoController::class, 'index'])
+        ->name('videos.index');
+
+    // Secure video streaming
+    Route::get('/video/{execution_id}', [VideoController::class, 'show'])
+        ->name('videos.show');
+
+});
+
 
 
 
