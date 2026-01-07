@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddPatientsController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientExerciseController;
 use App\Http\Controllers\ReportController;
@@ -44,10 +45,6 @@ Route::get('/privacy-policy', function () {
 });
 
 //-------------------------------------------------- Patient -------------------------------
-//Route::get('/homepage', function () {
-//    return view('homepage');
-//})->name('homepage');
-
 // Homepage
 Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage');
 
@@ -58,6 +55,7 @@ Route::get(
 Route::get('/homepage/progress', [HomepageController::class, 'progress']);
 Route::get('/homepage/knee-metrics', [HomepageController::class, 'kneeMetrics']);
 
+// Alle exercises pagina
 Route::middleware(['auth'])->group(function () {
     Route::get('/all-exercises', [PatientExerciseController::class, 'index'])->name('patient.exercises');
 });
@@ -70,7 +68,12 @@ Route::get('/patient-report', [ReportController::class, 'index'])
 Route::get('/report/execution/by-id/{executionId}', [ReportController::class, 'executionById']);
 
 
-Route::get('/information', function () { return view('patient/information'); });
+// Patient informatie
+Route::middleware(['auth'])->group(function () {
+    Route::get('/information', [InformationController::class, 'information'])->name('patient.information');
+    Route::post('/information/update', [InformationController::class, 'update'])->name('patient.information.update');
+});
+
 Route::get('/filming', function () { return view('patient/filming'); })->name('filming.show');
 
 //----------------------------------------------------Physio----------------------------------
