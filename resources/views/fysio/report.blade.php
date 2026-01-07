@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{{--Fysio--}}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,7 +24,7 @@
         <!-- App container starts -->
         <div class="app-container">
 
-           <x-header/>
+            <x-header/>
 
             <!-- Hero Header -->
             <div class="app-hero-header d-flex justify-content-between align-items-center">
@@ -40,30 +40,26 @@
             <!-- App body starts -->
             <div class="app-body p-4">
 
-
                 <!-- Patiënt info -->
                 <div class="mb-3">
-                    <h2 class="patient-name" >Report Jane Doe (Female)</h2>
+                    <h2 class="patient-name" >Report</h2>
+
                 </div>
 
-                <div class="row mb-3">
-                    <!-- Date picker -->
-                    <div class="col-md-4">
-                        <label class="label-date">Date</label>
-                        <input type="text" id="report-date" class="form-control form-control-sm" />
-                    </div>
-
-                    <!-- Exercise select -->
-                    <div class="col-md-4">
-                        <label class="label-exercise">Exercise</label>
-                        <select id="exercise-select" class="form-control form-control-sm">
-                            <option>Heel slide</option>
-                            <option>Squat</option>
-                            <option>Hamstring curls</option>
-                        </select>
-                    </div>
+                {{-- Dropdown --}}
+                <div class="mb-3">
+                    <select name="execution_id" id="executionSelect" class="form-select" required>
+                        <option value="">Selecteer een uitvoering</option>
+                        @foreach($executions as $exec)
+                            <option value="{{ $exec->execution_id }}"
+                                    @if($execution && $execution->execution_id == $exec->execution_id) selected @endif>
+                                {{ optional($exec->calendarEntry->exercise)->exercise_name ?? 'Onbekende oefening' }}
+                                — {{ \Carbon\Carbon::parse($exec->execution_date)->format('d-m-Y') }}
+                                {{ $exec->start_time ? '(' . substr($exec->start_time,0,5) . ')' : '' }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
-
 
 
                 <!-- Content area: video, report, gauge -->
@@ -75,38 +71,51 @@
                             <div class="card-header">
                                 <h5 class="card-title">Recorded Video</h5>
                             </div>
-                            <div class="card-body text-center">
-                                <video width="100%" controls>
-                                    <source src="http://localhost/filming/sample.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
+                            <div class="card-body text-center" id="video-container">
+                                <video id="executionVideo" width="100%" controls @if(!$execution) style="display:none" @endif>
+                                    <source id="videoSource"
+                                            src="{{ $execution && $execution->execution_video_path ? url('/video/' . $execution->execution_id) : '' }}"
+                                            type="video/webm">
                                 </video>
+
+                                @if(!$execution)
+                                    <p id="noVideoText" @if($execution && $execution->execution_video_path) style="display:none" @endif>
+                                        No video available.
+                                    </p>
+                                @endif
                             </div>
+
                         </div>
                     </div>
 
-                    <!-- Report text -->
+                    <!-- Feedback -->
                     <div class="col-xl-4 col-lg-12 mb-3">
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="card-title">Patient Report</h5>
                             </div>
-                            <div class="card-body">
-                                <p>Report content will appear here. This is backend generated.</p>
+                            <div class="card-body" id="patient-report">
+                                <p id="feedbackText">{{ $execution ? $execution->feedback : 'No feedback available.' }}</p>
+
+
                             </div>
+
                         </div>
                     </div>
 
-                    <!-- Gauge -->
+                    <!-- Match percentage -->
                     <div class="col-xl-4 col-lg-12 mb-3">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Match with example exercise </h5>
+                                <h5 class="card-title">Match Percentage</h5>
                             </div>
-                            <div class="card-body">
-                                <div id="gauge" style="height: 250px;"></div>
+                            <div class="card-body text-center">
+                                <h2 id="matchPercentage">{{ $execution ? round($execution->match_percentage) . '%' : '0%' }}</h2>
                             </div>
+
                         </div>
                     </div>
+
 
                 </div>
                 <!-- Row end -->

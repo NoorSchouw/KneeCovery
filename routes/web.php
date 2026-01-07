@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AddPatientsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientExerciseController;
+use App\Http\Controllers\ReportPhysioController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Auth;
@@ -61,6 +63,8 @@ Route::middleware(['auth'])->group(function () {
 // Report
 Route::get('/patient-report', [ReportController::class, 'index'])
     ->name('patient.report');
+Route::get('/report/execution/by-id/{executionId}', [ReportController::class, 'executionById']);
+
 
 Route::get('/information', function () {
     return view('/patient/information');
@@ -70,12 +74,15 @@ Route::get('/filming', function () {
 });
 
 //----------------------------------------------------Physio----------------------------------
-Route::get('/patients', function () {
-    return view('/fysio/patients');
-});
-Route::get('/report', function () {
-    return view('/fysio/report');
-});
+//Patients list
+Route::get('/patients/{user}/report', [AddPatientsController::class, 'report'])
+    ->name('patients.report');
+Route::resource('patients', AddPatientsController::class);
+
+// Report
+Route::get('/report', [ReportPhysioController::class, 'index'])->name('fysio.report');
+Route::get('/report/execution/by-id/{executionId}', [ReportPhysioController::class, 'executionById']);
+
 Route::get('/upload-exercises', function () {
     return view('/fysio/upload_exercises');
 });

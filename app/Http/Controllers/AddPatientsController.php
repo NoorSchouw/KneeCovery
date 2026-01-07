@@ -124,13 +124,16 @@ class AddPatientsController extends Controller
 
     public function report($user_id)
     {
+        // Haal de patiënt op
         $patient = Patient::with(['user', 'injury'])->findOrFail($user_id);
 
-        // Store selected patient in a session, so I can access the selected user all the time
+        // Sla geselecteerde patient op in session
         session([
             'selected_patient_id' => $patient->user_id
         ]);
 
-        return view('fysio.report', compact('patient'));
+        // Redirect naar ReportPhysioController@index
+        return redirect()->route('fysio.report');
     }
+
 }

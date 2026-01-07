@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{{--Patient--}}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,7 +47,20 @@
 
                 </div>
 
-
+                {{-- Dropdown --}}
+                <div class="mb-3">
+                    <select name="execution_id" id="executionSelect" class="form-select" required>
+                        <option value="">Selecteer een uitvoering</option>
+                        @foreach($executions as $exec)
+                            <option value="{{ $exec->execution_id }}"
+                                    @if($execution && $execution->execution_id == $exec->execution_id) selected @endif>
+                                {{ optional($exec->calendarEntry->exercise)->exercise_name ?? 'Onbekende oefening' }}
+                                — {{ \Carbon\Carbon::parse($exec->execution_date)->format('d-m-Y') }}
+                                {{ $exec->start_time ? '(' . substr($exec->start_time,0,5) . ')' : '' }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
 
                 <!-- Content area: video, report, gauge -->
@@ -60,16 +73,19 @@
                                 <h5 class="card-title">Recorded Video</h5>
                             </div>
                             <div class="card-body text-center" id="video-container">
-                                @if($execution)
-                                    <video width="100%" controls>
-                                        <source src="{{ url('/video/' . $execution->execution_id) }}" type="video/webm">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                @else
-                                    <p>No video available.</p>
-                                @endif
+                                <video id="executionVideo" width="100%" controls @if(!$execution) style="display:none" @endif>
+                                    <source id="videoSource"
+                                            src="{{ $execution && $execution->execution_video_path ? url('/video/' . $execution->execution_id) : '' }}"
+                                            type="video/webm">
+                                </video>
 
+                            @if(!$execution)
+                                    <p id="noVideoText" @if($execution && $execution->execution_video_path) style="display:none" @endif>
+                                        No video available.
+                                    </p>
+                                @endif
                             </div>
+
                         </div>
                     </div>
 
@@ -80,12 +96,11 @@
                                 <h5 class="card-title">Patient Report</h5>
                             </div>
                             <div class="card-body" id="patient-report">
-                                @if($execution)
-                                    <p>{{ $execution->feedback }}</p>
-                                @else
-                                    <p>No feedback available.</p>
-                                @endif
+                                <p id="feedbackText">{{ $execution ? $execution->feedback : 'No feedback available.' }}</p>
+
+
                             </div>
+
                         </div>
                     </div>
 
@@ -96,12 +111,9 @@
                                 <h5 class="card-title">Match Percentage</h5>
                             </div>
                             <div class="card-body text-center">
-                                @if($execution)
-                                    <h2>{{ round($execution->match_percentage) }}%</h2>
-                                @else
-                                    <p>0%</p>
-                                @endif
+                                <h2 id="matchPercentage">{{ $execution ? round($execution->match_percentage) . '%' : '0%' }}</h2>
                             </div>
+
                         </div>
                     </div>
 
