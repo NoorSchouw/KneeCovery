@@ -4,6 +4,7 @@ use App\Http\Controllers\AddPatientsController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PatientCalendarController;
 use App\Http\Controllers\PatientExerciseController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportPhysioController;
@@ -60,7 +61,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/all-exercises', [PatientExerciseController::class, 'index'])->name('patient.exercises');
 });
 
-Route::get('/calendar', function () { return view('patient/calendar'); });
+// Patient calendar
+Route::get('/calendar', function () {
+    return view('patient/calendar');
+});
+Route::get('/api/calendar', [PatientCalendarController::class, 'getUserCalendar']);
+
+Route::get('/calendar-data', [PatientCalendarController::class, 'getUserCalendar'])
+    ->middleware('auth');
 
 // Report
 Route::get('/patient-report', [ReportController::class, 'index'])
