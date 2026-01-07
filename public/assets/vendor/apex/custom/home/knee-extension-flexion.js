@@ -1,90 +1,57 @@
-var options = {
-    chart: {
-        height: 370,
-        type: "line",
-        stacked: false,
-        toolbar: { show: false },
-        fontFamily: "SF Pro Display, Inter, sans-serif",
-        animations: {
-            enabled: true,
-            easing: "easeOutQuart",
-            speed: 900,
-            animateGradually: { enabled: true, delay: 200 },
-            dynamicAnimation: { enabled: true, speed: 600 },
+let kneeChart;
+
+function loadKneeMetrics() {
+    const exercise = $('#exerciseSelector').val();
+    const range = $('#rangeSelector').val();
+
+    $.get('/homepage/knee-metrics', { exercise, range }, function (data) {
+        if (!data.length) {
+            $('#Knee-extension-flexion').html('<div class="text-center text-muted">No data for this exercise</div>');
+            return;
         }
-    },
 
-    stroke: {
-        curve: "smooth",
-        width: 4,
-        colors: ["#fd7596", "#faaa89"],
-    },
+        const dates = data.map(d => d.execution_date);
+        const maxAngles = data.map(d => d.max_angle);
+        const minAngles = data.map(d => d.min_angle);
 
-    markers: {
-        size: 5,
-        strokeWidth: 3,
-        strokeColors: "#fff",
-        colors: ["#fd7596"],
-        hover: { size: 8 }
-    },
+        const options = {
+            chart: {
+                type: 'line',
+                height: 300,
+                background: '#1c1c1c', // dark card background
+            },
+            series: [
+                { name: 'Max Angle', data: maxAngles },
+                { name: 'Min Angle', data: minAngles }
+            ],
+            xaxis: {
+                categories: dates,
+                labels: { style: { colors: '#e5e5e5' } }
+            },
+            yaxis: {
+                max: 180,
+                labels: { style: { colors: '#e5e5e5' } }
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 3
+            },
+            colors: ['#ff69b4', '#FAAA89FF'], // Pink for max, orange for min
+            grid: { borderColor: '#333' },
+            tooltip: { theme: 'dark' }
+        };
 
-    dataLabels: { enabled: false },
-
-    /* ---------------------------------------------------
-          REALISTIC ACL TEAR WEEK-1 ROM DATA
-    --------------------------------------------------- */
-    series: [
-        {
-            name: "Flexion (°)",
-            type: "line",
-            data: [45, 55, 65, 72, 78, 83, 88], // realistic week-1 flexion
-        },
-        {
-            name: "Extension (°)",
-            type: "line",
-            data: [-8, -7, -6, -5, -3, -2, -1], // realistic week-1 extension
+        if (!kneeChart) {
+            kneeChart = new ApexCharts(document.querySelector("#Knee-extension-flexion"), options);
+            kneeChart.render();
+        } else {
+            kneeChart.updateOptions(options);
         }
-    ],
+    });
+}
 
-    xaxis: {
-        categories: [
-            "Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"
-        ],
-        labels: {
-            style: { fontSize: "13px", colors: "#6B7280", fontWeight: 500 },
-        },
-        axisBorder: { show: false },
-        axisTicks: { show: false },
-    },
+// Trigger reload when selectors change
+$('#exerciseSelector, #rangeSelector').on('change', loadKneeMetrics);
 
-    yaxis: {
-        labels: {
-            style: { colors: "#9CA3AF" },
-            formatter: (val) => val + "°",
-        }
-    },
-
-    grid: {
-        borderColor: "#E5E7EB",
-        strokeDashArray: 4,
-    },
-
-    colors: ["#fd7596", "#faaa89"],
-
-    tooltip: {
-        theme: "dark",
-        y: {
-            formatter: val => val + "°",
-        },
-    },
-
-    legend: {
-        position: "top",
-        horizontalAlign: "right",
-        fontSize: "13px",
-        labels: { colors: "#4B5563" },
-    },
-};
-
-var chart = new ApexCharts(document.querySelector("#Knee-extension-flexion"), options);
-chart.render();
+// Initial load
+loadKneeMetrics();

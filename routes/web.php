@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddPatientsController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientExerciseController;
 use App\Http\Controllers\ReportController;
@@ -43,9 +44,20 @@ Route::get('/privacy-policy', function () {
 });
 
 //-------------------------------------------------- Patient -------------------------------
-Route::get('/homepage', function () {
-    return view('homepage');
-})->name('homepage');
+//Route::get('/homepage', function () {
+//    return view('homepage');
+//})->name('homepage');
+
+// Homepage
+Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage');
+
+Route::get(
+    '/homepage/calendar/{date}',
+    [HomepageController::class, 'calendarByDate']
+);
+Route::get('/homepage/progress', [HomepageController::class, 'progress']);
+Route::get('/homepage/knee-metrics', [HomepageController::class, 'kneeMetrics']);
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/all-exercises', [PatientExerciseController::class, 'index'])->name('patient.exercises');
 });
