@@ -7,7 +7,6 @@
 
     <!-- CSRF + USER ID -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="user-id" content="{{ 1 }}">
 
     <!-- Existing styles -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/remix/remixicon.css') }}">
@@ -193,11 +192,13 @@
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script>
 
 <script>
+    const userId = @json(auth()->user()->user_id);
+</script>
+
+<script>
     document.addEventListener("DOMContentLoaded", function() {
         // ----- Globals -----
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
-        const metaUser = document.querySelector('meta[name="user-id"]')?.getAttribute('content');
-        const userId = metaUser && metaUser !== '' ? metaUser : 1; // fallback voor testen
 
         const exerciseList = document.getElementById("exerciseList");
         const addExerciseBtn = document.getElementById("addExerciseBtn");

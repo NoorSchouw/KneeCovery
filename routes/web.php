@@ -50,7 +50,8 @@ Route::get('/privacy-policy', function () {
 //-------------------------------------------------- Patient -------------------------------
 Route::get('/homepage', function () {
     return view('homepage');
-});
+})->name('homepage');
+
 Route::get('/calendar', function () {
     return view('patient/calendar');
 });
