@@ -28,7 +28,8 @@ class ExerciseExecution extends Model
 
     public function calendarEntry()
     {
-        return $this->belongsTo(CalendarEntry::class, 'calendar_entry_id');
+        return $this->belongsTo(CalendarEntry::class, 'calendar_entry_id', 'id');
+
     }
 
 

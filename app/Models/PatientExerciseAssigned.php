@@ -1,4 +1,5 @@
 <?php
+//NIET GEBRUIKEN Ga naar calendar entry en exercise execution voor score en feedback en referencevideo model
 
 namespace App\Models;
 

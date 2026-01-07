@@ -1,4 +1,46 @@
 <?php
+//
+//namespace App\Http\Controllers;
+//
+//use Illuminate\Http\Request;
+//use App\Models\ExerciseExecution;
+//use Illuminate\Support\Facades\Auth;
+//
+//
+//class ReportController extends Controller
+//{
+//    // Pagina laden
+//    public function index()
+//    {
+//        $executions = ExerciseExecution::with('calendarEntry.exercise')->get();
+//
+//        $executions = $executions->filter(function ($exec) {
+//            return $exec->calendarEntry
+//                && $exec->calendarEntry->user_id === auth()->id();
+//        });
+//
+//        return view('patient.report', [
+//            'executions' => $executions
+//        ]);
+//    }
+//
+//    public function getExecutions(Request $request)
+//    {
+//        $executions = ExerciseExecution::with('calendarEntry.exercise')
+//            ->where('execution_date', $request->date)
+//            ->whereHas('calendarEntry', function ($q) use ($request) {
+//                $q->where('user_id', auth()->id())
+//                    ->where('exercise_id', $request->exercise_id);
+//            })
+//            ->orderBy('start_time')
+//            ->get();
+//
+//        return response()->json($executions);
+//    }
+//
+//}
+//
+
 
 namespace App\Http\Controllers;
 
@@ -6,57 +48,44 @@ use Illuminate\Http\Request;
 use App\Models\ExerciseExecution;
 use Illuminate\Support\Facades\Auth;
 
-
 class ReportController extends Controller
 {
     // Pagina laden
     public function index()
     {
-        $executions = ExerciseExecution::with('assignment.exercise')->get();
+        // Eerste execution van de ingelogde patiënt
+        $execution = ExerciseExecution::with('calendarEntry.exercise')
+            ->whereHas('calendarEntry', function ($q) {
+                $q->where('user_id', auth()->id());
+            })
+            ->orderBy('execution_date', 'asc')
+            ->orderBy('start_time', 'asc')
+            ->first();
 
-        // Filter out executions zonder assignment
-        $executions = $executions->filter(function($exec){
-            return $exec->assignment !== null && $exec->assignment->exercise !== null;
-        });
-
-        // DEBUG: voeg veilig null checks toe
-        foreach ($executions as $exec) {
-            $exerciseName = optional($exec->assignment->exercise)->exercise_name ?? 'NO EXERCISE';
-            $assignmentId = $exec->assignment_id ?? 'NULL';
-            logger("Execution {$exec->execution_id}: assignment_id={$assignmentId}, exercise={$exerciseName}");
+        //Debug
+        $path = public_path($execution->execution_video_path);
+        if (file_exists($path)) {
+            dd("File exists at: " . $path);
+        } else {
+            dd("File NOT found at: " . $path);
         }
 
         return view('patient.report', [
-            'executions' => $executions
+            'execution' => $execution
         ]);
     }
 
-
-
-
-    // Data ophalen via filters
-    public function getExecutions(Request $request)
+    // AJAX endpoint om dezelfde execution op te halen
+    public function getFirstExecution()
     {
-        $request->validate([
-            'date' => 'required|date',
-            'exercise_id' => 'required|integer'
-        ]);
+        $execution = ExerciseExecution::with('calendarEntry.exercise')
+            ->whereHas('calendarEntry', function ($q) {
+                $q->where('user_id', auth()->id());
+            })
+            ->orderBy('execution_date', 'asc')
+            ->orderBy('start_time', 'asc')
+            ->first();
 
-        $videos = Video::where('execution_date', $request->date)
-            ->where('assignment_id', $request->exercise_id)
-            ->orderBy('start_time')
-            ->get();
-
-        // Map naar frontend velden
-        $executions = $videos->map(function ($video) {
-            return [
-                'start_time' => $video->time,
-                'execution_video_path' => $video->filepath,
-                'feedback' => $video->patient_report,
-                'score' => $video->percentage,
-            ];
-        });
-
-        return response()->json($executions);
+        return response()->json($execution);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-
+// Niet gebruiken, dus ook niet migration 07 en 08
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;

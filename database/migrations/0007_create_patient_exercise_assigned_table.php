@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+// Niet gebruiken
 return new class extends Migration {
     public function up(): void {
         Schema::create('patientExerciseAssigned', function (Blueprint $table) {
