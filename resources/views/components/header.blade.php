@@ -1,3 +1,21 @@
+@php
+    use Illuminate\Support\Facades\Auth;
+
+    $user = Auth::user(); // currently logged-in user
+
+    // Full name
+    $userName = $user ? $user->first_name . ' ' . $user->last_name : 'John Doe';
+
+    // Determine role based on related models
+    if ($user && $user->patient) {
+        $userRole = 'Patient';
+    } elseif ($user && $user->physiotherapist) {
+        $userRole = 'Physiotherapist';
+    } else {
+        $userRole = 'Guest';
+    }
+@endphp
+
 <!-- App header starts -->
 <div class="app-header d-flex align-items-center">
 
