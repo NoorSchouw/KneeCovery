@@ -38,6 +38,12 @@
             </a>
         </div>
 
+        <div class="mx-3 my-2 d-grid">
+            <a href="/contact" class="btn btn-primary">
+                Contact
+            </a>
+        </div>
+
         <!-- User dropdown -->
         <div class="dropdown ms-3">
             <a class="dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">

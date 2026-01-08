@@ -59,7 +59,7 @@
     <!-- Sidebar contact starts -->
     <div class="sidebar-contact">
         <p class="fw-light mb-1 text-nowrap text-truncate">Physiotherapist Contact</p>
-        <h5 class="m-0 lh-1 text-nowrap text-truncate">06-187654321</h5>
+        <h5 class="m-0 lh-1 text-nowrap text-truncate">040 - 202 50 87</h5>
         <i class="ri-phone-line"></i>
     </div>
     <!-- Sidebar contact ends -->
