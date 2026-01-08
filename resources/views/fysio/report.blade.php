@@ -51,7 +51,7 @@
                 {{-- Dropdown --}}
                 <div class="mb-3">
                     <select name="execution_id" id="executionSelect" class="form-select" required>
-                        <option value="">Selecteer een uitvoering</option>
+                        <option value="">Select an execution</option>
                         @foreach($executions as $exec)
                             <option value="{{ $exec->execution_id }}"
                                     @if($execution && $execution->execution_id == $exec->execution_id) selected @endif>

@@ -19,9 +19,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 //------------------------------------------------General-------------------------------------
+// Login
 Route::get('/', [LoginController::class, 'showLogin'])->name('login.show');
-
-// Login POST
 Route::post('/', [LoginController::class, 'login'])->name('login.perform');
 
 // Homepage (alleen als voorbeeld)
@@ -35,6 +34,7 @@ Route::post('/signup', [SignUpController::class, 'createUser'])->name('signup.cr
 Route::get('/', function () {
     return view('login');
 })->name('login');
+
 Route::get('/signup', function () {
     return view('signup');
 });
@@ -43,6 +43,11 @@ Route::get('/forgot-password', function () {
 });
 Route::get('/privacy-policy', function () {
     return view('privacy');
+});
+
+// Contact
+Route::get('/contact', function () {
+    return view('contact');
 });
 
 //-------------------------------------------------- Patient -------------------------------
