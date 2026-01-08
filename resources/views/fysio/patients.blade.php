@@ -99,6 +99,12 @@
                                                         <i class="ri-file-list-3-line"></i>
                                                     </a>
 
+                                                    <a href="{{ url('/upload-exercises?patient=' . $patient->id) }}"
+                                                       class="btn btn-outline-info btn-sm"
+                                                       title="Upload Exercises">
+                                                        <i class="ri-add-line"></i>
+                                                    </a>
+
                                                 </td>
                                             </tr>
                                         @endforeach

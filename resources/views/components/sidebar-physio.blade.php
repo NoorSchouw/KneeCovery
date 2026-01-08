@@ -52,18 +52,6 @@
                     <span class="menu-text">Patients</span>
                 </a>
             </li>
-            <li class="{{ request()->is('report') ? 'active current-page' : '' }}">
-                <a href="{{ url('/report') }}">
-                    <i class="ri-file-chart-line"></i>
-                    <span class="menu-text">Report</span>
-                </a>
-            </li>
-            <li class="{{ request()->is('upload-exercises') ? 'active current-page' : '' }}">
-                <a href="{{ url('/upload-exercises') }}">
-                    <i class="ri-add-line"></i>
-                    <span class="menu-text">Add exercise</span>
-                </a>
-            </li>
         </ul>
     </div>
     <!-- Sidebar menu ends -->
