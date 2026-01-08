@@ -22,9 +22,6 @@
     <!-- Brand container for mobile -->
     <div class="brand-container-sm d-xl-none d-flex align-items-center">
         <div class="app-brand">
-            <a href="{{ url('/homepage') }}">
-                <img src="{{ asset('assets/images/logo.png') }}" class="logo" alt="KneeCovery">
-            </a>
         </div>
     </div>
 

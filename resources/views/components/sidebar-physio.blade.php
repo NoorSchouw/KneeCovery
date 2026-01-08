@@ -23,9 +23,7 @@
     <div class="brand-container d-flex align-items-center justify-content-between">
 
         <div class="app-brand ms-3">
-            <a href="{{ url('/homepage') }}">
                 <img src="{{ asset('assets/images/logo.png') }}" class="logo" alt="Kneecovery">
-            </a>
         </div>
 
     </div>
